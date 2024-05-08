@@ -12,4 +12,4 @@ En este proyecto, exploraremos los sistemas de planificación de recursos empres
 
    - Mynell Myers Hall [2022072412]
    - Eyden Su Díaz [2023025837]
-   - Nombre 3
+   - Jozafath Pérez [2023107460]
