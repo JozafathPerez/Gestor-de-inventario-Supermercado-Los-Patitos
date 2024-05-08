@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Gestor_de_inventario_Supermercado_Los_Patitos
 {
     internal static class Program

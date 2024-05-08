@@ -29,6 +29,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         private void BT_inicioSesion_Click(object sender, EventArgs e)
         {
+            this.Hide();
+
+            VentanaPrincipal formularioSecundario = new VentanaPrincipal();
+
+            // Muestra el formulario secundario
+            formularioSecundario.Show();
 
         }
 
