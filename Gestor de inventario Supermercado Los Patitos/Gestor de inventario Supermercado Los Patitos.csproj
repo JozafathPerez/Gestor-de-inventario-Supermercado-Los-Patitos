@@ -47,6 +47,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="PanelEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelEmpleados.Designer.cs">
+      <DependentUpon>PanelEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelInventario.Designer.cs">
+      <DependentUpon>PanelInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelReporteria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelReporteria.Designer.cs">
+      <DependentUpon>PanelReporteria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelVentas.Designer.cs">
+      <DependentUpon>PanelVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="VentanaInicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,16 +90,23 @@
     <Compile Include="VentanaPrincipal .Designer.cs">
       <DependentUpon>VentanaPrincipal .cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PanelEmpleados.resx">
+      <DependentUpon>PanelEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelInventario.resx">
+      <DependentUpon>PanelInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelReporteria.resx">
+      <DependentUpon>PanelReporteria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelVentas.resx">
+      <DependentUpon>PanelVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="VentanaInicioSesion.resx">
       <DependentUpon>VentanaInicioSesion.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +128,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SUPERMERCADO LOS PATITOS [LOGOSINFONDO].png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo de reportería.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo de menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo de inventario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo de empleados.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo de ventas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

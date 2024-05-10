@@ -43,7 +43,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             // 
             this.TXT_inicioSesion.AutoSize = true;
             this.TXT_inicioSesion.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_inicioSesion.Location = new System.Drawing.Point(329, 215);
+            this.TXT_inicioSesion.Location = new System.Drawing.Point(313, 226);
             this.TXT_inicioSesion.Name = "TXT_inicioSesion";
             this.TXT_inicioSesion.Size = new System.Drawing.Size(278, 50);
             this.TXT_inicioSesion.TabIndex = 1;
@@ -52,7 +52,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             // TEXT_cuenta
             // 
             this.TEXT_cuenta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TEXT_cuenta.Location = new System.Drawing.Point(372, 287);
+            this.TEXT_cuenta.Location = new System.Drawing.Point(348, 307);
             this.TEXT_cuenta.Name = "TEXT_cuenta";
             this.TEXT_cuenta.Size = new System.Drawing.Size(216, 29);
             this.TEXT_cuenta.TabIndex = 2;
@@ -62,7 +62,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             // TEXT_contrasena
             // 
             this.TEXT_contrasena.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TEXT_contrasena.Location = new System.Drawing.Point(372, 342);
+            this.TEXT_contrasena.Location = new System.Drawing.Point(348, 360);
             this.TEXT_contrasena.Name = "TEXT_contrasena";
             this.TEXT_contrasena.Size = new System.Drawing.Size(216, 29);
             this.TEXT_contrasena.TabIndex = 3;
@@ -74,7 +74,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             this.BT_inicioSesion.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BT_inicioSesion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_inicioSesion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BT_inicioSesion.Location = new System.Drawing.Point(412, 398);
+            this.BT_inicioSesion.Location = new System.Drawing.Point(390, 422);
             this.BT_inicioSesion.Name = "BT_inicioSesion";
             this.BT_inicioSesion.Size = new System.Drawing.Size(135, 34);
             this.BT_inicioSesion.TabIndex = 4;
@@ -85,7 +85,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             // IMG_logoPrincipal
             // 
             this.IMG_logoPrincipal.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.SUPERMERCADO_LOS_PATITOS__LOGOSINFONDO_;
-            this.IMG_logoPrincipal.Location = new System.Drawing.Point(315, -46);
+            this.IMG_logoPrincipal.Location = new System.Drawing.Point(308, -26);
             this.IMG_logoPrincipal.Name = "IMG_logoPrincipal";
             this.IMG_logoPrincipal.Size = new System.Drawing.Size(325, 267);
             this.IMG_logoPrincipal.TabIndex = 0;
@@ -101,8 +101,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             this.Controls.Add(this.TEXT_cuenta);
             this.Controls.Add(this.TXT_inicioSesion);
             this.Controls.Add(this.IMG_logoPrincipal);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "VentanaInicioSesion";
-            this.Text = "Form1";
+            this.Text = "Ventana de Inicio Sesión";
             this.Load += new System.EventHandler(this.VentanaInicioSesion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.IMG_logoPrincipal)).EndInit();
             this.ResumeLayout(false);

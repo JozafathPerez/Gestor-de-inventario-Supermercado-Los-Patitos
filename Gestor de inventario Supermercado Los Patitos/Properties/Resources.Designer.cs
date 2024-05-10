@@ -63,6 +63,56 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Logo_de_empleados {
+            get {
+                object obj = ResourceManager.GetObject("Logo de empleados", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_de_inventario {
+            get {
+                object obj = ResourceManager.GetObject("Logo de inventario", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_de_menu {
+            get {
+                object obj = ResourceManager.GetObject("Logo de menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_de_reportería {
+            get {
+                object obj = ResourceManager.GetObject("Logo de reportería", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_de_ventas {
+            get {
+                object obj = ResourceManager.GetObject("Logo de ventas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SUPERMERCADO_LOS_PATITOS__LOGOSINFONDO_ {
             get {
                 object obj = ResourceManager.GetObject("SUPERMERCADO LOS PATITOS [LOGOSINFONDO]", resourceCulture);
