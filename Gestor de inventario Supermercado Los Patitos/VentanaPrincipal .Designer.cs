@@ -44,6 +44,7 @@
             this.BT_ventas = new System.Windows.Forms.Button();
             this.BT_inventario = new System.Windows.Forms.Button();
             this.BT_empleados = new System.Windows.Forms.Button();
+            this.ImagenPatito = new System.Windows.Forms.PictureBox();
             this.sidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -51,26 +52,29 @@
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).BeginInit();
             this.SuspendLayout();
             // 
             // sidebar
             // 
-            this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(200)))), ((int)(((byte)(201)))));
+            this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.sidebar.Controls.Add(this.panel1);
             this.sidebar.Controls.Add(this.panel3);
             this.sidebar.Controls.Add(this.panel4);
             this.sidebar.Controls.Add(this.panel2);
             this.sidebar.Controls.Add(this.panel5);
+            this.sidebar.Controls.Add(this.ImagenPatito);
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebar.Location = new System.Drawing.Point(0, 0);
             this.sidebar.MaximumSize = new System.Drawing.Size(240, 662);
             this.sidebar.MinimumSize = new System.Drawing.Size(65, 662);
             this.sidebar.Name = "sidebar";
-            this.sidebar.Size = new System.Drawing.Size(65, 662);
+            this.sidebar.Size = new System.Drawing.Size(240, 662);
             this.sidebar.TabIndex = 0;
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.menuButton);
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -82,6 +86,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(68, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 21);
@@ -149,7 +154,7 @@
             this.BT_reporteria.FlatAppearance.BorderSize = 0;
             this.BT_reporteria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_reporteria.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_reporteria.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BT_reporteria.ForeColor = System.Drawing.Color.White;
             this.BT_reporteria.Image = ((System.Drawing.Image)(resources.GetObject("BT_reporteria.Image")));
             this.BT_reporteria.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_reporteria.Location = new System.Drawing.Point(0, 0);
@@ -167,7 +172,7 @@
             this.BT_ventas.FlatAppearance.BorderSize = 0;
             this.BT_ventas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_ventas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_ventas.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BT_ventas.ForeColor = System.Drawing.Color.White;
             this.BT_ventas.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_ventas;
             this.BT_ventas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_ventas.Location = new System.Drawing.Point(0, 0);
@@ -186,7 +191,7 @@
             this.BT_inventario.FlatAppearance.BorderSize = 0;
             this.BT_inventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_inventario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_inventario.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BT_inventario.ForeColor = System.Drawing.Color.White;
             this.BT_inventario.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_inventario;
             this.BT_inventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_inventario.Location = new System.Drawing.Point(0, 0);
@@ -204,7 +209,7 @@
             this.BT_empleados.FlatAppearance.BorderSize = 0;
             this.BT_empleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_empleados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_empleados.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BT_empleados.ForeColor = System.Drawing.Color.White;
             this.BT_empleados.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_empleados;
             this.BT_empleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_empleados.Location = new System.Drawing.Point(0, 0);
@@ -215,6 +220,16 @@
             this.BT_empleados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_empleados.UseVisualStyleBackColor = true;
             this.BT_empleados.Click += new System.EventHandler(this.BT_empleados_Click);
+            // 
+            // ImagenPatito
+            // 
+            this.ImagenPatito.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.SUPERMERCADO_LOS_PATITOS__LOGOSINFONDO_;
+            this.ImagenPatito.Location = new System.Drawing.Point(3, 433);
+            this.ImagenPatito.Name = "ImagenPatito";
+            this.ImagenPatito.Size = new System.Drawing.Size(237, 217);
+            this.ImagenPatito.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ImagenPatito.TabIndex = 5;
+            this.ImagenPatito.TabStop = false;
             // 
             // VentanaPrincipal
             // 
@@ -234,6 +249,7 @@
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -254,5 +270,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer sidebarTimer;
         private System.Windows.Forms.Panel PanelAreaDeTrabajo;
+        private System.Windows.Forms.PictureBox ImagenPatito;
     }
 }

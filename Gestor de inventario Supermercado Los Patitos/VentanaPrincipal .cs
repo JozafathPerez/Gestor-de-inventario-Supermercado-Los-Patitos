@@ -24,10 +24,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         {
             if (ultimoBoton != null)
             {
-                ultimoBoton.BackColor = Color.FromArgb(180, 200, 201); // Restaurar color del último botón
+                ultimoBoton.BackColor = Color.FromArgb(19, 45, 70); // Restaurar color del último botón
             }
 
-            botonPresionado.BackColor = Color.FromArgb(91, 135, 27); // Cambiar color del botón presionado
+            botonPresionado.BackColor = Color.FromArgb(1, 195, 141); // Cambiar color del botón presionado
             ultimoBoton = botonPresionado; // Actualizar el último botón presionado
         }
 
@@ -42,13 +42,16 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 {
                     sidebarExpand = false;
                     sidebarTimer.Stop();
+                    ImagenPatito.Visible = false;
                 }
             }
             else
             {
+                ImagenPatito.Visible = true;
                 sidebar.Width += 10;
                 if (sidebar.Width == sidebar.MaximumSize.Width)
                 {
+                    
                     sidebarExpand = true;
                     sidebarTimer.Stop();
                 }
