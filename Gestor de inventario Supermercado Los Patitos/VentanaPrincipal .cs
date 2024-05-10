@@ -67,7 +67,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         private void BT_reporteria_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_reporteria);
-
+            if (sidebarExpand)
+            {
+                menuButton_Click(sender, e);
+            }
             cargarForm(new PanelReporteria());
 
         }
@@ -75,21 +78,30 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         private void BT_ventas_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_ventas);
-
+            if (sidebarExpand)
+            {
+                menuButton_Click(sender, e);
+            }
             cargarForm(new PanelVentas());
         }
 
         private void BT_inventario_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_inventario);
-
+            if (sidebarExpand)
+            {
+                menuButton_Click(sender, e);
+            }
             cargarForm(new PanelInventario());
         }
 
         private void BT_empleados_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_empleados);
-
+            if (sidebarExpand)
+            {
+                menuButton_Click(sender, e);
+            }
             cargarForm(new PanelEmpleados());
         }
 

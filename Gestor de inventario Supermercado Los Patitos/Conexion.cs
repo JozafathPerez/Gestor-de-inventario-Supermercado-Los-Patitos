@@ -12,8 +12,7 @@ namespace Gestor_de_inventario__Super_Los_Patitos_
 {
     public class Conexion
     {
-        // Cambiar el nombre de hotel
-        string cadena = "Data source=" + Environment.MachineName + "; Initial Catalog=hotel; Integrated Security=True";
+        string cadena = "Data source=" + Environment.MachineName + "; Initial Catalog=PY02-Query01; Integrated Security=True";
 
         public SqlConnection ConectarBD = new SqlConnection();
 

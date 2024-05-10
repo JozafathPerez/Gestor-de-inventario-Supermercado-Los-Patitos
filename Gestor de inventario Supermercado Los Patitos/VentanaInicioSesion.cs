@@ -22,7 +22,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         private void VentanaInicioSesion_Load(object sender, EventArgs e)
         {
-            TEXT_cuenta.Text = "Correo";
+            TEXT_cuenta.Text = "Cuenta";
             TEXT_contrasena.Text = "Contraseña";
             TEXT_contrasena.PasswordChar = '\0';
         }
@@ -40,7 +40,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         private void TEXT_cuenta_Enter(object sender, EventArgs e)
         {
-            if (TEXT_cuenta.Text == "Correo")
+            if (TEXT_cuenta.Text == "Cuenta")
             {
                 TEXT_cuenta.Text = "";
             }
@@ -50,7 +50,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         {
             if (string.IsNullOrWhiteSpace(TEXT_cuenta.Text))
             {
-                TEXT_cuenta.Text = "Correo";
+                TEXT_cuenta.Text = "Cuenta";
             }
         }
 
