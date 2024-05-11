@@ -58,7 +58,7 @@
             this.dateNacimiento = new System.Windows.Forms.DateTimePicker();
             this.labelNacimiento = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textDireccion = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPersonal)).BeginInit();
             this.SuspendLayout();
             // 
@@ -356,21 +356,21 @@
             this.label2.TabIndex = 28;
             this.label2.Text = "Direccion";
             // 
-            // richTextBox1
+            // textDireccion
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(900, 506);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(492, 169);
-            this.richTextBox1.TabIndex = 29;
-            this.richTextBox1.Text = "";
+            this.textDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textDireccion.Location = new System.Drawing.Point(900, 506);
+            this.textDireccion.Name = "textDireccion";
+            this.textDireccion.Size = new System.Drawing.Size(492, 169);
+            this.textDireccion.TabIndex = 29;
+            this.textDireccion.Text = "";
             // 
             // PanelEmpleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1425, 696);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.textDireccion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelNacimiento);
             this.Controls.Add(this.dateNacimiento);
@@ -443,6 +443,6 @@
         private System.Windows.Forms.DateTimePicker dateNacimiento;
         private System.Windows.Forms.Label labelNacimiento;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox textDireccion;
     }
 }
