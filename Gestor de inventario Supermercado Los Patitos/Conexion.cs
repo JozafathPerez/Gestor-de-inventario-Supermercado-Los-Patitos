@@ -12,7 +12,7 @@ namespace Gestor_de_inventario__Super_Los_Patitos_
 {
     public class Conexion
     {
-        string cadena = "Data source=" + Environment.MachineName + "; Initial Catalog=PY02-Query01; Integrated Security=True";
+        string cadena = "Data source=" + Environment.MachineName + "; Initial Catalog=LOS_PATITOS; Integrated Security=True";
 
         public SqlConnection ConectarBD = new SqlConnection();
 

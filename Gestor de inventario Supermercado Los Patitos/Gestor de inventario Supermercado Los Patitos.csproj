@@ -144,5 +144,9 @@
   <ItemGroup>
     <None Include="Resources\Logo de ventas.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Base de datos\Query-SupermercadoLosPatitos.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

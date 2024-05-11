@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Gestor_de_inventario__Super_Los_Patitos_;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,10 +16,48 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
     {
         bool sidebarExpand;
         private Button ultimoBoton = null;
-        public VentanaPrincipal()
+        private Conexion conexion;
+        private int idTrabajador;
+        public VentanaPrincipal(int idTrabajador)
         {
             InitializeComponent();
+            this.idTrabajador = idTrabajador;
+            conexion = new Conexion();
+
+            int idRol = ObtenerIdRol(idTrabajador);
+
+            if (idRol != 1) { BT_empleados.Visible = false; }
+
         }
+        public int ObtenerIdRol(int idTrabajador)
+        {
+            // Verifica si el idEmpleado es igual a 1 para administrador
+            string query = "SELECT idRol FROM Personal WHERE idTrabajador = @idTrabajador";
+
+            using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
+            {
+                command.Parameters.AddWithValue("@idTrabajador", idTrabajador);
+                conexion.abrir();
+
+                try
+                {
+                    object result = command.ExecuteScalar();
+                    if (result != null && int.TryParse(result.ToString(), out int idRol))
+                    {
+                        return idRol;
+                    }
+                    else
+                    {  
+                        return -1; 
+                    }
+                }
+                finally
+                {
+                    conexion.cerrar();
+                }
+            }
+        }
+
 
         // Función para cambiar el color del botón y restaurar el color del último botón presionado
         private void CambiarColorBoton(Button botonPresionado)
