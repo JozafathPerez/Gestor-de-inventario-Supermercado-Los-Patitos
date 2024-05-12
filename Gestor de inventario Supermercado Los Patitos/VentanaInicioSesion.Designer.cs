@@ -102,6 +102,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(919, 565);
             this.Controls.Add(this.BT_inicioSesion);
             this.Controls.Add(this.TEXT_contrasena);
