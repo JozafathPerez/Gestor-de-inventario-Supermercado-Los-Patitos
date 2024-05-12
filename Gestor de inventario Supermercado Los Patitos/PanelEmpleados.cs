@@ -26,12 +26,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             try
             {
                 c.abrir();
-                string consulta = "SELECT p.idTrabajador AS Identificacion," +
+                string consulta = "SELECT p.idTrabajador AS 'Identificación'," +
                     "p.fechaNacim AS Nacimiento," +
                     "p.nombre AS Nombre," +
-                    "p.apellidoPat AS Apellido_Paterno," +
-                    "p.apellidoMat AS Apellido_Materno," +
-                    "p.direccion AS Direccion," +
+                    "p.apellidoPat AS 'Primer apellido'," +
+                    "p.apellidoMat AS 'Segundo apellido'," +
+                    "p.direccion AS 'Dirección'," +
                     "p.email AS Correo," +
                     "p.contrasenia AS Contraseña," +
                     "p.numTel AS Telefono," +
@@ -228,143 +228,158 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            string identificacion = textIdentificacion.Text;
-            string nombre = textNombre.Text;
-            string apellido1 = textApellido1.Text;
-            string apellido2 = textApellido2.Text;
-            string direccion = textDireccion.Text;
-            string email = textEmail.Text;
-            string contrasenia = textContra.Text;
-            string telefono = textTelefono.Text;
-            string genero = comboBoxGenero.SelectedItem.ToString();
-            string nombreRol = comboBoxRol.SelectedItem.ToString();
-            bool estado = checkActivo.Checked;
-            DateTime fechaNacimiento = dateNacimiento.Value;
-
-            if (string.IsNullOrWhiteSpace(identificacion) || string.IsNullOrWhiteSpace(nombre) ||
-                string.IsNullOrWhiteSpace(apellido1) || string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(contrasenia) || string.IsNullOrWhiteSpace(telefono) ||
-                string.IsNullOrWhiteSpace(genero) || string.IsNullOrWhiteSpace(nombreRol) ||
-                string.IsNullOrWhiteSpace(direccion))
+            // Verifica si hay una fila seleccionada en el DataGridView
+            if (DGVPersonal.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Todos los campos son obligatorios.");
-                return;
-            }
+                // Obtiene los valores de la fila seleccionada
+                int idEmpleado = Convert.ToInt32(DGVPersonal.SelectedRows[0].Cells["Identificación"].Value);
 
-            if (!EsFormatoCorreoValido(email))
-            {
-                MessageBox.Show("El formato del correo electrónico no es válido.");
-                return;
-            }
+                // Obtiene los valores de los campos de entrada, pero si están vacíos, toma los valores de la fila seleccionada
+                string identificacion = string.IsNullOrWhiteSpace(textIdentificacion.Text) ? DGVPersonal.SelectedRows[0].Cells["Identificación"].Value.ToString() : textIdentificacion.Text;
+                string nombre = string.IsNullOrWhiteSpace(textNombre.Text) ? DGVPersonal.SelectedRows[0].Cells["Nombre"].Value.ToString() : textNombre.Text;
+                string apellido1 = string.IsNullOrWhiteSpace(textApellido1.Text) ? DGVPersonal.SelectedRows[0].Cells["Primer apellido"].Value.ToString() : textApellido1.Text;
+                string apellido2 = string.IsNullOrWhiteSpace(textApellido2.Text) ? DGVPersonal.SelectedRows[0].Cells["Segundo apellido"].Value.ToString() : textApellido2.Text;
+                string direccion = string.IsNullOrWhiteSpace(textDireccion.Text) ? DGVPersonal.SelectedRows[0].Cells["Dirección"].Value.ToString() : textDireccion.Text;
+                string email = string.IsNullOrWhiteSpace(textEmail.Text) ? DGVPersonal.SelectedRows[0].Cells["Correo"].Value.ToString() : textEmail.Text;
+                string contrasenia = string.IsNullOrWhiteSpace(textContra.Text) ? DGVPersonal.SelectedRows[0].Cells["Contraseña"].Value.ToString() : textContra.Text;
+                string telefono = string.IsNullOrWhiteSpace(textTelefono.Text) ? DGVPersonal.SelectedRows[0].Cells["Telefono"].Value.ToString() : textTelefono.Text;
+                string genero = comboBoxGenero.SelectedItem == null ? DGVPersonal.SelectedRows[0].Cells["Genero"].Value.ToString() : comboBoxGenero.SelectedItem.ToString();
+                string nombreRol = comboBoxRol.SelectedItem == null ? DGVPersonal.SelectedRows[0].Cells["Rol"].Value.ToString() : comboBoxRol.SelectedItem.ToString();
+                bool estado = checkActivo.Checked;
 
-            if (!EsNumeroValido(telefono))
-            {
-                MessageBox.Show("El número de teléfono debe contener solo números.");
-                return;
-            }
-
-            if (!EsNumeroValido(identificacion))
-            {
-                MessageBox.Show("La identificación debe contener solo números.");
-                return;
-            }
-
-            int idRol = ObtenerIdRol(nombreRol);
-
-            if (idRol == -1)
-            {
-                MessageBox.Show("El rol seleccionado no existe en la base de datos.");
-                return;
-            }
-
-            string query = "UPDATE Personal SET fechaNacim = @fechaNacim, nombre = @nombre, apellidoPat = @apellidoPat, " +
-                           "apellidoMat = @apellidoMat, direccion = @direccion, email = @email, " +
-                           "contrasenia = @contrasenia, numTel = @numTel, genero = @genero, idRol = @idRol, estado = @estado " +
-                           "WHERE idTrabajador = @idTrabajador";
-
-            using (SqlCommand command = new SqlCommand(query, c.ConectarBD))
-            {
-                try
+                // Convierte la cadena de género al formato de una letra
+                if (!string.IsNullOrWhiteSpace(genero) && genero.Length > 0)
                 {
-                    c.abrir();
-
-                    command.Parameters.AddWithValue("@fechaNacim", fechaNacimiento);
-                    command.Parameters.AddWithValue("@nombre", nombre);
-                    command.Parameters.AddWithValue("@apellidoPat", apellido1);
-                    command.Parameters.AddWithValue("@apellidoMat", apellido2);
-                    command.Parameters.AddWithValue("@direccion", direccion);
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@contrasenia", contrasenia);
-                    command.Parameters.AddWithValue("@numTel", telefono);
-                    command.Parameters.AddWithValue("@genero", genero);
-                    command.Parameters.AddWithValue("@idRol", idRol);
-                    command.Parameters.AddWithValue("@estado", estado);
-                    command.Parameters.AddWithValue("@idTrabajador", identificacion);
-
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Registro de personal modificado correctamente.");
-                        LimpiarCampos();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo modificar el registro de personal. Verifique la identificación.");
-                    }
-                    c.cerrar();
+                    genero = genero.Substring(0, 1);
                 }
-                catch (Exception ex)
+
+                // Verifica el formato del correo electrónico y del teléfono
+                if (!EsFormatoCorreoValido(email))
                 {
-                    MessageBox.Show("Error al modificar el registro de personal: " + ex.Message);
+                    MessageBox.Show("El formato del correo electrónico no es válido.");
+                    return;
                 }
+
+                if (!EsNumeroValido(telefono))
+                {
+                    MessageBox.Show("El número de teléfono debe contener solo números.");
+                    return;
+                }
+
+                // Obtiene el idRol correspondiente al nombre del rol seleccionado
+                int idRol = ObtenerIdRol(nombreRol);
+
+                if (idRol == -1)
+                {
+                    MessageBox.Show("El rol seleccionado no existe en la base de datos.");
+                    return;
+                }
+
+                // Prepara la consulta SQL para actualizar los datos del empleado
+                string query = "UPDATE Personal SET fechaNacim = @fechaNacim, nombre = @nombre, apellidoPat = @apellidoPat, " +
+                               "apellidoMat = @apellidoMat, direccion = @direccion, email = @email, " +
+                               "contrasenia = @contrasenia, numTel = @numTel, genero = @genero, idRol = @idRol, estado = @estado " +
+                               "WHERE idTrabajador = @idTrabajador";
+
+                using (SqlCommand command = new SqlCommand(query, c.ConectarBD))
+                {
+                    try
+                    {
+                        c.abrir();
+
+                        // Asigna los valores a los parámetros
+                        command.Parameters.AddWithValue("@fechaNacim", DGVPersonal.SelectedRows[0].Cells["Nacimiento"].Value);
+                        command.Parameters.AddWithValue("@nombre", nombre);
+                        command.Parameters.AddWithValue("@apellidoPat", apellido1);
+                        command.Parameters.AddWithValue("@apellidoMat", apellido2);
+                        command.Parameters.AddWithValue("@direccion", direccion);
+                        command.Parameters.AddWithValue("@email", email);
+                        command.Parameters.AddWithValue("@contrasenia", contrasenia);
+                        command.Parameters.AddWithValue("@numTel", telefono);
+                        command.Parameters.AddWithValue("@genero", genero);
+                        command.Parameters.AddWithValue("@idRol", idRol);
+                        command.Parameters.AddWithValue("@estado", estado);
+                        command.Parameters.AddWithValue("@idTrabajador", idEmpleado); // Utiliza el idEmpleado de la fila seleccionada
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Registro de personal modificado correctamente.");
+                            LimpiarCampos();
+                            CargarPersonal(); // Vuelve a cargar los datos en el DataGridView después de modificar
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo modificar el registro de personal. Verifique la identificación.");
+                        }
+                        c.cerrar();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al modificar el registro de personal: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para modificar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string identificacion = textIdentificacion.Text;
-
-            if (string.IsNullOrEmpty(identificacion))
+            // Verifica si hay una fila seleccionada en el DataGridView
+            if (DGVPersonal.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Ingrese la identificación del personal a eliminar.");
-                return;
-            }
+                // Obtiene el idEmpleado de la fila seleccionada
+                int idEmpleado = Convert.ToInt32(DGVPersonal.SelectedRows[0].Cells["Identificación"].Value);
 
-            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este registro de personal?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-            {
-                return;
-            }
-
-            string query = "DELETE FROM Personal WHERE idTrabajador = @idTrabajador";
-
-            using (SqlCommand command = new SqlCommand(query, c.ConectarBD))
-            {
-                try
+                DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este registro de personal?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
                 {
-                    c.abrir();
-                    command.Parameters.AddWithValue("@idTrabajador", identificacion);
-
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Registro de personal eliminado correctamente.");
-                        LimpiarCampos();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontró ningún registro de personal con esa identificación.");
-                    }
-                    c.cerrar();
+                    return;
                 }
-                catch (Exception ex)
+
+                // Llamar al Stored Procedure para eliminar la fila seleccionada
+                string storedProcedure = "EliminarPersonal";
+
+                using (SqlCommand command = new SqlCommand(storedProcedure, c.ConectarBD))
                 {
-                    MessageBox.Show("Error al eliminar el registro de personal: " + ex.Message);
+                    try
+                    {
+                        c.abrir();
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@idTrabajador", idEmpleado);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Registro de personal eliminado correctamente.");
+                            LimpiarCampos();
+                            CargarPersonal(); // Vuelve a cargar los datos en el DataGridView después de eliminar
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró ningún registro de personal con ese identificador.");
+                        }
+                        c.cerrar();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al eliminar el registro de personal: " + ex.Message);
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
     }

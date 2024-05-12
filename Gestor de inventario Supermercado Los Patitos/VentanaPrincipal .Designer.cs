@@ -33,25 +33,25 @@
             this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
-            this.PanelAreaDeTrabajo = new System.Windows.Forms.Panel();
             this.menuButton = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.BT_reporteria = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.BT_ventas = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.BT_inventario = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.BT_empleados = new System.Windows.Forms.Button();
             this.ImagenPatito = new System.Windows.Forms.PictureBox();
+            this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
+            this.PanelAreaDeTrabajo = new System.Windows.Forms.Panel();
             this.sidebar.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,50 +93,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Menu";
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.BT_reporteria);
-            this.panel3.Location = new System.Drawing.Point(3, 130);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(237, 73);
-            this.panel3.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.BT_ventas);
-            this.panel4.Location = new System.Drawing.Point(3, 209);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(234, 68);
-            this.panel4.TabIndex = 3;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.BT_inventario);
-            this.panel2.Location = new System.Drawing.Point(3, 283);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(234, 67);
-            this.panel2.TabIndex = 4;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.BT_empleados);
-            this.panel5.Location = new System.Drawing.Point(3, 356);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(237, 71);
-            this.panel5.TabIndex = 3;
-            // 
-            // sidebarTimer
-            // 
-            this.sidebarTimer.Interval = 10;
-            this.sidebarTimer.Tick += new System.EventHandler(this.sidebarTimer_Tick);
-            // 
-            // PanelAreaDeTrabajo
-            // 
-            this.PanelAreaDeTrabajo.Location = new System.Drawing.Point(65, 0);
-            this.PanelAreaDeTrabajo.Name = "PanelAreaDeTrabajo";
-            this.PanelAreaDeTrabajo.Size = new System.Drawing.Size(1069, 662);
-            this.PanelAreaDeTrabajo.TabIndex = 1;
-            // 
             // menuButton
             // 
             this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -147,6 +103,14 @@
             this.menuButton.TabIndex = 1;
             this.menuButton.TabStop = false;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.BT_reporteria);
+            this.panel3.Location = new System.Drawing.Point(3, 130);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(237, 73);
+            this.panel3.TabIndex = 2;
             // 
             // BT_reporteria
             // 
@@ -165,6 +129,14 @@
             this.BT_reporteria.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_reporteria.UseVisualStyleBackColor = true;
             this.BT_reporteria.Click += new System.EventHandler(this.BT_reporteria_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.BT_ventas);
+            this.panel4.Location = new System.Drawing.Point(3, 209);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(234, 68);
+            this.panel4.TabIndex = 3;
             // 
             // BT_ventas
             // 
@@ -185,6 +157,14 @@
             this.BT_ventas.UseVisualStyleBackColor = true;
             this.BT_ventas.Click += new System.EventHandler(this.BT_ventas_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.BT_inventario);
+            this.panel2.Location = new System.Drawing.Point(3, 283);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(234, 67);
+            this.panel2.TabIndex = 4;
+            // 
             // BT_inventario
             // 
             this.BT_inventario.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -202,6 +182,14 @@
             this.BT_inventario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_inventario.UseVisualStyleBackColor = true;
             this.BT_inventario.Click += new System.EventHandler(this.BT_inventario_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.BT_empleados);
+            this.panel5.Location = new System.Drawing.Point(3, 356);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(237, 71);
+            this.panel5.TabIndex = 3;
             // 
             // BT_empleados
             // 
@@ -231,6 +219,18 @@
             this.ImagenPatito.TabIndex = 5;
             this.ImagenPatito.TabStop = false;
             // 
+            // sidebarTimer
+            // 
+            this.sidebarTimer.Interval = 10;
+            this.sidebarTimer.Tick += new System.EventHandler(this.sidebarTimer_Tick);
+            // 
+            // PanelAreaDeTrabajo
+            // 
+            this.PanelAreaDeTrabajo.Location = new System.Drawing.Point(65, 0);
+            this.PanelAreaDeTrabajo.Name = "PanelAreaDeTrabajo";
+            this.PanelAreaDeTrabajo.Size = new System.Drawing.Size(1069, 662);
+            this.PanelAreaDeTrabajo.TabIndex = 1;
+            // 
             // VentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,11 +244,11 @@
             this.sidebar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).EndInit();
             this.ResumeLayout(false);
 

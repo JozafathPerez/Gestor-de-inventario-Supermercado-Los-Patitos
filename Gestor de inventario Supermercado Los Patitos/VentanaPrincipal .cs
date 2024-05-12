@@ -23,6 +23,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             InitializeComponent();
             this.idTrabajador = idTrabajador;
             conexion = new Conexion();
+            sidebarExpand = true;
 
             int idRol = ObtenerIdRol(idTrabajador);
 

@@ -20,7 +20,33 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             conexion = new Conexion();
         }
 
+        private void BT_agregarProducto_Click(object sender, EventArgs e)
+        {
 
+            // Crear una instancia del formulario secundario
+            DialogoAgregarProducto actualizarForm = new DialogoAgregarProducto();
 
+            // Mostrar el formulario secundario como una ventana emergente
+            DialogResult resultado = actualizarForm.ShowDialog();
+
+            // Actualizar la vista de datos u realizar otras acciones necesarias
+            actualizarDataView();
+        }
+
+        private void BT_realizarAjuste_Click(object sender, EventArgs e)
+        {
+            // Crear una instancia del formulario secundario
+            DialogoRealizarAjuste actualizarForm = new DialogoRealizarAjuste();
+
+            // Mostrar el formulario secundario como una ventana emergente
+            DialogResult resultado = actualizarForm.ShowDialog();
+
+            // Actualizar la vista de datos u realizar otras acciones necesarias
+            actualizarDataView();
+        }
+        public void actualizarDataView()
+        {
+
+        }
     }
 }

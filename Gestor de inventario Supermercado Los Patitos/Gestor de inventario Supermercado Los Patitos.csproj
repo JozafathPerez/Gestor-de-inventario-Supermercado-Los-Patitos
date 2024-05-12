@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DialogoAgregarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogoAgregarProducto.Designer.cs">
+      <DependentUpon>DialogoAgregarProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogoRealizarAjuste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogoRealizarAjuste.Designer.cs">
+      <DependentUpon>DialogoRealizarAjuste.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelEmpleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +105,12 @@
     <Compile Include="VentanaPrincipal .Designer.cs">
       <DependentUpon>VentanaPrincipal .cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DialogoAgregarProducto.resx">
+      <DependentUpon>DialogoAgregarProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogoRealizarAjuste.resx">
+      <DependentUpon>DialogoRealizarAjuste.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelEmpleados.resx">
       <DependentUpon>PanelEmpleados.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +134,7 @@
     <EmbeddedResource Include="VentanaPrincipal .resx">
       <DependentUpon>VentanaPrincipal .cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
