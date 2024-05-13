@@ -235,7 +235,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 int idEmpleado = Convert.ToInt32(DGVPersonal.SelectedRows[0].Cells["Identificación"].Value);
 
                 // Obtiene los valores de los campos de entrada, pero si están vacíos, toma los valores de la fila seleccionada
-                string identificacion = string.IsNullOrWhiteSpace(textIdentificacion.Text) ? DGVPersonal.SelectedRows[0].Cells["Identificación"].Value.ToString() : textIdentificacion.Text;
                 string nombre = string.IsNullOrWhiteSpace(textNombre.Text) ? DGVPersonal.SelectedRows[0].Cells["Nombre"].Value.ToString() : textNombre.Text;
                 string apellido1 = string.IsNullOrWhiteSpace(textApellido1.Text) ? DGVPersonal.SelectedRows[0].Cells["Primer apellido"].Value.ToString() : textApellido1.Text;
                 string apellido2 = string.IsNullOrWhiteSpace(textApellido2.Text) ? DGVPersonal.SelectedRows[0].Cells["Segundo apellido"].Value.ToString() : textApellido2.Text;
@@ -246,6 +245,16 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 string genero = comboBoxGenero.SelectedItem == null ? DGVPersonal.SelectedRows[0].Cells["Genero"].Value.ToString() : comboBoxGenero.SelectedItem.ToString();
                 string nombreRol = comboBoxRol.SelectedItem == null ? DGVPersonal.SelectedRows[0].Cells["Rol"].Value.ToString() : comboBoxRol.SelectedItem.ToString();
                 bool estado = checkActivo.Checked;
+                DateTime fechaNacimiento;
+                string v = (DateTime.Now.ToShortDateString() == dateNacimiento.Value.ToShortDateString()) ? DGVPersonal.SelectedRows[0].Cells["Nacimiento"].Value.ToString()  : dateNacimiento.Value.ToShortDateString();
+
+                DateTime fecha;
+                if (DateTime.TryParse(v, out fechaNacimiento))
+                {}else
+                {
+                    MessageBox.Show("La fecha no fue correctamente ingresada");
+                    return;
+                }
 
                 // Convierte la cadena de género al formato de una letra
                 if (!string.IsNullOrWhiteSpace(genero) && genero.Length > 0)
@@ -288,7 +297,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                         c.abrir();
 
                         // Asigna los valores a los parámetros
-                        command.Parameters.AddWithValue("@fechaNacim", DGVPersonal.SelectedRows[0].Cells["Nacimiento"].Value);
+                        command.Parameters.AddWithValue("@fechaNacim", fechaNacimiento);
                         command.Parameters.AddWithValue("@nombre", nombre);
                         command.Parameters.AddWithValue("@apellidoPat", apellido1);
                         command.Parameters.AddWithValue("@apellidoMat", apellido2);
