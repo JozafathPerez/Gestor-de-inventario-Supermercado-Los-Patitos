@@ -257,6 +257,7 @@
 			this.Name = "VentanaPrincipal";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Ventana Principal";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.cerrarVentana);
 			this.sidebar.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();

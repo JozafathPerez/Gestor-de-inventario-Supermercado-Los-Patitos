@@ -113,7 +113,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 return;
             }
 
-            int idRol = ObtenerIdRol(rol);
+			VerifyID vID = new VerifyID();
+			if (vID.verifyID(identificacion) == null) {
+				MessageBox.Show("Error: Identificacion no válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			int idRol = ObtenerIdRol(rol);
 
             if (idRol == -1)
             {
