@@ -34,10 +34,10 @@
             this.BT_agregarProducto = new System.Windows.Forms.Button();
             this.BT_realizarAjuste = new System.Windows.Forms.Button();
             this.PanelAreaInventario = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.BT_vistaAgregar = new System.Windows.Forms.Button();
             this.BT_vistaAjuste = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PanelAreaInventario.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +90,7 @@
             this.BT_realizarAjuste.Name = "BT_realizarAjuste";
             this.BT_realizarAjuste.Size = new System.Drawing.Size(166, 41);
             this.BT_realizarAjuste.TabIndex = 4;
-            this.BT_realizarAjuste.Text = "Realizar ajuste";
+            this.BT_realizarAjuste.Text = "Guardar ajuste";
             this.BT_realizarAjuste.UseVisualStyleBackColor = false;
             this.BT_realizarAjuste.Click += new System.EventHandler(this.BT_realizarAjuste_Click);
             // 
@@ -101,6 +101,16 @@
             this.PanelAreaInventario.Name = "PanelAreaInventario";
             this.PanelAreaInventario.Size = new System.Drawing.Size(428, 465);
             this.PanelAreaInventario.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(115, 213);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(204, 42);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "      Selecciona una vista \r\npara realizar modificaciones\r\n";
             // 
             // button1
             // 
@@ -131,23 +141,13 @@
             this.BT_vistaAjuste.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.BT_vistaAjuste.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_vistaAjuste.ForeColor = System.Drawing.Color.White;
-            this.BT_vistaAjuste.Location = new System.Drawing.Point(891, 580);
+            this.BT_vistaAjuste.Location = new System.Drawing.Point(891, 578);
             this.BT_vistaAjuste.Name = "BT_vistaAjuste";
             this.BT_vistaAjuste.Size = new System.Drawing.Size(166, 41);
             this.BT_vistaAjuste.TabIndex = 8;
             this.BT_vistaAjuste.Text = "Vista de ajuste";
             this.BT_vistaAjuste.UseVisualStyleBackColor = false;
             this.BT_vistaAjuste.Click += new System.EventHandler(this.BT_vistaAjuste_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(115, 213);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(204, 42);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "      Selecciona una vista \r\npara realizar modificaciones\r\n";
             // 
             // PanelInventario
             // 
