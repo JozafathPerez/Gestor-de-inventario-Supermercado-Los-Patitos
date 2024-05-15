@@ -67,5 +67,5 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return cedula + ',' + name;
 		}
 	}
-	
+
 }
