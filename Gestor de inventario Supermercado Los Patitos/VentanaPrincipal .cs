@@ -18,8 +18,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         private Button ultimoBoton = null;
         private Conexion conexion;
         private int idTrabajador;
-        public VentanaPrincipal(int idTrabajador)
+
+        VentanaInicioSesion view;
+
+        public VentanaPrincipal(VentanaInicioSesion pView,int idTrabajador)
         {
+            this.view = pView;
             InitializeComponent();
             this.idTrabajador = idTrabajador;
             conexion = new Conexion();
@@ -160,6 +164,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             f.Show();
         }
 
-
-    }
+		private void cerrarVentana(object sender, FormClosedEventArgs e) {
+			this.view.Close();
+		}
+	}
 }

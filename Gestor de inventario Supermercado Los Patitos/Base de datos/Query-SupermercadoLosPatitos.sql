@@ -113,3 +113,28 @@ SELECT * FROM Personal
 
 
 
+-- PARA AGREGAR NOMBRE PRODUCTO EN ORDEN
+
+USE LOS_PATITOS
+
+DROP TABLE Lineas
+DROP TABLE Productos
+
+CREATE TABLE Productos
+	(codigoProd		INT	PRIMARY KEY	NOT NULL,
+	nombre			VARCHAR(150)	NOT NULL,
+	categoria		VARCHAR(150)	NOT NULL,
+	descripcion		VARCHAR(150)	NOT NULL,
+	tipoMedida		VARCHAR(150)	NOT NULL,
+	cantidadInv		INT				NOT NULL,
+	precioUnit		DECIMAL(38,2)	NOT NULL)
+
+CREATE TABLE Lineas
+	(cantidad		INT		NOT NULL,
+	codigoProd		INT		NOT NULL	FOREIGN KEY REFERENCES	Productos(codigoProd),
+	subtotal		INT		NOT NULL,
+	impuesto		INT		NOT NULL,
+	idDocumento		INT		NOT NULL	FOREIGN KEY REFERENCES	Documentos(idDocumento));
+
+-------------------------------
+

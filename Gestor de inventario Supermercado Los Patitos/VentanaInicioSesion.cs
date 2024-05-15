@@ -49,7 +49,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 int idPersonal = (int)command.ExecuteScalar();
                 conexion.cerrar();
 
-                VentanaPrincipal formularioSecundario = new VentanaPrincipal(idPersonal);
+                VentanaPrincipal formularioSecundario = new VentanaPrincipal(this, idPersonal);
 
                 // Muestra el formulario secundario
                 formularioSecundario.Show();
@@ -124,5 +124,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 TEXT_contrasena.PasswordChar = '\0';
             }
         }
-    }
+
+		private void cerrarVentana(object sender, FormClosedEventArgs e) {
+			this.Close();
+		}
+	}
 }
