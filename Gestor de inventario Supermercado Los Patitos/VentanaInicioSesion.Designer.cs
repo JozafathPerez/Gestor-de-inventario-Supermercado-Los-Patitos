@@ -119,6 +119,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			this.Name = "VentanaInicioSesion";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Ventana de Inicio Sesión";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.cerrarVentana);
 			this.Load += new System.EventHandler(this.VentanaInicioSesion_Load);
 			((System.ComponentModel.ISupportInitialize)(this.IMG_logoPrincipal)).EndInit();
 			this.ResumeLayout(false);
