@@ -101,10 +101,6 @@ END
 
 EXEC VerificarCredenciales @correo = 'jozperez@gmail.com', @contrasenia = '1234';
 
-
-
-
-
 CREATE PROCEDURE EliminarPersonal
     @idTrabajador INT -- Cambiarlo luego por cedula?
 AS
