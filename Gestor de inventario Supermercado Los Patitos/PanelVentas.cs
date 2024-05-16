@@ -27,7 +27,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             try
             {
                 c.abrir();
-                string consulta = "SELECT codigoProd AS 'Código del Producto', categoria AS 'Categoría', descripcion AS 'Descripción', tipoMedida AS 'Tipo de Medida', cantidad AS 'Cantidad Disponible', precioUnit AS 'Precio Unitario', fechaCaducidad AS 'Fecha de Caducidad' FROM Productos; ";
+                string consulta = "SELECT codigoProd AS 'Código del Producto', categoria AS 'Categoría', tipoMedida AS 'Tipo de Medida', cantidadInv AS 'Cantidad Disponible', precioUnit AS 'Precio Unitario' FROM Productos; ";
                 SqlDataAdapter adaptador = new SqlDataAdapter(consulta, c.ConectarBD);
                 DataTable tabla = new DataTable();
                 adaptador.Fill(tabla);
@@ -123,6 +123,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             LimpiarCarrito();
         }
 
+        private void LimpiarCarrito()
+        {
+
+        }
         private void ActualizarTotales()
         {
             decimal totalImpuestos = 0;
