@@ -29,92 +29,92 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxCodigo = new System.Windows.Forms.TextBox();
+            this.textBoxNombre = new System.Windows.Forms.TextBox();
+            this.comboBoxTipoMedida = new System.Windows.Forms.ComboBox();
+            this.comboBoxCategoria = new System.Windows.Forms.ComboBox();
+            this.textBoxCantidad = new System.Windows.Forms.NumericUpDown();
+            this.textBoxPrecioUnitario = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPrecioUnitario)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 375);
+            this.label1.Size = new System.Drawing.Size(194, 384);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Código :\r\n\r\nNombre :\r\n\r\nCategoria :\r\n\r\nDescripción :\r\n\r\nTipo de medida :\t\r\n\r\nCant" +
-    "idad :\t\t\r\n\r\nPrecio unitario :\t\t\r\n\r\nFecha de caducidad :\t";
+            this.label1.Text = "Código :\r\n\r\nNombre :\r\n\r\nCategoria :\r\n\r\nTipo de medida :\t\r\n\r\nCantidad :\t\t\r\n\r\nPreci" +
+    "o unitario :\t\t\r\n\r\n";
             // 
-            // textBox1
+            // textBoxCodigo
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(227, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 29);
-            this.textBox1.TabIndex = 1;
+            this.textBoxCodigo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCodigo.Location = new System.Drawing.Point(227, 30);
+            this.textBoxCodigo.Name = "textBoxCodigo";
+            this.textBoxCodigo.Size = new System.Drawing.Size(163, 29);
+            this.textBoxCodigo.TabIndex = 1;
             // 
-            // textBox2
+            // textBoxNombre
             // 
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(227, 71);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(163, 29);
-            this.textBox2.TabIndex = 2;
+            this.textBoxNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNombre.Location = new System.Drawing.Point(227, 93);
+            this.textBoxNombre.Name = "textBoxNombre";
+            this.textBoxNombre.Size = new System.Drawing.Size(163, 29);
+            this.textBoxNombre.TabIndex = 2;
             // 
-            // textBox3
+            // comboBoxTipoMedida
             // 
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(227, 175);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(163, 29);
-            this.textBox3.TabIndex = 3;
+            this.comboBoxTipoMedida.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxTipoMedida.FormattingEnabled = true;
+            this.comboBoxTipoMedida.Location = new System.Drawing.Point(227, 223);
+            this.comboBoxTipoMedida.Name = "comboBoxTipoMedida";
+            this.comboBoxTipoMedida.Size = new System.Drawing.Size(163, 29);
+            this.comboBoxTipoMedida.TabIndex = 7;
             // 
-            // textBox5
+            // comboBoxCategoria
             // 
-            this.textBox5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(227, 274);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(163, 29);
-            this.textBox5.TabIndex = 5;
+            this.comboBoxCategoria.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxCategoria.FormattingEnabled = true;
+            this.comboBoxCategoria.Location = new System.Drawing.Point(227, 159);
+            this.comboBoxCategoria.Name = "comboBoxCategoria";
+            this.comboBoxCategoria.Size = new System.Drawing.Size(163, 29);
+            this.comboBoxCategoria.TabIndex = 8;
             // 
-            // textBox6
+            // textBoxCantidad
             // 
-            this.textBox6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(227, 322);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(163, 29);
-            this.textBox6.TabIndex = 6;
+            this.textBoxCantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCantidad.Location = new System.Drawing.Point(227, 283);
+            this.textBoxCantidad.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.textBoxCantidad.Name = "textBoxCantidad";
+            this.textBoxCantidad.Size = new System.Drawing.Size(163, 29);
+            this.textBoxCantidad.TabIndex = 9;
             // 
-            // comboBox1
+            // textBoxPrecioUnitario
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(227, 223);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(163, 29);
-            this.comboBox1.TabIndex = 7;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(227, 370);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(163, 29);
-            this.dateTimePicker1.TabIndex = 8;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(227, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(163, 29);
-            this.textBox4.TabIndex = 9;
+            this.textBoxPrecioUnitario.DecimalPlaces = 2;
+            this.textBoxPrecioUnitario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPrecioUnitario.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.textBoxPrecioUnitario.Location = new System.Drawing.Point(227, 347);
+            this.textBoxPrecioUnitario.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.textBoxPrecioUnitario.Name = "textBoxPrecioUnitario";
+            this.textBoxPrecioUnitario.Size = new System.Drawing.Size(163, 29);
+            this.textBoxPrecioUnitario.TabIndex = 10;
             // 
             // DialogoAgregarProducto
             // 
@@ -122,18 +122,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(412, 426);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxPrecioUnitario);
+            this.Controls.Add(this.textBoxCantidad);
+            this.Controls.Add(this.comboBoxCategoria);
+            this.Controls.Add(this.comboBoxTipoMedida);
+            this.Controls.Add(this.textBoxNombre);
+            this.Controls.Add(this.textBoxCodigo);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DialogoAgregarProducto";
             this.Text = "DialogoAgregarProducto";
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPrecioUnitario)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,14 +141,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox4;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox textBoxCodigo;
+        public System.Windows.Forms.TextBox textBoxNombre;
+        public System.Windows.Forms.ComboBox comboBoxTipoMedida;
+        public System.Windows.Forms.ComboBox comboBoxCategoria;
+        public System.Windows.Forms.NumericUpDown textBoxCantidad;
+        public System.Windows.Forms.NumericUpDown textBoxPrecioUnitario;
     }
 }

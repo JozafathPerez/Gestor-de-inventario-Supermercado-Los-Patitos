@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DialogHistorialAjustes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogHistorialAjustes.Designer.cs">
+      <DependentUpon>DialogHistorialAjustes.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogoAgregarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
       <DependentUpon>VentanaPrincipal .cs</DependentUpon>
     </Compile>
     <Compile Include="VerifyID.cs" />
+    <EmbeddedResource Include="DialogHistorialAjustes.resx">
+      <DependentUpon>DialogHistorialAjustes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogoAgregarProducto.resx">
       <DependentUpon>DialogoAgregarProducto.cs</DependentUpon>
     </EmbeddedResource>

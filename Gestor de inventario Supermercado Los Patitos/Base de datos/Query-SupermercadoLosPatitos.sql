@@ -126,7 +126,6 @@ CREATE TABLE Productos
 	(codigoProd		INT	PRIMARY KEY	NOT NULL,
 	nombre			VARCHAR(150)	NOT NULL,
 	categoria		VARCHAR(150)	NOT NULL,
-	descripcion		VARCHAR(150)	NOT NULL,
 	tipoMedida		VARCHAR(150)	NOT NULL,
 	cantidadInv		INT				NOT NULL,
 	precioUnit		DECIMAL(38,2)	NOT NULL)
@@ -141,5 +140,17 @@ CREATE TABLE Lineas
 
 ALTER TABLE Personal
 ALTER COLUMN genero VARCHAR(20);
--------------------------------
+
+INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit) VALUES
+(1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
+(2, 'Pan Integral', 'Panadería', 'Unidades', 100, 0.80),
+(3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
+(4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
+(5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
+(6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
+(7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50);
+
+
+ALTER TABLE Bitacora
+ADD motivo VARCHAR(255);
 
