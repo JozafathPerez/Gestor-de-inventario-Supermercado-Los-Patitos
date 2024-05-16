@@ -150,6 +150,11 @@ INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, p
 (6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
 (7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50);
 
+INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
+VALUES (30, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
+       (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
+       (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
+       (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
 
 ALTER TABLE Bitacora
 ADD motivo VARCHAR(255);

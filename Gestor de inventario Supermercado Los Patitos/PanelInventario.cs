@@ -25,6 +25,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             InitializeComponent();
             conexion = new Conexion();
             this.idTrabajador = idTrabajador;
+
+
+        }
+        private void PanelInventario_Load(object sender, EventArgs e)
+        {
             actualizarDataView();
             BT_realizarAjuste.Visible = false;
             BT_agregarProducto.Visible = false;
@@ -32,8 +37,71 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             PanelAjuste = new DialogoRealizarAjuste();
             CargarTiposMedida();
             CargarCategorias();
+
+            // Habilitar autocompletado y configurar el modo de sugerencia
+            comboBoxBuscar.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBoxBuscar.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            comboBoxBuscar.DropDownStyle = ComboBoxStyle.DropDown;
+            comboBoxBuscar.AutoCompleteCustomSource = ObtenerSugerenciasDesdeBaseDatos(""); // Inicializar con sugerencias vacías
+
         }
 
+        private void ComboBoxBuscar_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        private AutoCompleteStringCollection ObtenerSugerenciasDesdeBaseDatos(string filtro)
+        {
+            AutoCompleteStringCollection suggestions = new AutoCompleteStringCollection();
+
+            try
+            {
+                conexion.abrir();
+
+                string[] filtros = filtro.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                StringBuilder queryBuilder = new StringBuilder("SELECT nombre FROM Productos WHERE 1=1");
+
+                for (int i = 0; i < filtros.Length; i++)
+                {
+                    string paramName = "@filtro" + i;
+                    queryBuilder.Append($" AND nombre LIKE {paramName}");
+                    filtros[i] = "%" + filtros[i] + "%";
+                }
+
+                string query = queryBuilder.ToString();
+
+                using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
+                {
+                    for (int i = 0; i < filtros.Length; i++)
+                    {
+                        string paramName = "@filtro" + i;
+                        command.Parameters.AddWithValue(paramName, filtros[i]);
+                    }
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string nombreProducto = reader["nombre"].ToString();
+                        suggestions.Add(nombreProducto);
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener sugerencias desde la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexion.cerrar();
+            }
+
+            return suggestions;
+        }
 
 
         private void BT_agregarProducto_Click(object sender, EventArgs e)
@@ -444,5 +512,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             cargarForm(new DialogHistorialAjustes ());
             MostrarBotones(true, true, false, false);
         }
+
+
     }
 }

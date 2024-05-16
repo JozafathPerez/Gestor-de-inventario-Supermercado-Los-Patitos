@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.DataViewProductos = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxBuscar = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BT_agregarProducto = new System.Windows.Forms.Button();
             this.BT_realizarAjuste = new System.Windows.Forms.Button();
@@ -53,14 +53,15 @@
             this.DataViewProductos.TabIndex = 0;
             this.DataViewProductos.DoubleClick += new System.EventHandler(this.DataViewProductos_DoubleClick);
             // 
-            // comboBox1
+            // comboBoxBuscar
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(192, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(389, 33);
-            this.comboBox1.TabIndex = 1;
+            this.comboBoxBuscar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxBuscar.FormattingEnabled = true;
+            this.comboBoxBuscar.Location = new System.Drawing.Point(192, 35);
+            this.comboBoxBuscar.Name = "comboBoxBuscar";
+            this.comboBoxBuscar.Size = new System.Drawing.Size(389, 33);
+            this.comboBoxBuscar.TabIndex = 1;
+            this.comboBoxBuscar.TextChanged += new System.EventHandler(this.ComboBoxBuscar_TextChanged);
             // 
             // label1
             // 
@@ -176,13 +177,14 @@
             this.Controls.Add(this.BT_realizarAjuste);
             this.Controls.Add(this.BT_agregarProducto);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxBuscar);
             this.Controls.Add(this.DataViewProductos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximumSize = new System.Drawing.Size(1069, 662);
             this.MinimumSize = new System.Drawing.Size(1069, 662);
             this.Name = "PanelInventario";
             this.Text = "PanelInventario";
+            this.Load += new System.EventHandler(this.PanelInventario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataViewProductos)).EndInit();
             this.PanelAreaInventario.ResumeLayout(false);
             this.PanelAreaInventario.PerformLayout();
@@ -194,7 +196,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DataViewProductos;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxBuscar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BT_agregarProducto;
         private System.Windows.Forms.Button BT_realizarAjuste;
