@@ -76,7 +76,9 @@ VALUES
     (4, '1988-12-10', 'Pedro', 'Martínez', 'Hernández', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'M', 3, 1),
     (5, '1987-04-25', 'Ana', 'Gómez', 'Fernández', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'F', 4, 1);
 
-
+INSERT INTO Personal 
+VALUES 
+(6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
 
 CREATE PROCEDURE VerificarCredenciales
     @correo VARCHAR(150),
@@ -136,5 +138,8 @@ CREATE TABLE Lineas
 	impuesto		INT		NOT NULL,
 	idDocumento		INT		NOT NULL	FOREIGN KEY REFERENCES	Documentos(idDocumento));
 
+
+ALTER TABLE Personal
+ALTER COLUMN genero VARCHAR(20);
 -------------------------------
 
