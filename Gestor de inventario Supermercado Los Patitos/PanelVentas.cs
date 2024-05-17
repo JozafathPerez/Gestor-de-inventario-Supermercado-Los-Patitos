@@ -156,6 +156,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 				this.txtID_Founded.Text		 = cI[0];
 				this.txtName_Founded.Text	 = cI[1];
 
+				this.lbClientID.Visible		 = true;
 				this.lbName.Visible			 = true;
 				this.txtName_Founded.Visible = true;
 				this.txtID_Founded.Visible 	 = true;
