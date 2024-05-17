@@ -1,5 +1,7 @@
 ﻿using Gestor_de_inventario__Super_Los_Patitos_;
+using OpenQA.Selenium;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 	public partial class PanelVentas : Form {
@@ -198,6 +201,24 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
                     transaction.Commit();
                     MessageBox.Show("Documento y líneas creados correctamente.");
+
+                    DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
+                        SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
+                        getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
+                        object res = getemail.ExecuteScalar();
+                        if (res != null)
+                        {
+                            string email = res.ToString();
+                            enviarDocumento(email, idDocumento);
+                        }
+                        else
+                        {
+                            throw new Exception("No se encontró ningún trabajador");
+                        }
+                    }
                 }
                 catch (Exception ex){
                     transaction.Rollback();
@@ -209,6 +230,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
             LimpiarCarrito();
             ActualizarTotales();
+        }
+
+        private void enviarDocumento(string correo, int idDocumento)
+        {
+            Console.WriteLine("El correo del trabajador que hizo el documento {0} es: {1}", idDocumento, correo);
         }
 
         private void LimpiarCarrito() {
@@ -386,6 +412,25 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
                     LimpiarCarrito();
                     ActualizarTotales();
+
+                    DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
+                        SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
+                        getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
+                        object res = getemail.ExecuteScalar();
+                        if (res != null)
+                        {
+                            string email = res.ToString();
+                            enviarDocumento(email, idDocumentoNotaCredito);
+                        }
+                        else
+                        {
+                            throw new Exception("No se encontró ningún trabajador");
+                        }
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -444,6 +489,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                 this.txtName_Founded.Text = "";
                 this.textIDCliente.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        private void bLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarCarrito();
         }
 
 
