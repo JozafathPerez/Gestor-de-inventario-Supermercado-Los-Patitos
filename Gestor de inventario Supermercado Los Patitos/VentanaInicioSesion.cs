@@ -34,33 +34,74 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             string contrasena = TEXT_contrasena.Text;
 
             bool credencialesValidas = VerificarCredenciales(cuenta, contrasena);
-
-            if (credencialesValidas)
+            if (!credencialesValidas)
             {
-                this.Hide();
-
-                conexion.abrir();
-                string query = "SELECT idTrabajador FROM Personal WHERE email = @CorreoUsuario AND contrasenia = @contrasena";
-
-                SqlCommand command = new SqlCommand(query, conexion.ConectarBD);
-                command.Parameters.AddWithValue("@CorreoUsuario", cuenta);
-                command.Parameters.AddWithValue("@contrasena", contrasena);
-
-                int idPersonal = (int)command.ExecuteScalar();
-                conexion.cerrar();
-
-                VentanaPrincipal formularioSecundario = new VentanaPrincipal(this, idPersonal);
-
-                // Muestra el formulario secundario
-                formularioSecundario.Show();
-            }
-            else {
                 MessageBox.Show("Cuenta o contraseña incorrectos. Inténtelo de nuevo.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
+
+            bool estadoPesonal = VerificarEstado(cuenta);
+            if (!estadoPesonal)
+            {
+                MessageBox.Show("El usuario se encuentra inactivo.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            this.Hide();
+
+            conexion.abrir();
+            string query = "SELECT idTrabajador FROM Personal WHERE email = @CorreoUsuario AND contrasenia = @contrasena";
+
+            SqlCommand command = new SqlCommand(query, conexion.ConectarBD);
+            command.Parameters.AddWithValue("@CorreoUsuario", cuenta);
+            command.Parameters.AddWithValue("@contrasena", contrasena);
+
+            int idPersonal = (int)command.ExecuteScalar();
+            conexion.cerrar();
+
+            VentanaPrincipal formularioSecundario = new VentanaPrincipal(this, idPersonal);
+
+            // Muestra el formulario secundario
+            formularioSecundario.Show();
 
         }
 
-        private bool VerificarCredenciales(string CorreoUsuario, string contrasena)
+        private bool VerificarEstado(string cuenta)
+        {
+            bool estado = false;
+
+            try
+            {
+                conexion.abrir();
+
+                string query = "SELECT estado FROM Personal WHERE email = @cuenta";
+                using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
+                {
+                    command.Parameters.AddWithValue("@cuenta", cuenta);
+
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        estado = Convert.ToBoolean(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al verificar el estado del trabajador: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexion.cerrar();
+            }
+
+            return estado;
+        }
+
+
+
+
+    private bool VerificarCredenciales(string CorreoUsuario, string contrasena)
         {
             // Nombre del procedimiento almacenado
             string SP_verificarCredenciales = "VerificarCredenciales";
