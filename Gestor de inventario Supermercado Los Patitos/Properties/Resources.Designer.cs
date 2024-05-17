@@ -113,6 +113,16 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LOGO_Transparente {
+            get {
+                object obj = ResourceManager.GetObject("LOGO_Transparente", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SUPERMERCADO_LOS_PATITOS__LOGOSINFONDO_ {
             get {
                 object obj = ResourceManager.GetObject("SUPERMERCADO LOS PATITOS [LOGOSINFONDO]", resourceCulture);

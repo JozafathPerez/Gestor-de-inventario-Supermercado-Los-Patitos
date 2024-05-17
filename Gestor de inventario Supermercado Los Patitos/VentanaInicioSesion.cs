@@ -125,7 +125,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
-		private void cerrarVentana(object sender, FormClosedEventArgs e) {
+		public void cerrarVentana(object sender, FormClosedEventArgs e) {
 			this.Close();
 		}
 	}
