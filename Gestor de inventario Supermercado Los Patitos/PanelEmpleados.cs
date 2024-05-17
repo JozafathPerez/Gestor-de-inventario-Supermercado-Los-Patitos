@@ -19,6 +19,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         {
             CargarPersonal();
             CargarRoles();
+            comboBoxGenero.SelectedIndex = 0;
+            comboBoxRol.SelectedIndex = 0;
         }
 
         private void CargarPersonal()
@@ -57,11 +59,14 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             try
             {
                 c.abrir();
-                string consulta = "SELECT nombre FROM Roles";
+                string consulta = "SELECT nombre FROM Roles WHERE nombre != 'Administrador'";
                 SqlDataAdapter adaptador = new SqlDataAdapter(consulta, c.ConectarBD);
                 DataTable tabla = new DataTable();
                 adaptador.Fill(tabla);
-                foreach (DataRow row in tabla.Rows) { comboBoxRol.Items.Add(row["nombre"]); }
+                foreach (DataRow row in tabla.Rows)
+                {
+                    comboBoxRol.Items.Add(row["nombre"]);
+                }
                 c.cerrar();
             }
             catch (Exception ex)
@@ -69,6 +74,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -79,7 +85,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             string email = textEmail.Text;
             string contrasenia = textContra.Text;
             string telefono = textTelefono.Text;
-            string genero = comboBoxGenero.SelectedItem.ToString().Substring(0, 1);
+            string genero = comboBoxGenero.SelectedItem.ToString();
             string rol = comboBoxRol.SelectedItem.ToString();
             bool estado = checkActivo.Checked;
             string direccion = textDireccion.Text;
@@ -113,19 +119,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 return;
             }
 
-			VerifyID vID = new VerifyID();
-			if (vID.verifyID(identificacion) == null) {
-				MessageBox.Show("Error: Identificacion no válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
+			//VerifyID vID = new VerifyID();
+			//if (vID.verifyID(identificacion) == null) {
+			//	MessageBox.Show("Error: Identificacion no válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//	return;
+			//}
 
 			int idRol = ObtenerIdRol(rol);
-
-            if (idRol == -1)
-            {
-                MessageBox.Show("El rol seleccionado no existe en la base de datos.");
-                return;
-            }
 
             string query = "INSERT INTO Personal (idTrabajador, fechaNacim, nombre, apellidoPat, apellidoMat, direccion, email, contrasenia, numTel, genero, idRol, estado) " +
                            "VALUES (@idTrabajador, @fechaNacim, @nombre, @apellidoPat, @apellidoMat, @direccion, @email, @contrasenia, @numTel, @genero, @idRol, @estado)";
@@ -201,8 +201,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             textEmail.Text = "";
             textContra.Text = "";
             textTelefono.Text = "";
-            comboBoxGenero.SelectedIndex = -1;
-            comboBoxRol.SelectedIndex = -1;
+            textDireccion.Text = "";
+            comboBoxGenero.SelectedIndex = 0;
+            comboBoxRol.SelectedIndex = 0;
             checkActivo.Checked = false;
             dateNacimiento.Value = DateTime.Today;
         }
@@ -234,111 +235,97 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            // Verifica si hay una fila seleccionada en el DataGridView
-            if (DGVPersonal.SelectedRows.Count > 0)
+            string identificacion = textIdentificacion.Text;
+            string nombre = textNombre.Text;
+            string apellido1 = textApellido1.Text;
+            string apellido2 = textApellido2.Text;
+            string direccion = textDireccion.Text;
+            string email = textEmail.Text;
+            string contrasenia = textContra.Text;
+            string telefono = textTelefono.Text;
+            string genero = comboBoxGenero.SelectedItem.ToString();
+            string nombreRol = comboBoxRol.SelectedItem.ToString();
+            bool estado = checkActivo.Checked;
+            DateTime fechaNacimiento = dateNacimiento.Value;
+
+            if (string.IsNullOrWhiteSpace(identificacion) || string.IsNullOrWhiteSpace(nombre) ||
+                string.IsNullOrWhiteSpace(apellido1) || string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(contrasenia) || string.IsNullOrWhiteSpace(telefono) ||
+                string.IsNullOrWhiteSpace(genero) || string.IsNullOrWhiteSpace(nombreRol) ||
+                string.IsNullOrWhiteSpace(direccion))
             {
-                // Obtiene los valores de la fila seleccionada
-                int idEmpleado = Convert.ToInt32(DGVPersonal.SelectedRows[0].Cells["Identificación"].Value);
-
-                // Obtiene los valores de los campos de entrada, pero si están vacíos, toma los valores de la fila seleccionada
-                string nombre = string.IsNullOrWhiteSpace(textNombre.Text) ? DGVPersonal.SelectedRows[0].Cells["Nombre"].Value.ToString() : textNombre.Text;
-                string apellido1 = string.IsNullOrWhiteSpace(textApellido1.Text) ? DGVPersonal.SelectedRows[0].Cells["Primer apellido"].Value.ToString() : textApellido1.Text;
-                string apellido2 = string.IsNullOrWhiteSpace(textApellido2.Text) ? DGVPersonal.SelectedRows[0].Cells["Segundo apellido"].Value.ToString() : textApellido2.Text;
-                string direccion = string.IsNullOrWhiteSpace(textDireccion.Text) ? DGVPersonal.SelectedRows[0].Cells["Dirección"].Value.ToString() : textDireccion.Text;
-                string email = string.IsNullOrWhiteSpace(textEmail.Text) ? DGVPersonal.SelectedRows[0].Cells["Correo"].Value.ToString() : textEmail.Text;
-                string contrasenia = string.IsNullOrWhiteSpace(textContra.Text) ? DGVPersonal.SelectedRows[0].Cells["Contraseña"].Value.ToString() : textContra.Text;
-                string telefono = string.IsNullOrWhiteSpace(textTelefono.Text) ? DGVPersonal.SelectedRows[0].Cells["Telefono"].Value.ToString() : textTelefono.Text;
-                string genero = comboBoxGenero.SelectedItem == null ? DGVPersonal.SelectedRows[0].Cells["Genero"].Value.ToString() : comboBoxGenero.SelectedItem.ToString();
-                string nombreRol = comboBoxRol.SelectedItem == null ? DGVPersonal.SelectedRows[0].Cells["Rol"].Value.ToString() : comboBoxRol.SelectedItem.ToString();
-                bool estado = checkActivo.Checked;
-                DateTime fechaNacimiento;
-                string v = (DateTime.Now.ToShortDateString() == dateNacimiento.Value.ToShortDateString()) ? DGVPersonal.SelectedRows[0].Cells["Nacimiento"].Value.ToString()  : dateNacimiento.Value.ToShortDateString();
-
-                DateTime fecha;
-                if (DateTime.TryParse(v, out fechaNacimiento))
-                {}else
-                {
-                    MessageBox.Show("La fecha no fue correctamente ingresada");
-                    return;
-                }
-
-                // Convierte la cadena de género al formato de una letra
-                if (!string.IsNullOrWhiteSpace(genero) && genero.Length > 0)
-                {
-                    genero = genero.Substring(0, 1);
-                }
-
-                // Verifica el formato del correo electrónico y del teléfono
-                if (!EsFormatoCorreoValido(email))
-                {
-                    MessageBox.Show("El formato del correo electrónico no es válido.");
-                    return;
-                }
-
-                if (!EsNumeroValido(telefono))
-                {
-                    MessageBox.Show("El número de teléfono debe contener solo números.");
-                    return;
-                }
-
-                // Obtiene el idRol correspondiente al nombre del rol seleccionado
-                int idRol = ObtenerIdRol(nombreRol);
-
-                if (idRol == -1)
-                {
-                    MessageBox.Show("El rol seleccionado no existe en la base de datos.");
-                    return;
-                }
-
-                // Prepara la consulta SQL para actualizar los datos del empleado
-                string query = "UPDATE Personal SET fechaNacim = @fechaNacim, nombre = @nombre, apellidoPat = @apellidoPat, " +
-                               "apellidoMat = @apellidoMat, direccion = @direccion, email = @email, " +
-                               "contrasenia = @contrasenia, numTel = @numTel, genero = @genero, idRol = @idRol, estado = @estado " +
-                               "WHERE idTrabajador = @idTrabajador";
-
-                using (SqlCommand command = new SqlCommand(query, c.ConectarBD))
-                {
-                    try
-                    {
-                        c.abrir();
-
-                        // Asigna los valores a los parámetros
-                        command.Parameters.AddWithValue("@fechaNacim", fechaNacimiento);
-                        command.Parameters.AddWithValue("@nombre", nombre);
-                        command.Parameters.AddWithValue("@apellidoPat", apellido1);
-                        command.Parameters.AddWithValue("@apellidoMat", apellido2);
-                        command.Parameters.AddWithValue("@direccion", direccion);
-                        command.Parameters.AddWithValue("@email", email);
-                        command.Parameters.AddWithValue("@contrasenia", contrasenia);
-                        command.Parameters.AddWithValue("@numTel", telefono);
-                        command.Parameters.AddWithValue("@genero", genero);
-                        command.Parameters.AddWithValue("@idRol", idRol);
-                        command.Parameters.AddWithValue("@estado", estado);
-                        command.Parameters.AddWithValue("@idTrabajador", idEmpleado); // Utiliza el idEmpleado de la fila seleccionada
-
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Registro de personal modificado correctamente.");
-                            LimpiarCampos();
-                            CargarPersonal(); // Vuelve a cargar los datos en el DataGridView después de modificar
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se pudo modificar el registro de personal. Verifique la identificación.");
-                        }
-                        c.cerrar();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al modificar el registro de personal: " + ex.Message);
-                    }
-                }
+                MessageBox.Show("Todos los campos son obligatorios.");
+                return;
             }
-            else
+
+            if (!EsFormatoCorreoValido(email))
             {
-                MessageBox.Show("Seleccione una fila para modificar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El formato del correo electrónico no es válido.");
+                return;
+            }
+
+            if (!EsNumeroValido(telefono))
+            {
+                MessageBox.Show("El número de teléfono debe contener solo números.");
+                return;
+            }
+
+            if (!EsNumeroValido(identificacion))
+            {
+                MessageBox.Show("La identificación debe contener solo números.");
+                return;
+            }
+
+            int idRol = ObtenerIdRol(nombreRol);
+
+            if (idRol == -1)
+            {
+                MessageBox.Show("El rol seleccionado no existe en la base de datos.");
+                return;
+            }
+
+            string query = "UPDATE Personal SET fechaNacim = @fechaNacim, nombre = @nombre, apellidoPat = @apellidoPat, " +
+                           "apellidoMat = @apellidoMat, direccion = @direccion, email = @email, " +
+                           "contrasenia = @contrasenia, numTel = @numTel, genero = @genero, idRol = @idRol, estado = @estado " +
+                           "WHERE idTrabajador = @idTrabajador";
+
+            using (SqlCommand command = new SqlCommand(query, c.ConectarBD))
+            {
+                try
+                {
+                    c.abrir();
+
+                    command.Parameters.AddWithValue("@fechaNacim", fechaNacimiento);
+                    command.Parameters.AddWithValue("@nombre", nombre);
+                    command.Parameters.AddWithValue("@apellidoPat", apellido1);
+                    command.Parameters.AddWithValue("@apellidoMat", apellido2);
+                    command.Parameters.AddWithValue("@direccion", direccion);
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@contrasenia", contrasenia);
+                    command.Parameters.AddWithValue("@numTel", telefono);
+                    command.Parameters.AddWithValue("@genero", genero);
+                    command.Parameters.AddWithValue("@idRol", idRol);
+                    command.Parameters.AddWithValue("@estado", estado);
+                    command.Parameters.AddWithValue("@idTrabajador", identificacion);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Registro de personal modificado correctamente.");
+                        LimpiarCampos();
+                        CargarPersonal();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo modificar el registro de personal. Verifique la identificación.");
+                    }
+                    c.cerrar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al modificar el registro de personal: " + ex.Message);
+                }
             }
         }
 
@@ -395,7 +382,30 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        private void DGVPersonal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < DGVPersonal.Rows.Count)
+            {
+                DataGridViewRow fila = DGVPersonal.Rows[e.RowIndex];
 
+                textIdentificacion.Text = fila.Cells["Identificación"].Value.ToString();
+                dateNacimiento.Value = Convert.ToDateTime(fila.Cells["Nacimiento"].Value);
+                textNombre.Text = fila.Cells["Nombre"].Value.ToString();
+                textApellido1.Text = fila.Cells["Primer apellido"].Value.ToString();
+                textApellido2.Text = fila.Cells["Segundo apellido"].Value.ToString();
+                textDireccion.Text = fila.Cells["Dirección"].Value.ToString();
+                textEmail.Text = fila.Cells["Correo"].Value.ToString();
+                textContra.Text = fila.Cells["Contraseña"].Value.ToString();
+                textTelefono.Text = fila.Cells["Telefono"].Value.ToString();
+                comboBoxGenero.SelectedItem = fila.Cells["Genero"].Value.ToString();
+                comboBoxRol.SelectedItem = fila.Cells["Rol"].Value.ToString();
+                checkActivo.Checked = Convert.ToBoolean(fila.Cells["Estado"].Value);
+            }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
+        }
     }
 }

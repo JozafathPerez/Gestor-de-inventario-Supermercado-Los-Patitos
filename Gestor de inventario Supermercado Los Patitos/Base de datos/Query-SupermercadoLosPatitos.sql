@@ -76,7 +76,9 @@ VALUES
     (4, '1988-12-10', 'Pedro', 'Martínez', 'Hernández', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'M', 3, 1),
     (5, '1987-04-25', 'Ana', 'Gómez', 'Fernández', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'F', 4, 1);
 
-
+INSERT INTO Personal 
+VALUES 
+(6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
 
 CREATE PROCEDURE VerificarCredenciales
     @correo VARCHAR(150),
@@ -101,10 +103,6 @@ END
 
 EXEC VerificarCredenciales @correo = 'jozperez@gmail.com', @contrasenia = '1234';
 
-
-
-
-
 CREATE PROCEDURE EliminarPersonal
     @idTrabajador INT -- Cambiarlo luego por cedula?
 AS
@@ -128,7 +126,6 @@ CREATE TABLE Productos
 	(codigoProd		INT	PRIMARY KEY	NOT NULL,
 	nombre			VARCHAR(150)	NOT NULL,
 	categoria		VARCHAR(150)	NOT NULL,
-	descripcion		VARCHAR(150)	NOT NULL,
 	tipoMedida		VARCHAR(150)	NOT NULL,
 	cantidadInv		INT				NOT NULL,
 	precioUnit		DECIMAL(38,2)	NOT NULL)
@@ -140,5 +137,25 @@ CREATE TABLE Lineas
 	impuesto		INT		NOT NULL,
 	idDocumento		INT		NOT NULL	FOREIGN KEY REFERENCES	Documentos(idDocumento));
 
--------------------------------
+
+ALTER TABLE Personal
+ALTER COLUMN genero VARCHAR(20);
+
+INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit) VALUES
+(1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
+(2, 'Pan Integral', 'Panadería', 'Unidades', 100, 0.80),
+(3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
+(4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
+(5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
+(6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
+(7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50);
+
+INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
+VALUES (30, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
+       (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
+       (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
+       (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
+
+ALTER TABLE Bitacora
+ADD motivo VARCHAR(255);
 

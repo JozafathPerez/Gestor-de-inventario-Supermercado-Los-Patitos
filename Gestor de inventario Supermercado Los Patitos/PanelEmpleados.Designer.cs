@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelPersonal = new System.Windows.Forms.Label();
             this.DGVPersonal = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,6 +59,7 @@
             this.labelNacimiento = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textDireccion = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPersonal)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,12 +88,13 @@
             this.DGVPersonal.Name = "DGVPersonal";
             this.DGVPersonal.ReadOnly = true;
             this.DGVPersonal.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGVPersonal.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGVPersonal.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DGVPersonal.RowTemplate.Height = 24;
             this.DGVPersonal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVPersonal.Size = new System.Drawing.Size(618, 510);
             this.DGVPersonal.TabIndex = 0;
+            this.DGVPersonal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVPersonal_CellDoubleClick);
             // 
             // label1
             // 
@@ -302,9 +304,8 @@
             this.comboBoxGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxGenero.FormattingEnabled = true;
             this.comboBoxGenero.Items.AddRange(new object[] {
-            "Femenino",
             "Masculino",
-            "No definir"});
+            "Femenino"});
             this.comboBoxGenero.Location = new System.Drawing.Point(668, 353);
             this.comboBoxGenero.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxGenero.Name = "comboBoxGenero";
@@ -396,12 +397,23 @@
             this.textDireccion.TabIndex = 29;
             this.textDireccion.Text = "";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(535, 93);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(114, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Limpiar campos\r\n";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PanelEmpleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1069, 662);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textDireccion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelNacimiento);
@@ -475,5 +487,6 @@
         private System.Windows.Forms.Label labelNacimiento;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox textDireccion;
+        private System.Windows.Forms.Button button1;
     }
 }
