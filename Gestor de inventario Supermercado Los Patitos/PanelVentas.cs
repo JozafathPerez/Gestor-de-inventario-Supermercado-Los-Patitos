@@ -1,5 +1,7 @@
 ﻿using Gestor_de_inventario__Super_Los_Patitos_;
+using OpenQA.Selenium;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 	public partial class PanelVentas : Form {
@@ -43,7 +46,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 		private void CargarDocumentos() {
 			try {
 				c.abrir();
-				string consulta = "SELECT idDocumento AS 'ID', tipo AS 'Tipo', fechaCreacion AS 'Fecha de Creacion', consecutivo AS 'Consecutivo', idCliente AS 'ID del Cliente', idTrabajador AS 'ID del Trabajador', totalImpuestos AS 'Total de Impuestos', subtotal AS 'Subtotal' FROM Documentos;";
+				string consulta = "SELECT idDocumento AS 'ID', tipo AS 'Tipo', fechaCreacion AS 'Fecha de Creacion', consecutivo AS 'Consecutivo', idCliente AS 'ID del Cliente', idTrabajador AS 'ID del Trabajador', totalImpuestos AS 'Total de Impuestos', subtotal AS 'Subtotal', idNotaCredito AS 'Nota de Credito' FROM Documentos;";
 				SqlDataAdapter adaptador = new SqlDataAdapter(consulta, c.ConectarBD);
 				DataTable tabla = new DataTable();
 				adaptador.Fill(tabla);
@@ -117,44 +120,40 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                 MessageBox.Show("Tipo de documento no válido.");
                 return;
             }
-
             string informacionCliente = textIDCliente.Text.Trim();
             if (tipoDocumentoId == 1 && string.IsNullOrEmpty(informacionCliente))
             {
                 MessageBox.Show("Debe ingresar la información del cliente.");
                 return;
             }
-
             try
             {
                 c.abrir();
                 SqlTransaction transaction = c.ConectarBD.BeginTransaction();
-
                 try
                 {
                     decimal totalImpuestos = 0;
                     decimal subtotal = 0;
-                    foreach (DataGridViewRow fila in DGVCarrito.Rows)
-                    {
+                    foreach (DataGridViewRow fila in DGVCarrito.Rows){
                         subtotal += Convert.ToDecimal(fila.Cells["Subtotal"].Value);
                         totalImpuestos += Convert.ToDecimal(fila.Cells["Impuesto"].Value);
                     }
 
-                    string obtenerConsecutivoQuery = "SELECT consecutivo FROM Consecutivos WHERE tipo = @TipoDocumento";
-                    SqlCommand obtenerConsecutivoCmd = new SqlCommand(obtenerConsecutivoQuery, c.ConectarBD, transaction);
+                    SqlCommand obtenerConsecutivoCmd = new SqlCommand("ObtenerConsecutivo", c.ConectarBD, transaction);
+                    obtenerConsecutivoCmd.CommandType = CommandType.StoredProcedure;
                     obtenerConsecutivoCmd.Parameters.AddWithValue("@TipoDocumento", tipoDocumentoId);
-                    object resultado = obtenerConsecutivoCmd.ExecuteScalar();
-                    int consecutivo = (resultado != DBNull.Value) ? Convert.ToInt32(resultado) : 0;
+                    SqlParameter consecutivoParam = new SqlParameter("@Consecutivo", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    obtenerConsecutivoCmd.Parameters.Add(consecutivoParam);
+                    obtenerConsecutivoCmd.ExecuteNonQuery();
+                    int consecutivo = (int)consecutivoParam.Value;
 
-                    string actualizarConsecutivoQuery = "UPDATE Consecutivos SET consecutivo = consecutivo + 1 WHERE tipo = @TipoDocumento";
-                    SqlCommand actualizarConsecutivoCmd = new SqlCommand(actualizarConsecutivoQuery, c.ConectarBD, transaction);
+                    SqlCommand actualizarConsecutivoCmd = new SqlCommand("ActualizarConsecutivo", c.ConectarBD, transaction);
+                    actualizarConsecutivoCmd.CommandType = CommandType.StoredProcedure;
                     actualizarConsecutivoCmd.Parameters.AddWithValue("@TipoDocumento", tipoDocumentoId);
                     actualizarConsecutivoCmd.ExecuteNonQuery();
 
-                    string insertarDocumentoQuery = "INSERT INTO Documentos (tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal) " +
-                        "VALUES (@TipoDocumento, @FechaCreacion, @Consecutivo, @IdCliente, @IdTrabajador, @TotalImpuestos, @Subtotal); " +
-                        "SELECT SCOPE_IDENTITY();";
-                    SqlCommand insertarDocumentoCmd = new SqlCommand(insertarDocumentoQuery, c.ConectarBD, transaction);
+                    SqlCommand insertarDocumentoCmd = new SqlCommand("InsertarDocumento", c.ConectarBD, transaction);
+                    insertarDocumentoCmd.CommandType = CommandType.StoredProcedure;
                     insertarDocumentoCmd.Parameters.AddWithValue("@TipoDocumento", tipoDocumentoId);
                     insertarDocumentoCmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
                     insertarDocumentoCmd.Parameters.AddWithValue("@Consecutivo", consecutivo);
@@ -162,7 +161,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                     insertarDocumentoCmd.Parameters.AddWithValue("@IdTrabajador", this.idTrabajador);
                     insertarDocumentoCmd.Parameters.AddWithValue("@TotalImpuestos", totalImpuestos);
                     insertarDocumentoCmd.Parameters.AddWithValue("@Subtotal", subtotal);
-                    int idDocumento = Convert.ToInt32(insertarDocumentoCmd.ExecuteScalar());
+                    SqlParameter idDocumentoParam = new SqlParameter("@IdDocumento", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    insertarDocumentoCmd.Parameters.Add(idDocumentoParam);
+                    insertarDocumentoCmd.ExecuteNonQuery();
+                    int idDocumento = (int)idDocumentoParam.Value;
 
                     foreach (DataGridViewRow fila in DGVCarrito.Rows)
                     {
@@ -171,16 +173,17 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                         decimal subtotalLinea = Convert.ToDecimal(fila.Cells["Subtotal"].Value);
                         decimal impuestoLinea = Convert.ToDecimal(fila.Cells["Impuesto"].Value);
 
-                        string verificarProductoQuery = "SELECT COUNT(*) FROM Productos WHERE codigoProd = @CodigoProd";
-                        SqlCommand verificarProductoCmd = new SqlCommand(verificarProductoQuery, c.ConectarBD, transaction);
+                        SqlCommand verificarProductoCmd = new SqlCommand("VerificarProducto", c.ConectarBD, transaction);
+                        verificarProductoCmd.CommandType = CommandType.StoredProcedure;
                         verificarProductoCmd.Parameters.AddWithValue("@CodigoProd", codigoProd);
-                        int productoExiste = Convert.ToInt32(verificarProductoCmd.ExecuteScalar());
+                        SqlParameter productoExisteParam = new SqlParameter("@ProductoExiste", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                        verificarProductoCmd.Parameters.Add(productoExisteParam);
+                        verificarProductoCmd.ExecuteNonQuery();
+                        int productoExiste = (int)productoExisteParam.Value;
 
-                        if (productoExiste > 0)
-                        {
-                            string insertarLineaQuery = "INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento) " +
-                            "VALUES (@Cantidad, @CodigoProd, @Subtotal, @Impuesto, @IdDocumento)";
-                            SqlCommand insertarLineaCmd = new SqlCommand(insertarLineaQuery, c.ConectarBD, transaction);
+                        if (productoExiste > 0){
+                            SqlCommand insertarLineaCmd = new SqlCommand("InsertarLinea", c.ConectarBD, transaction);
+                            insertarLineaCmd.CommandType = CommandType.StoredProcedure;
                             insertarLineaCmd.Parameters.AddWithValue("@Cantidad", cantidad);
                             insertarLineaCmd.Parameters.AddWithValue("@CodigoProd", codigoProd);
                             insertarLineaCmd.Parameters.AddWithValue("@Subtotal", subtotalLinea);
@@ -188,8 +191,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                             insertarLineaCmd.Parameters.AddWithValue("@IdDocumento", idDocumento);
                             insertarLineaCmd.ExecuteNonQuery();
 
-                            string actualizarCantidadQuery = "UPDATE Productos SET cantidadInv = cantidadInv - @Cantidad WHERE codigoProd = @CodigoProd";
-                            SqlCommand actualizarCantidadCmd = new SqlCommand(actualizarCantidadQuery, c.ConectarBD, transaction);
+                            SqlCommand actualizarCantidadCmd = new SqlCommand("ActualizarCantidadProducto", c.ConectarBD, transaction);
+                            actualizarCantidadCmd.CommandType = CommandType.StoredProcedure;
                             actualizarCantidadCmd.Parameters.AddWithValue("@Cantidad", cantidad);
                             actualizarCantidadCmd.Parameters.AddWithValue("@CodigoProd", codigoProd);
                             actualizarCantidadCmd.ExecuteNonQuery();
@@ -197,28 +200,42 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                     }
 
                     transaction.Commit();
-
                     MessageBox.Show("Documento y líneas creados correctamente.");
+
+                    DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
+                        SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
+                        getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
+                        object res = getemail.ExecuteScalar();
+                        if (res != null)
+                        {
+                            string email = res.ToString();
+                            enviarDocumento(email, idDocumento);
+                        }
+                        else
+                        {
+                            throw new Exception("No se encontró ningún trabajador");
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex){
                     transaction.Rollback();
                     MessageBox.Show("Error al crear el documento: " + ex.Message);
                 }
-                finally
-                {
-                    c.cerrar();
-                }
+                finally{c.cerrar();}
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al abrir la conexión: " + ex.Message);
-            }
+            catch (Exception ex){MessageBox.Show("Error al abrir la conexión: " + ex.Message);}
 
             LimpiarCarrito();
             ActualizarTotales();
         }
 
+        private void enviarDocumento(string correo, int idDocumento)
+        {
+            Console.WriteLine("El correo del trabajador que hizo el documento {0} es: {1}", idDocumento, correo);
+        }
 
         private void LimpiarCarrito() {
             DGVCarrito.Rows.Clear();
@@ -245,55 +262,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 		}
 
 		// CÓDIGO PARA VERIFICACIÓN DE CÉDULA DE CLIENTE
-		
-		private void textIDCliente_Enter(object sender, EventArgs e) {
-			if (this.textIDCliente.Text == "Ej: 123456789") {
-				this.textIDCliente.Text = "";
-			}
-			this.textIDCliente.ForeColor = Color.Black;
-		}
 
 		private void textIDCliente_Leave(object sender, EventArgs e) {
-
-			if (this.textIDCliente.Text == "") {
-				this.textIDCliente.Text = "Ej: 123456789";
-				this.textIDCliente.ForeColor = Color.Silver;
-				return;
-			}
-
-			if (this.txtID_Founded.Text.Equals(this.textIDCliente.Text)) {
-				return;
-			}
-
-			string clientInfo = getClientID(this.textIDCliente.Text);
-
-			if (clientInfo != null && !clientInfo[0].Equals('0')) {
-
-				string[] cI     = clientInfo.Split(',');
-
-				this.lbClientID.Text = "Identificación:";
-				this.lbName.Text	 = "Nombre Completo:";
-
-				this.txtID_Founded.Text		 = cI[0];
-				this.txtName_Founded.Text	 = cI[1];
-
-				this.lbClientID.Visible		 = true;
-				this.lbName.Visible			 = true;
-				this.txtName_Founded.Visible = true;
-				this.txtID_Founded.Visible 	 = true;
-
-				return;
-			}
-			this.lbName.Visible			 = false;
-			this.txtName_Founded.Visible = false;
-			this.txtID_Founded.Visible	 = false;
-			this.lbClientID.Visible		 = false;
-
-			this.lbClientID.Text		 = "";
-			this.lbName.Text			 = "";
-			this.txtID_Founded.Text		 = "";
-			this.txtName_Founded.Text	 = "";
-			this.textIDCliente.ForeColor = System.Drawing.Color.Red;
 		}
 
 		private string getClientID(string pID) {
@@ -315,6 +285,218 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return true;
 		}
 
-		////////////////////////////////////////////////////////////////////////////
-	}
+        private void bNotaCredito_Click(object sender, EventArgs e)
+        {
+            if (DGVDocumentos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar un documento de la lista de facturas.");
+                return;
+            }
+
+            int idDocumentoReferencia = Convert.ToInt32(DGVDocumentos.SelectedRows[0].Cells["ID"].Value);
+            int tipoDocumentoReferencia = Convert.ToInt32(DGVDocumentos.SelectedRows[0].Cells["Tipo"].Value);
+
+            if (tipoDocumentoReferencia == 3)
+            {
+                MessageBox.Show("Solo se pueden anular notas de credito.");
+                return;
+            }
+
+            try
+            {
+                c.abrir();
+                SqlTransaction transaction = c.ConectarBD.BeginTransaction();
+
+                try
+                {
+                    string verificarAnulacionQuery = "SELECT idNotaCredito FROM Documentos WHERE idDocumento = @IdDocumentoReferencia";
+                    SqlCommand verificarAnulacionCmd = new SqlCommand(verificarAnulacionQuery, c.ConectarBD, transaction);
+                    verificarAnulacionCmd.Parameters.AddWithValue("@IdDocumentoReferencia", idDocumentoReferencia);
+                    object idNotaCredito = verificarAnulacionCmd.ExecuteScalar();
+                    if (idNotaCredito != DBNull.Value)
+                    {
+                        throw new Exception("Este documento ya ha sido anulado.");
+                    }
+
+                    string idCliente = DGVDocumentos.SelectedRows[0].Cells["Id del Cliente"].Value.ToString();
+                    int idTrabajador = this.idTrabajador;
+                    decimal totalImpuestos = Convert.ToDecimal(DGVDocumentos.SelectedRows[0].Cells["Total de Impuestos"].Value);
+                    decimal subtotal = Convert.ToDecimal(DGVDocumentos.SelectedRows[0].Cells["Subtotal"].Value);
+
+                    SqlCommand obtenerConsecutivoCmd = new SqlCommand("ObtenerConsecutivo", c.ConectarBD, transaction);
+                    obtenerConsecutivoCmd.CommandType = CommandType.StoredProcedure;
+                    obtenerConsecutivoCmd.Parameters.AddWithValue("@TipoDocumento", 3);
+                    SqlParameter consecutivoParam = new SqlParameter("@Consecutivo", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                    obtenerConsecutivoCmd.Parameters.Add(consecutivoParam);
+                    obtenerConsecutivoCmd.ExecuteNonQuery();
+                    int consecutivo = (int)consecutivoParam.Value;
+
+                    SqlCommand actualizarConsecutivoCmd = new SqlCommand("ActualizarConsecutivo", c.ConectarBD, transaction);
+                    actualizarConsecutivoCmd.CommandType = CommandType.StoredProcedure;
+                    actualizarConsecutivoCmd.Parameters.AddWithValue("@TipoDocumento", 3);
+                    actualizarConsecutivoCmd.ExecuteNonQuery();
+
+                    SqlCommand insertarDocumentoCmd = new SqlCommand("InsertarDocumento", c.ConectarBD, transaction);
+                    insertarDocumentoCmd.CommandType = CommandType.StoredProcedure;
+                    insertarDocumentoCmd.Parameters.AddRange(new SqlParameter[]
+                    {
+                        new SqlParameter("@TipoDocumento", 3),
+                        new SqlParameter("@FechaCreacion", DateTime.Now),
+                        new SqlParameter("@Consecutivo", consecutivo),
+                        new SqlParameter("@IdCliente", string.IsNullOrEmpty(idCliente) ? (object)DBNull.Value : idCliente),
+                        new SqlParameter("@IdTrabajador", idTrabajador),
+                        new SqlParameter("@TotalImpuestos", totalImpuestos),
+                        new SqlParameter("@Subtotal", subtotal),
+                        new SqlParameter("@IdDocumento", SqlDbType.Int) { Direction = ParameterDirection.Output }
+                    });
+                    insertarDocumentoCmd.ExecuteNonQuery();
+                    int idDocumentoNotaCredito = (int)((SqlParameter)insertarDocumentoCmd.Parameters["@IdDocumento"]).Value;
+
+                    string obtenerLineasQuery = "SELECT cantidad, codigoProd, subtotal, impuesto FROM Lineas WHERE idDocumento = @IdDocumentoReferencia";
+                    SqlCommand obtenerLineasCmd = new SqlCommand(obtenerLineasQuery, c.ConectarBD, transaction);
+                    obtenerLineasCmd.Parameters.AddWithValue("@IdDocumentoReferencia", idDocumentoReferencia);
+                    SqlDataReader lineasReader = obtenerLineasCmd.ExecuteReader();
+                    List<(int cantidad, int codigoProd, decimal subtotalLinea, decimal impuestoLinea)> lineas = new List<(int, int, decimal, decimal)>();
+
+                    while (lineasReader.Read())
+                    {
+                        int cantidad = Convert.ToInt32(lineasReader["cantidad"]);
+                        int codigoProd = Convert.ToInt32(lineasReader["codigoProd"]);
+                        decimal subtotalLinea = Convert.ToDecimal(lineasReader["subtotal"]);
+                        decimal impuestoLinea = Convert.ToDecimal(lineasReader["impuesto"]);
+
+                        lineas.Add((cantidad, codigoProd, subtotalLinea, impuestoLinea));
+                    }
+                    lineasReader.Close();
+
+                    foreach (var linea in lineas)
+                    {
+                        int cantidad = linea.cantidad;
+                        int codigoProd = linea.codigoProd;
+                        decimal subtotalLinea = linea.subtotalLinea;
+                        decimal impuestoLinea = linea.impuestoLinea;
+
+                        SqlCommand insertarLineaCmd = new SqlCommand("InsertarLinea", c.ConectarBD, transaction);
+                        insertarLineaCmd.CommandType = CommandType.StoredProcedure;
+                        insertarLineaCmd.Parameters.AddRange(new SqlParameter[]
+                        {
+                            new SqlParameter("@Cantidad", cantidad),
+                            new SqlParameter("@CodigoProd", codigoProd),
+                            new SqlParameter("@Subtotal", subtotalLinea),
+                            new SqlParameter("@Impuesto", impuestoLinea),
+                            new SqlParameter("@IdDocumento", idDocumentoNotaCredito)
+                        });
+                        insertarLineaCmd.ExecuteNonQuery();
+
+                        SqlCommand actualizarCantidadCmd = new SqlCommand("ActualizarCantidadProductoAnulacion", c.ConectarBD, transaction);
+                        actualizarCantidadCmd.CommandType = CommandType.StoredProcedure;
+                        actualizarCantidadCmd.Parameters.AddRange(new SqlParameter[]
+                        {
+                            new SqlParameter("@Cantidad", cantidad),
+                            new SqlParameter("@CodigoProd", codigoProd)
+                        });
+                        actualizarCantidadCmd.ExecuteNonQuery();
+                    }
+
+                    string actualizarDocumentoReferenciaQuery = "UPDATE Documentos SET idNotaCredito = @IdNotaCredito WHERE idDocumento = @IdDocumentoReferencia";
+                    SqlCommand actualizarDocumentoReferenciaCmd = new SqlCommand(actualizarDocumentoReferenciaQuery, c.ConectarBD, transaction);
+                    actualizarDocumentoReferenciaCmd.Parameters.AddRange(new SqlParameter[]
+                    {
+                        new SqlParameter("@IdNotaCredito", idDocumentoNotaCredito),
+                        new SqlParameter("@IdDocumentoReferencia", idDocumentoReferencia)
+                    });
+                    actualizarDocumentoReferenciaCmd.ExecuteNonQuery();
+
+                    transaction.Commit();
+                    MessageBox.Show("Nota de Crédito generada correctamente.");
+
+                    LimpiarCarrito();
+                    ActualizarTotales();
+
+                    DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
+                        SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
+                        getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
+                        object res = getemail.ExecuteScalar();
+                        if (res != null)
+                        {
+                            string email = res.ToString();
+                            enviarDocumento(email, idDocumentoNotaCredito);
+                        }
+                        else
+                        {
+                            throw new Exception("No se encontró ningún trabajador");
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("Error al generar la Nota de Crédito: " + ex.Message);
+                }
+                finally
+                {
+                    c.cerrar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir la conexión: " + ex.Message);
+            }
+        }
+
+        private void textIDCliente_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.textIDCliente.Text == "")
+            {
+                return;
+            }
+
+            if (this.txtID_Founded.Text.Equals(this.textIDCliente.Text))
+            {
+                return;
+            }
+
+            string clientInfo = getClientID(this.textIDCliente.Text);
+
+            if (clientInfo != null && !clientInfo[0].Equals('0'))
+            {
+                string[] cI = clientInfo.Split(',');
+                this.lbClientID.Text = "Identificación:";
+                this.lbName.Text = "Nombre Completo:";
+                this.txtID_Founded.Text = cI[0];
+                this.txtName_Founded.Text = cI[1];
+
+                this.lbClientID.Visible = true;
+                this.lbName.Visible = true;
+                this.txtName_Founded.Visible = true;
+                this.txtID_Founded.Visible = true;
+                this.textIDCliente.ForeColor = System.Drawing.Color.Black;
+            }
+            else
+            {
+                this.lbName.Visible = false;
+                this.txtName_Founded.Visible = false;
+                this.txtID_Founded.Visible = false;
+                this.lbClientID.Visible = false;
+
+                this.lbClientID.Text = "";
+                this.lbName.Text = "";
+                this.txtID_Founded.Text = "";
+                this.txtName_Founded.Text = "";
+                this.textIDCliente.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        private void bLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarCarrito();
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////////
+    }
 }
