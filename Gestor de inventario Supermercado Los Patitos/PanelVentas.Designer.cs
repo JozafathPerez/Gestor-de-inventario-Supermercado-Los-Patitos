@@ -23,9 +23,9 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxTipoDoc = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,12 +42,6 @@
             this.bAgregar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.DGVCarrito = new System.Windows.Forms.DataGridView();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bComprar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,6 +50,13 @@
             this.DGVDocumentos = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.bNotaCredito = new System.Windows.Forms.Button();
+            this.bLimpiar = new System.Windows.Forms.Button();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVInventario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
@@ -120,19 +121,20 @@
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.txtName_Founded);
             this.panel1.Controls.Add(this.lbName);
             this.panel1.Controls.Add(this.txtID_Founded);
             this.panel1.Controls.Add(this.lbClientID);
             this.panel1.Location = new System.Drawing.Point(25, 309);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(371, 494);
+            this.panel1.Size = new System.Drawing.Size(371, 287);
             this.panel1.TabIndex = 6;
             // 
             // txtName_Founded
             // 
             this.txtName_Founded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName_Founded.Location = new System.Drawing.Point(157, 144);
+            this.txtName_Founded.Location = new System.Drawing.Point(156, 76);
             this.txtName_Founded.Name = "txtName_Founded";
             this.txtName_Founded.Size = new System.Drawing.Size(211, 108);
             this.txtName_Founded.TabIndex = 3;
@@ -140,7 +142,7 @@
             // lbName
             // 
             this.lbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbName.Location = new System.Drawing.Point(3, 144);
+            this.lbName.Location = new System.Drawing.Point(3, 76);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(148, 108);
             this.lbName.TabIndex = 2;
@@ -149,7 +151,7 @@
             // txtID_Founded
             // 
             this.txtID_Founded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtID_Founded.Location = new System.Drawing.Point(156, 47);
+            this.txtID_Founded.Location = new System.Drawing.Point(156, 11);
             this.txtID_Founded.Name = "txtID_Founded";
             this.txtID_Founded.Size = new System.Drawing.Size(212, 65);
             this.txtID_Founded.TabIndex = 1;
@@ -157,7 +159,7 @@
             // lbClientID
             // 
             this.lbClientID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbClientID.Location = new System.Drawing.Point(3, 47);
+            this.lbClientID.Location = new System.Drawing.Point(3, 11);
             this.lbClientID.Name = "lbClientID";
             this.lbClientID.Size = new System.Drawing.Size(148, 65);
             this.lbClientID.TabIndex = 0;
@@ -175,23 +177,24 @@
             // 
             // DGVInventario
             // 
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGVInventario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGVInventario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.DGVInventario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVInventario.Location = new System.Drawing.Point(474, 50);
+            this.DGVInventario.Location = new System.Drawing.Point(413, 348);
             this.DGVInventario.MultiSelect = false;
             this.DGVInventario.Name = "DGVInventario";
             this.DGVInventario.ReadOnly = true;
+            this.DGVInventario.RowHeadersVisible = false;
             this.DGVInventario.RowHeadersWidth = 51;
             this.DGVInventario.RowTemplate.Height = 24;
             this.DGVInventario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGVInventario.Size = new System.Drawing.Size(430, 250);
+            this.DGVInventario.Size = new System.Drawing.Size(667, 247);
             this.DGVInventario.TabIndex = 8;
             // 
             // numCantidad
             // 
             this.numCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numCantidad.Location = new System.Drawing.Point(474, 337);
+            this.numCantidad.Location = new System.Drawing.Point(1086, 348);
             this.numCantidad.Maximum = new decimal(new int[] {
             -469762049,
             -590869294,
@@ -203,7 +206,7 @@
             0,
             0});
             this.numCantidad.Name = "numCantidad";
-            this.numCantidad.Size = new System.Drawing.Size(429, 30);
+            this.numCantidad.Size = new System.Drawing.Size(327, 30);
             this.numCantidad.TabIndex = 9;
             this.numCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numCantidad.Value = new decimal(new int[] {
@@ -215,9 +218,9 @@
             // bAgregar
             // 
             this.bAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.bAgregar.Location = new System.Drawing.Point(474, 373);
+            this.bAgregar.Location = new System.Drawing.Point(1086, 385);
             this.bAgregar.Name = "bAgregar";
-            this.bAgregar.Size = new System.Drawing.Size(210, 140);
+            this.bAgregar.Size = new System.Drawing.Size(327, 65);
             this.bAgregar.TabIndex = 10;
             this.bAgregar.Text = "Agregar al Carrito";
             this.bAgregar.UseVisualStyleBackColor = true;
@@ -227,7 +230,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label5.Location = new System.Drawing.Point(469, 309);
+            this.label5.Location = new System.Drawing.Point(1081, 320);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 25);
             this.label5.TabIndex = 11;
@@ -235,8 +238,9 @@
             // 
             // DGVCarrito
             // 
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGVCarrito.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGVCarrito.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.DGVCarrito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DGVCarrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVCarrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
@@ -245,69 +249,22 @@
             this.Subtotal,
             this.Impuesto,
             this.Total});
-            this.DGVCarrito.Location = new System.Drawing.Point(915, 50);
+            this.DGVCarrito.Location = new System.Drawing.Point(413, 47);
             this.DGVCarrito.Name = "DGVCarrito";
             this.DGVCarrito.ReadOnly = true;
+            this.DGVCarrito.RowHeadersVisible = false;
             this.DGVCarrito.RowHeadersWidth = 51;
             this.DGVCarrito.RowTemplate.Height = 24;
             this.DGVCarrito.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGVCarrito.Size = new System.Drawing.Size(430, 250);
+            this.DGVCarrito.Size = new System.Drawing.Size(546, 270);
             this.DGVCarrito.TabIndex = 12;
-            // 
-            // Codigo
-            // 
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.MinimumWidth = 6;
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 125;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.MinimumWidth = 6;
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 125;
-            // 
-            // PrecioUnitario
-            // 
-            this.PrecioUnitario.HeaderText = "Precio Unitario";
-            this.PrecioUnitario.MinimumWidth = 6;
-            this.PrecioUnitario.Name = "PrecioUnitario";
-            this.PrecioUnitario.ReadOnly = true;
-            this.PrecioUnitario.Width = 125;
-            // 
-            // Subtotal
-            // 
-            this.Subtotal.HeaderText = "SubTotal";
-            this.Subtotal.MinimumWidth = 6;
-            this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
-            this.Subtotal.Width = 125;
-            // 
-            // Impuesto
-            // 
-            this.Impuesto.HeaderText = "Impuesto";
-            this.Impuesto.MinimumWidth = 6;
-            this.Impuesto.Name = "Impuesto";
-            this.Impuesto.ReadOnly = true;
-            this.Impuesto.Width = 125;
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.MinimumWidth = 6;
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            this.Total.Width = 125;
             // 
             // bComprar
             // 
             this.bComprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.bComprar.Location = new System.Drawing.Point(694, 373);
+            this.bComprar.Location = new System.Drawing.Point(1086, 458);
             this.bComprar.Name = "bComprar";
-            this.bComprar.Size = new System.Drawing.Size(210, 140);
+            this.bComprar.Size = new System.Drawing.Size(327, 65);
             this.bComprar.TabIndex = 13;
             this.bComprar.Text = "Completar Compra";
             this.bComprar.UseVisualStyleBackColor = true;
@@ -317,7 +274,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label6.Location = new System.Drawing.Point(910, 308);
+            this.label6.Location = new System.Drawing.Point(983, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(162, 25);
             this.label6.TabIndex = 15;
@@ -327,7 +284,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label7.Location = new System.Drawing.Point(470, 22);
+            this.label7.Location = new System.Drawing.Point(408, 320);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(97, 25);
             this.label7.TabIndex = 16;
@@ -337,7 +294,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label8.Location = new System.Drawing.Point(910, 22);
+            this.label8.Location = new System.Drawing.Point(408, 19);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 25);
             this.label8.TabIndex = 17;
@@ -346,31 +303,35 @@
             // textTotales
             // 
             this.textTotales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textTotales.Location = new System.Drawing.Point(915, 336);
+            this.textTotales.Location = new System.Drawing.Point(965, 47);
+            this.textTotales.Margin = new System.Windows.Forms.Padding(10);
             this.textTotales.Name = "textTotales";
-            this.textTotales.Size = new System.Drawing.Size(430, 177);
+            this.textTotales.ReadOnly = true;
+            this.textTotales.Size = new System.Drawing.Size(448, 270);
             this.textTotales.TabIndex = 18;
             this.textTotales.Text = "";
             // 
             // DGVDocumentos
             // 
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGVDocumentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGVDocumentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.DGVDocumentos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DGVDocumentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVDocumentos.Location = new System.Drawing.Point(474, 553);
+            this.DGVDocumentos.Location = new System.Drawing.Point(25, 626);
             this.DGVDocumentos.Name = "DGVDocumentos";
             this.DGVDocumentos.ReadOnly = true;
+            this.DGVDocumentos.RowHeadersVisible = false;
             this.DGVDocumentos.RowHeadersWidth = 51;
             this.DGVDocumentos.RowTemplate.Height = 24;
             this.DGVDocumentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGVDocumentos.Size = new System.Drawing.Size(756, 250);
+            this.DGVDocumentos.Size = new System.Drawing.Size(1055, 177);
             this.DGVDocumentos.TabIndex = 19;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label9.Location = new System.Drawing.Point(470, 525);
+            this.label9.Location = new System.Drawing.Point(21, 598);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(222, 25);
             this.label9.TabIndex = 20;
@@ -379,13 +340,72 @@
             // bNotaCredito
             // 
             this.bNotaCredito.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bNotaCredito.Location = new System.Drawing.Point(1236, 553);
+            this.bNotaCredito.Location = new System.Drawing.Point(1086, 626);
             this.bNotaCredito.Name = "bNotaCredito";
-            this.bNotaCredito.Size = new System.Drawing.Size(109, 250);
+            this.bNotaCredito.Size = new System.Drawing.Size(327, 177);
             this.bNotaCredito.TabIndex = 21;
             this.bNotaCredito.Text = "Generar Nota de credito";
             this.bNotaCredito.UseVisualStyleBackColor = true;
             this.bNotaCredito.Click += new System.EventHandler(this.bNotaCredito_Click);
+            // 
+            // bLimpiar
+            // 
+            this.bLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bLimpiar.Location = new System.Drawing.Point(1086, 531);
+            this.bLimpiar.Name = "bLimpiar";
+            this.bLimpiar.Size = new System.Drawing.Size(327, 65);
+            this.bLimpiar.TabIndex = 22;
+            this.bLimpiar.Text = "Limpiar Espacios";
+            this.bLimpiar.UseVisualStyleBackColor = true;
+            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 80;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.MinimumWidth = 6;
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 90;
+            // 
+            // PrecioUnitario
+            // 
+            this.PrecioUnitario.HeaderText = "Precio";
+            this.PrecioUnitario.MinimumWidth = 6;
+            this.PrecioUnitario.Name = "PrecioUnitario";
+            this.PrecioUnitario.ReadOnly = true;
+            this.PrecioUnitario.Width = 75;
+            // 
+            // Subtotal
+            // 
+            this.Subtotal.HeaderText = "SubTotal";
+            this.Subtotal.MinimumWidth = 6;
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
+            this.Subtotal.Width = 91;
+            // 
+            // Impuesto
+            // 
+            this.Impuesto.HeaderText = "Impuesto";
+            this.Impuesto.MinimumWidth = 6;
+            this.Impuesto.Name = "Impuesto";
+            this.Impuesto.ReadOnly = true;
+            this.Impuesto.Width = 91;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.MinimumWidth = 6;
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.Width = 67;
             // 
             // PanelVentas
             // 
@@ -393,6 +413,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1425, 815);
+            this.Controls.Add(this.bLimpiar);
             this.Controls.Add(this.bNotaCredito);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.DGVDocumentos);
@@ -455,6 +476,7 @@
 		private System.Windows.Forms.Label txtID_Founded;
 		private System.Windows.Forms.Label txtName_Founded;
 		private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Button bLimpiar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioUnitario;

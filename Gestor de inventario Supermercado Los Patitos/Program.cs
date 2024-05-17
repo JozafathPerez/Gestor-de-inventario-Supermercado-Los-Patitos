@@ -16,7 +16,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         static void Main()
         {
 
-
             // PRUEBA FUNCIONALIDAD VERIFICADOR ID
 
             // cedula valida
