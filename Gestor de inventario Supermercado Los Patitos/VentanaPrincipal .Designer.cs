@@ -33,25 +33,25 @@
 			this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
-			this.menuButton = new System.Windows.Forms.PictureBox();
 			this.panel3 = new System.Windows.Forms.Panel();
-			this.BT_reporteria = new System.Windows.Forms.Button();
 			this.panel4 = new System.Windows.Forms.Panel();
-			this.BT_ventas = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.BT_inventario = new System.Windows.Forms.Button();
 			this.panel5 = new System.Windows.Forms.Panel();
-			this.BT_empleados = new System.Windows.Forms.Button();
-			this.ImagenPatito = new System.Windows.Forms.PictureBox();
 			this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
 			this.PanelAreaDeTrabajo = new System.Windows.Forms.Panel();
+			this.menuButton = new System.Windows.Forms.PictureBox();
+			this.BT_reporteria = new System.Windows.Forms.Button();
+			this.BT_ventas = new System.Windows.Forms.Button();
+			this.BT_inventario = new System.Windows.Forms.Button();
+			this.BT_empleados = new System.Windows.Forms.Button();
+			this.ImagenPatito = new System.Windows.Forms.PictureBox();
 			this.sidebar.SuspendLayout();
 			this.panel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
 			this.panel3.SuspendLayout();
 			this.panel4.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -66,7 +66,7 @@
 			this.sidebar.Controls.Add(this.ImagenPatito);
 			this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
 			this.sidebar.Location = new System.Drawing.Point(0, 0);
-			this.sidebar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.sidebar.Margin = new System.Windows.Forms.Padding(4);
 			this.sidebar.MaximumSize = new System.Drawing.Size(320, 815);
 			this.sidebar.MinimumSize = new System.Drawing.Size(87, 815);
 			this.sidebar.Name = "sidebar";
@@ -79,7 +79,7 @@
 			this.panel1.Controls.Add(this.label1);
 			this.panel1.Controls.Add(this.menuButton);
 			this.panel1.Location = new System.Drawing.Point(4, 4);
-			this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.panel1.Margin = new System.Windows.Forms.Padding(4);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(316, 149);
 			this.panel1.TabIndex = 0;
@@ -96,26 +96,66 @@
 			this.label1.TabIndex = 2;
 			this.label1.Text = "Menu";
 			// 
+			// panel3
+			// 
+			this.panel3.Controls.Add(this.BT_reporteria);
+			this.panel3.Location = new System.Drawing.Point(4, 161);
+			this.panel3.Margin = new System.Windows.Forms.Padding(4);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(316, 90);
+			this.panel3.TabIndex = 2;
+			// 
+			// panel4
+			// 
+			this.panel4.Controls.Add(this.BT_ventas);
+			this.panel4.Location = new System.Drawing.Point(4, 259);
+			this.panel4.Margin = new System.Windows.Forms.Padding(4);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(312, 84);
+			this.panel4.TabIndex = 3;
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.BT_inventario);
+			this.panel2.Location = new System.Drawing.Point(4, 351);
+			this.panel2.Margin = new System.Windows.Forms.Padding(4);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(312, 82);
+			this.panel2.TabIndex = 4;
+			// 
+			// panel5
+			// 
+			this.panel5.Controls.Add(this.BT_empleados);
+			this.panel5.Location = new System.Drawing.Point(4, 441);
+			this.panel5.Margin = new System.Windows.Forms.Padding(4);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(316, 87);
+			this.panel5.TabIndex = 3;
+			// 
+			// sidebarTimer
+			// 
+			this.sidebarTimer.Interval = 10;
+			this.sidebarTimer.Tick += new System.EventHandler(this.sidebarTimer_Tick);
+			// 
+			// PanelAreaDeTrabajo
+			// 
+			this.PanelAreaDeTrabajo.Location = new System.Drawing.Point(87, 0);
+			this.PanelAreaDeTrabajo.Margin = new System.Windows.Forms.Padding(4);
+			this.PanelAreaDeTrabajo.Name = "PanelAreaDeTrabajo";
+			this.PanelAreaDeTrabajo.Size = new System.Drawing.Size(1425, 815);
+			this.PanelAreaDeTrabajo.TabIndex = 1;
+			// 
 			// menuButton
 			// 
 			this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.menuButton.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_menu;
 			this.menuButton.Location = new System.Drawing.Point(4, 36);
-			this.menuButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.menuButton.Margin = new System.Windows.Forms.Padding(4);
 			this.menuButton.Name = "menuButton";
 			this.menuButton.Size = new System.Drawing.Size(71, 60);
 			this.menuButton.TabIndex = 1;
 			this.menuButton.TabStop = false;
 			this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
-			// 
-			// panel3
-			// 
-			this.panel3.Controls.Add(this.BT_reporteria);
-			this.panel3.Location = new System.Drawing.Point(4, 161);
-			this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(316, 90);
-			this.panel3.TabIndex = 2;
 			// 
 			// BT_reporteria
 			// 
@@ -127,7 +167,7 @@
 			this.BT_reporteria.Image = ((System.Drawing.Image)(resources.GetObject("BT_reporteria.Image")));
 			this.BT_reporteria.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.BT_reporteria.Location = new System.Drawing.Point(0, 0);
-			this.BT_reporteria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.BT_reporteria.Margin = new System.Windows.Forms.Padding(4);
 			this.BT_reporteria.Name = "BT_reporteria";
 			this.BT_reporteria.Size = new System.Drawing.Size(316, 90);
 			this.BT_reporteria.TabIndex = 0;
@@ -135,15 +175,6 @@
 			this.BT_reporteria.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.BT_reporteria.UseVisualStyleBackColor = true;
 			this.BT_reporteria.Click += new System.EventHandler(this.BT_reporteria_Click);
-			// 
-			// panel4
-			// 
-			this.panel4.Controls.Add(this.BT_ventas);
-			this.panel4.Location = new System.Drawing.Point(4, 259);
-			this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(312, 84);
-			this.panel4.TabIndex = 3;
 			// 
 			// BT_ventas
 			// 
@@ -164,15 +195,6 @@
 			this.BT_ventas.UseVisualStyleBackColor = true;
 			this.BT_ventas.Click += new System.EventHandler(this.BT_ventas_Click);
 			// 
-			// panel2
-			// 
-			this.panel2.Controls.Add(this.BT_inventario);
-			this.panel2.Location = new System.Drawing.Point(4, 351);
-			this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(312, 82);
-			this.panel2.TabIndex = 4;
-			// 
 			// BT_inventario
 			// 
 			this.BT_inventario.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -183,7 +205,7 @@
 			this.BT_inventario.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_inventario;
 			this.BT_inventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.BT_inventario.Location = new System.Drawing.Point(0, 0);
-			this.BT_inventario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.BT_inventario.Margin = new System.Windows.Forms.Padding(4);
 			this.BT_inventario.Name = "BT_inventario";
 			this.BT_inventario.Size = new System.Drawing.Size(312, 82);
 			this.BT_inventario.TabIndex = 0;
@@ -191,15 +213,6 @@
 			this.BT_inventario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.BT_inventario.UseVisualStyleBackColor = true;
 			this.BT_inventario.Click += new System.EventHandler(this.BT_inventario_Click);
-			// 
-			// panel5
-			// 
-			this.panel5.Controls.Add(this.BT_empleados);
-			this.panel5.Location = new System.Drawing.Point(4, 441);
-			this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(316, 87);
-			this.panel5.TabIndex = 3;
 			// 
 			// BT_empleados
 			// 
@@ -211,7 +224,7 @@
 			this.BT_empleados.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_empleados;
 			this.BT_empleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.BT_empleados.Location = new System.Drawing.Point(0, 0);
-			this.BT_empleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.BT_empleados.Margin = new System.Windows.Forms.Padding(4);
 			this.BT_empleados.Name = "BT_empleados";
 			this.BT_empleados.Size = new System.Drawing.Size(316, 87);
 			this.BT_empleados.TabIndex = 0;
@@ -222,27 +235,14 @@
 			// 
 			// ImagenPatito
 			// 
-			this.ImagenPatito.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.SUPERMERCADO_LOS_PATITOS__LOGOSINFONDO_;
+			this.ImagenPatito.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.LOGO_Transparente;
 			this.ImagenPatito.Location = new System.Drawing.Point(4, 536);
-			this.ImagenPatito.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ImagenPatito.Margin = new System.Windows.Forms.Padding(4);
 			this.ImagenPatito.Name = "ImagenPatito";
 			this.ImagenPatito.Size = new System.Drawing.Size(316, 267);
 			this.ImagenPatito.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.ImagenPatito.TabIndex = 5;
 			this.ImagenPatito.TabStop = false;
-			// 
-			// sidebarTimer
-			// 
-			this.sidebarTimer.Interval = 10;
-			this.sidebarTimer.Tick += new System.EventHandler(this.sidebarTimer_Tick);
-			// 
-			// PanelAreaDeTrabajo
-			// 
-			this.PanelAreaDeTrabajo.Location = new System.Drawing.Point(87, 0);
-			this.PanelAreaDeTrabajo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.PanelAreaDeTrabajo.Name = "PanelAreaDeTrabajo";
-			this.PanelAreaDeTrabajo.Size = new System.Drawing.Size(1425, 815);
-			this.PanelAreaDeTrabajo.TabIndex = 1;
 			// 
 			// VentanaPrincipal
 			// 
@@ -253,7 +253,8 @@
 			this.Controls.Add(this.sidebar);
 			this.Controls.Add(this.PanelAreaDeTrabajo);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "VentanaPrincipal";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Ventana Principal";
@@ -261,11 +262,11 @@
 			this.sidebar.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
 			this.panel3.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).EndInit();
 			this.ResumeLayout(false);
 

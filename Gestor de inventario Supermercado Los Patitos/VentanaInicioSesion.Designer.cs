@@ -31,6 +31,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaInicioSesion));
 			this.TXT_inicioSesion = new System.Windows.Forms.Label();
 			this.TEXT_cuenta = new System.Windows.Forms.TextBox();
 			this.TEXT_contrasena = new System.Windows.Forms.TextBox();
@@ -55,7 +56,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			this.TEXT_cuenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TEXT_cuenta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.TEXT_cuenta.Location = new System.Drawing.Point(464, 378);
-			this.TEXT_cuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.TEXT_cuenta.Margin = new System.Windows.Forms.Padding(4);
 			this.TEXT_cuenta.Name = "TEXT_cuenta";
 			this.TEXT_cuenta.Size = new System.Drawing.Size(287, 34);
 			this.TEXT_cuenta.TabIndex = 2;
@@ -69,7 +70,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			this.TEXT_contrasena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TEXT_contrasena.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.TEXT_contrasena.Location = new System.Drawing.Point(464, 443);
-			this.TEXT_contrasena.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.TEXT_contrasena.Margin = new System.Windows.Forms.Padding(4);
 			this.TEXT_contrasena.Name = "TEXT_contrasena";
 			this.TEXT_contrasena.Size = new System.Drawing.Size(287, 34);
 			this.TEXT_contrasena.TabIndex = 3;
@@ -85,7 +86,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			this.BT_inicioSesion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.BT_inicioSesion.ForeColor = System.Drawing.Color.White;
 			this.BT_inicioSesion.Location = new System.Drawing.Point(520, 519);
-			this.BT_inicioSesion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.BT_inicioSesion.Margin = new System.Windows.Forms.Padding(4);
 			this.BT_inicioSesion.Name = "BT_inicioSesion";
 			this.BT_inicioSesion.Size = new System.Drawing.Size(180, 42);
 			this.BT_inicioSesion.TabIndex = 4;
@@ -97,7 +98,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			// 
 			this.IMG_logoPrincipal.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.SUPERMERCADO_LOS_PATITOS__LOGOSINFONDO_;
 			this.IMG_logoPrincipal.Location = new System.Drawing.Point(411, -32);
-			this.IMG_logoPrincipal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.IMG_logoPrincipal.Margin = new System.Windows.Forms.Padding(4);
 			this.IMG_logoPrincipal.Name = "IMG_logoPrincipal";
 			this.IMG_logoPrincipal.Size = new System.Drawing.Size(433, 329);
 			this.IMG_logoPrincipal.TabIndex = 0;
@@ -115,7 +116,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			this.Controls.Add(this.TXT_inicioSesion);
 			this.Controls.Add(this.IMG_logoPrincipal);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "VentanaInicioSesion";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Ventana de Inicio Sesión";
