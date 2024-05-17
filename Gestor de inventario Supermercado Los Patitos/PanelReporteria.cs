@@ -56,6 +56,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 				DataTable dt = new DataTable();
 				da.Fill(dt);
 
+
+				/*
 				DataColumn colName = new DataColumn("Nombre Completo", typeof(string));
 				dt.Columns.Add(colName);
 
@@ -73,7 +75,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 					row["Nombre Completo"] = cD[1];
 				}
-	
+				*/
 				this.tbTopClientes.DataSource = dt;
 				c.cerrar();
 			} catch (Exception ex) {
