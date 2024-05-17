@@ -194,3 +194,222 @@ VALUES (30, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
        (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
        (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
        (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
+
+
+--Para Documentos
+
+INSERT INTO Consecutivos
+VALUES	(1, 0),
+		(2, 0),
+		(3,	0);
+
+
+--CAMBIOS MYNELL
+
+USE LOS_PATITOS;
+
+ALTER TABLE Documentos
+ALTER COLUMN totalImpuestos DECIMAL(18, 2);
+
+ALTER TABLE Documentos
+ALTER COLUMN subtotal DECIMAL(18, 2);
+
+ALTER TABLE Lineas
+ALTER COLUMN subtotal DECIMAL(18, 2);
+
+ALTER TABLE Lineas
+ALTER COLUMN impuesto DECIMAL(18, 2);
+
+
+
+--#####################################################################
+
+--INSERCIÓN DE SP PARA Reportería
+
+
+
+-- Crear las 20 facturas
+
+INSERT INTO Documentos (idDocumento, tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
+VALUES
+    (1, 1, '2024-05-01', 1, 703100722, 1, 500, 4500),
+    (2, 2, '2024-05-02', 1, 703100722, 2, 600, 5400),
+    (3, 1, '2024-05-03', 2, 3, 1, 550, 4950),
+    (4, 2, '2024-05-04', 2, 703100722, 2, 620, 5580),
+    (5, 1, '2024-05-05', 3, 5, 1, 580, 5220),
+    (6, 1, '2024-05-06', 4, 1, 2, 630, 5670),
+    (7, 1, '2024-05-07', 5, 703100722, 1, 600, 5400),
+    (8, 1, '2024-05-08', 6, 3, 2, 650, 5850),
+    (9, 1, '2024-05-09', 7, 4, 1, 620, 5580),
+    (10, 2, '2024-05-10', 3, 703100722, 2, 670, 6030),
+    (11, 1, '2024-05-11', 8, 703100722, 1, 640, 5760),
+    (12, 2, '2024-05-12', 4, 703100722, 2, 690, 6210),
+    (13, 1, '2024-04-13', 9, 703100722, 1, 660, 5940),
+    (14, 1, '2024-04-14', 10, 4, 2, 710, 6390),
+    (15, 1, '2024-04-15', 11, 5, 1, 680, 6120),
+    (16, 1, '2024-04-16', 12, 703100722, 2, 730, 6570),
+    (17, 1, '2024-04-17', 13, 703100722, 1, 700, 6300),
+    (18, 1, '2024-04-18', 14, 703100722, 2, 750, 6750),
+    (19, 1, '2024-04-19', 15, 4, 1, 720, 6480),
+    (20, 1, '2024-04-20', 16, 5, 2, 770, 6930);
+
+
+-- Crear las líneas de productos
+
+INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento)
+VALUES
+    (10, 1, 15.00, 2, 1),
+    (5, 2, 4.00, 1, 1),
+    (20, 3, 40.00, 4, 2),
+    (10, 4, 12.00, 2, 2),
+    (15, 5, 26.25, 2, 3),
+    (5, 6, 25.00, 5, 3),
+    (8, 7, 28.00, 3, 4),
+    (10, 30, 29.90, 3, 4),
+    (7, 31, 34.93, 3, 5),
+    (10, 32, 34.90, 3, 5),
+    (12, 33, 23.88, 2, 6),
+    (15, 1, 22.50, 3, 6),
+    (20, 2, 16.00, 2, 7),
+    (10, 3, 20.00, 2, 7),
+    (25, 4, 30.00, 4, 8),
+    (12, 5, 21.00, 2, 8),
+    (6, 6, 30.00, 5, 9),
+    (5, 7, 17.50, 2, 9),
+    (8, 30, 23.92, 3, 10),
+    (10, 31, 49.90, 4, 10),
+    (7, 32, 24.43, 2, 11),
+    (9, 33, 17.91, 2, 11),
+    (10, 1, 15.00, 2, 12),
+    (5, 2, 4.00, 1, 12),
+    (20, 3, 40.00, 4, 13),
+    (10, 4, 12.00, 2, 13),
+    (15, 5, 26.25, 2, 14),
+    (5, 6, 25.00, 5, 14),
+    (8, 7, 28.00, 3, 15),
+    (10, 30, 29.90, 3, 15),
+    (7, 31, 34.93, 3, 16),
+    (10, 32, 34.90, 3, 16),
+    (12, 33, 23.88, 2, 17),
+    (15, 1, 22.50, 3, 17),
+    (20, 2, 16.00, 2, 18),
+    (10, 3, 20.00, 2, 18),
+    (25, 4, 30.00, 4, 19),
+    (12, 5, 21.00, 2, 19),
+    (6, 6, 30.00, 5, 20),
+    (5, 7, 17.50, 2, 20);
+
+
+SELECT * FROM Productos
+
+CREATE PROC Top_Producto
+AS
+BEGIN
+	SELECT TOP 1  P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	FROM Lineas L
+	INNER JOIN Productos P on
+	L.codigoProd = P.codigoProd
+	GROUP BY P.codigoProd, P.nombre, P.categoria
+	ORDER BY SUM(L.cantidad) DESC;
+END;
+
+CREATE PROC Prod_Vendido_30_Dias
+AS
+BEGIN
+	DECLARE @FechaActual DATE = GETDATE();
+	DECLARE @FechaInicio DATE = DATEADD(DAY, -30, @FechaActual);
+
+	SELECT TOP 1 P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	FROM Documentos D
+	INNER JOIN Lineas L ON
+	D.idDocumento = L.idDocumento
+	INNER JOIN Productos P ON
+	P.codigoProd = L.codigoProd
+	WHERE D.fechaCreacion >= @FechaInicio
+	GROUP BY P.codigoProd, P.nombre, P.categoria
+	ORDER BY SUM(L.cantidad) DESC;
+END;
+
+CREATE PROC Top_5_Clientes
+AS
+BEGIN
+    SELECT TOP 5 D.idCliente 'Cédula', COUNT(D.idDocumento) 'Cantidad de Documentos'
+    FROM Documentos D
+    WHERE D.idCliente IS NOT NULL
+    GROUP BY D.idCliente
+    ORDER BY COUNT(D.idDocumento) DESC;
+END;
+
+CREATE PROC Facturas_Por_Rango_Fechas
+	(@fechaInicial DATE,
+    @fechaFinal   DATE)
+AS
+BEGIN
+	SELECT
+        D.idDocumento   'ID Documento',
+        D.tipo			'Tipo',
+        D.fechaCreacion	'Efectuado En',
+        D.consecutivo	'Consecurivo',
+        D.idCliente		'Cédula del Cliente',
+        D.idTrabajador	'Cédula del Trabajador',
+        D.totalImpuestos 'Total Impuestos',
+        D.subtotal		'SubTotal'
+    FROM
+        Documentos D
+    WHERE
+        D.fechaCreacion BETWEEN @fechaInicial AND @fechaFinal
+    ORDER BY
+        D.fechaCreacion;
+END;
+
+
+CREATE PROC Top_Categorias_Vendidas
+AS
+BEGIN
+	SELECT TOP 5 P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	FROM Lineas L
+	INNER JOIN Productos P ON
+	L.codigoProd = P.codigoProd
+	GROUP BY P.categoria
+	ORDER BY SUM(L.cantidad) DESC;
+END;
+
+CREATE PROC Cajero_Del_Mes
+AS
+BEGIN
+	SELECT TOP 1 P.idTrabajador 'Cédula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo'
+	FROM Documentos D
+	INNER JOIN Personal P ON
+	D.idTrabajador = P.idTrabajador
+	GROUP BY P.idTrabajador, P.apellidoPat, P.apellidoMat, P.nombre;
+END;
+
+CREATE PROC Fecha_Mas_Compras
+AS
+BEGIN
+	SET LANGUAGE Spanish;
+	SELECT TOP 1 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
+	FROM Documentos D
+	GROUP BY DATENAME(DW, D.fechaCreacion)
+	ORDER BY COUNT(D.idDocumento) DESC;
+	SET LANGUAGE English;
+END;
+
+DROP PROC Fecha_Mas_Compras
+DROP PROC Cajero_Del_Mes
+DROP PROC Top_Categorias_Vendidas
+DROP PROC Facturas_Por_Rango_Fechas
+DROP PROC Top_5_Clientes
+DROP PROC Prod_Vendido_30_Dias
+DROP PROC Top_Producto
+
+
+EXEC Top_Producto
+EXEC Prod_Vendido_30_Dias
+EXEC Top_5_Clientes
+EXEC Facturas_Por_Rango_Fechas '2024-04-01', '2024-04-20';
+EXEC Top_Categorias_Vendidas
+EXEC Cajero_Del_Mes
+EXEC Fecha_Mas_Compras
+
+--##############################################################

@@ -50,6 +50,12 @@
             this.DGVDocumentos = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.bNotaCredito = new System.Windows.Forms.Button();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVInventario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
@@ -79,6 +85,7 @@
             this.comboBoxTipoDoc.Name = "comboBoxTipoDoc";
             this.comboBoxTipoDoc.Size = new System.Drawing.Size(369, 33);
             this.comboBoxTipoDoc.TabIndex = 2;
+            this.comboBoxTipoDoc.Text = "Factura";
             // 
             // label2
             // 
@@ -169,13 +176,16 @@
             // 
             // DGVInventario
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGVInventario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DGVInventario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVInventario.Location = new System.Drawing.Point(474, 50);
+            this.DGVInventario.MultiSelect = false;
             this.DGVInventario.Name = "DGVInventario";
+            this.DGVInventario.ReadOnly = true;
             this.DGVInventario.RowHeadersWidth = 51;
             this.DGVInventario.RowTemplate.Height = 24;
+            this.DGVInventario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVInventario.Size = new System.Drawing.Size(430, 250);
             this.DGVInventario.TabIndex = 8;
             // 
@@ -188,10 +198,20 @@
             -590869294,
             5421010,
             0});
+            this.numCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numCantidad.Name = "numCantidad";
             this.numCantidad.Size = new System.Drawing.Size(429, 30);
             this.numCantidad.TabIndex = 9;
             this.numCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // bAgregar
             // 
@@ -216,13 +236,22 @@
             // 
             // DGVCarrito
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGVCarrito.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGVCarrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVCarrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Cantidad,
+            this.PrecioUnitario,
+            this.Subtotal,
+            this.Impuesto,
+            this.Total});
             this.DGVCarrito.Location = new System.Drawing.Point(915, 50);
             this.DGVCarrito.Name = "DGVCarrito";
+            this.DGVCarrito.ReadOnly = true;
             this.DGVCarrito.RowHeadersWidth = 51;
             this.DGVCarrito.RowTemplate.Height = 24;
+            this.DGVCarrito.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVCarrito.Size = new System.Drawing.Size(430, 250);
             this.DGVCarrito.TabIndex = 12;
             // 
@@ -278,13 +307,15 @@
             // 
             // DGVDocumentos
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGVDocumentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.DGVDocumentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVDocumentos.Location = new System.Drawing.Point(474, 553);
             this.DGVDocumentos.Name = "DGVDocumentos";
+            this.DGVDocumentos.ReadOnly = true;
             this.DGVDocumentos.RowHeadersWidth = 51;
             this.DGVDocumentos.RowTemplate.Height = 24;
+            this.DGVDocumentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVDocumentos.Size = new System.Drawing.Size(756, 250);
             this.DGVDocumentos.TabIndex = 19;
             // 
@@ -307,6 +338,54 @@
             this.bNotaCredito.TabIndex = 21;
             this.bNotaCredito.Text = "Generar Nota de credito";
             this.bNotaCredito.UseVisualStyleBackColor = true;
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 125;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.MinimumWidth = 6;
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 125;
+            // 
+            // PrecioUnitario
+            // 
+            this.PrecioUnitario.HeaderText = "Precio Unitario";
+            this.PrecioUnitario.MinimumWidth = 6;
+            this.PrecioUnitario.Name = "PrecioUnitario";
+            this.PrecioUnitario.ReadOnly = true;
+            this.PrecioUnitario.Width = 125;
+            // 
+            // Subtotal
+            // 
+            this.Subtotal.HeaderText = "SubTotal";
+            this.Subtotal.MinimumWidth = 6;
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
+            this.Subtotal.Width = 125;
+            // 
+            // Impuesto
+            // 
+            this.Impuesto.HeaderText = "Impuesto";
+            this.Impuesto.MinimumWidth = 6;
+            this.Impuesto.Name = "Impuesto";
+            this.Impuesto.ReadOnly = true;
+            this.Impuesto.Width = 125;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.MinimumWidth = 6;
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.Width = 125;
             // 
             // PanelVentas
             // 
@@ -376,5 +455,11 @@
 		private System.Windows.Forms.Label txtID_Founded;
 		private System.Windows.Forms.Label txtName_Founded;
 		private System.Windows.Forms.Label lbName;
-	}
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioUnitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Impuesto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+    }
 }

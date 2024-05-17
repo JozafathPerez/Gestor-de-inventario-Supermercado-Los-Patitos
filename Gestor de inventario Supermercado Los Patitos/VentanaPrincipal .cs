@@ -127,7 +127,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             {
                 menuButton_Click(sender, e);
             }
-            cargarForm(new PanelVentas());
+            cargarForm(new PanelVentas(this.idTrabajador));
         }
 
         private void BT_inventario_Click(object sender, EventArgs e)
@@ -165,7 +165,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         }
 
 		private void cerrarVentana(object sender, FormClosedEventArgs e) {
-			this.view.cerrarVentana(sender, e);
+            String mensaje = "¿Desea cerrar la aplicación?";
+            DialogResult resultado = MessageBox.Show(mensaje, "Cerrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
 		}
 	}
 }
