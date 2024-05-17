@@ -43,6 +43,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			} catch (Exception ex) {
 				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+			foreach (DataGridViewColumn column in tbTopProd.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
 		}
 
 		private void loadTop5Clients() {
@@ -57,7 +60,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 				dt.Columns.Add(colName);
 
 				colName.SetOrdinal(1);
-				/*
+	
 				foreach (DataRow row in dt.Rows) {
 					string clientID = row["Cédula"].ToString();
 
@@ -70,11 +73,14 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 					row["Nombre Completo"] = cD[1];
 				}
-				*/
+	
 				this.tbTopClientes.DataSource = dt;
 				c.cerrar();
 			} catch (Exception ex) {
 				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			foreach (DataGridViewColumn column in tbTopClientes.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
 			}
 		}
 
@@ -90,6 +96,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			} catch (Exception ex) {
 				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+			foreach (DataGridViewColumn column in tbProdVendidos.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
 		}
 
 		private void loadCashierOfTheMonth() {
@@ -103,6 +112,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 				c.cerrar();
 			} catch (Exception ex) {
 				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			foreach (DataGridViewColumn column in tbTopCashier.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
 			}
 		}
 

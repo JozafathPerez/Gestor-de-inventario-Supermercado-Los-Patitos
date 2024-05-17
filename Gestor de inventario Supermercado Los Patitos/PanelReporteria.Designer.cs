@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea21 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend21 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.Location = new System.Drawing.Point(3, 546);
+			this.label4.Location = new System.Drawing.Point(3, 8);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(233, 25);
 			this.label4.TabIndex = 33;
@@ -111,7 +111,7 @@
 			// 
 			this.lbDias.AutoSize = true;
 			this.lbDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbDias.Location = new System.Drawing.Point(3, 8);
+			this.lbDias.Location = new System.Drawing.Point(3, 544);
 			this.lbDias.Name = "lbDias";
 			this.lbDias.Size = new System.Drawing.Size(315, 25);
 			this.lbDias.TabIndex = 31;
@@ -119,61 +119,61 @@
 			// 
 			// chFechas
 			// 
-			chartArea4.Name = "ChartFechas";
-			this.chFechas.ChartAreas.Add(chartArea4);
-			legend4.Name = "Legend1";
-			this.chFechas.Legends.Add(legend4);
+			chartArea19.Name = "ChartFechas";
+			this.chFechas.ChartAreas.Add(chartArea19);
+			legend19.Name = "Legend1";
+			this.chFechas.Legends.Add(legend19);
 			this.chFechas.Location = new System.Drawing.Point(3, 562);
 			this.chFechas.Name = "chFechas";
-			series4.ChartArea = "ChartFechas";
-			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-			series4.IsValueShownAsLabel = true;
-			series4.Legend = "Legend1";
-			series4.Name = "Fechas";
-			series4.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.BrightPastel;
-			series4.YValuesPerPoint = 4;
-			this.chFechas.Series.Add(series4);
+			series19.ChartArea = "ChartFechas";
+			series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+			series19.IsValueShownAsLabel = true;
+			series19.Legend = "Legend1";
+			series19.Name = "Fechas";
+			series19.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.BrightPastel;
+			series19.YValuesPerPoint = 4;
+			this.chFechas.Series.Add(series19);
 			this.chFechas.Size = new System.Drawing.Size(374, 252);
 			this.chFechas.TabIndex = 2;
 			this.chFechas.Text = "chart3";
 			// 
 			// chCajeros
 			// 
-			chartArea5.Name = "chartCajeroFact";
-			this.chCajeros.ChartAreas.Add(chartArea5);
-			legend5.Name = "Legend1";
-			this.chCajeros.Legends.Add(legend5);
+			chartArea20.Name = "chartCajeroFact";
+			this.chCajeros.ChartAreas.Add(chartArea20);
+			legend20.Name = "Legend1";
+			this.chCajeros.Legends.Add(legend20);
 			this.chCajeros.Location = new System.Drawing.Point(3, 299);
 			this.chCajeros.Name = "chCajeros";
 			this.chCajeros.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-			series5.ChartArea = "chartCajeroFact";
-			series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-			series5.IsValueShownAsLabel = true;
-			series5.IsVisibleInLegend = false;
-			series5.Legend = "Legend1";
-			series5.LegendText = " ";
-			series5.Name = "Facturas";
-			series5.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-			this.chCajeros.Series.Add(series5);
+			series20.ChartArea = "chartCajeroFact";
+			series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+			series20.IsValueShownAsLabel = true;
+			series20.IsVisibleInLegend = false;
+			series20.Legend = "Legend1";
+			series20.LegendText = " ";
+			series20.Name = "Facturas";
+			series20.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+			this.chCajeros.Series.Add(series20);
 			this.chCajeros.Size = new System.Drawing.Size(377, 252);
 			this.chCajeros.TabIndex = 1;
 			this.chCajeros.Text = "chart2";
 			// 
 			// chCategorias
 			// 
-			chartArea6.Name = "ChartCategorias";
-			this.chCategorias.ChartAreas.Add(chartArea6);
-			legend6.Name = "Legend1";
-			this.chCategorias.Legends.Add(legend6);
+			chartArea21.Name = "ChartCategorias";
+			this.chCategorias.ChartAreas.Add(chartArea21);
+			legend21.Name = "Legend1";
+			this.chCategorias.Legends.Add(legend21);
 			this.chCategorias.Location = new System.Drawing.Point(3, 22);
 			this.chCategorias.Name = "chCategorias";
-			series6.ChartArea = "ChartCategorias";
-			series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-			series6.IsValueShownAsLabel = true;
-			series6.Legend = "Legend1";
-			series6.Name = "Categorias";
-			series6.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-			this.chCategorias.Series.Add(series6);
+			series21.ChartArea = "ChartCategorias";
+			series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+			series21.IsValueShownAsLabel = true;
+			series21.Legend = "Legend1";
+			series21.Name = "Categorias";
+			series21.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+			this.chCategorias.Series.Add(series21);
 			this.chCategorias.Size = new System.Drawing.Size(374, 252);
 			this.chCategorias.TabIndex = 0;
 			// 
@@ -282,7 +282,7 @@
 			this.tbProdVendidos.RowHeadersVisible = false;
 			this.tbProdVendidos.RowHeadersWidth = 51;
 			this.tbProdVendidos.RowTemplate.Height = 24;
-			this.tbProdVendidos.Size = new System.Drawing.Size(471, 369);
+			this.tbProdVendidos.Size = new System.Drawing.Size(471, 360);
 			this.tbProdVendidos.TabIndex = 5;
 			// 
 			// tbTopClientes
@@ -300,7 +300,7 @@
 			this.tbTopClientes.RowHeadersVisible = false;
 			this.tbTopClientes.RowHeadersWidth = 51;
 			this.tbTopClientes.RowTemplate.Height = 24;
-			this.tbTopClientes.Size = new System.Drawing.Size(554, 167);
+			this.tbTopClientes.Size = new System.Drawing.Size(554, 158);
 			this.tbTopClientes.TabIndex = 4;
 			// 
 			// panel3
@@ -315,10 +315,13 @@
 			// 
 			this.tbFacturasRF.AllowUserToAddRows = false;
 			this.tbFacturasRF.AllowUserToDeleteRows = false;
+			this.tbFacturasRF.AllowUserToResizeColumns = false;
+			this.tbFacturasRF.AllowUserToResizeRows = false;
 			this.tbFacturasRF.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.tbFacturasRF.Location = new System.Drawing.Point(5, 81);
 			this.tbFacturasRF.Name = "tbFacturasRF";
 			this.tbFacturasRF.ReadOnly = true;
+			this.tbFacturasRF.RowHeadersVisible = false;
 			this.tbFacturasRF.RowHeadersWidth = 51;
 			this.tbFacturasRF.RowTemplate.Height = 24;
 			this.tbFacturasRF.Size = new System.Drawing.Size(643, 307);
