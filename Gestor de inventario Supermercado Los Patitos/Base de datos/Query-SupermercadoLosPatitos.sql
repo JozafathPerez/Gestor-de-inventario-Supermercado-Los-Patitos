@@ -69,6 +69,8 @@ VALUES	(1,'Administrador'),
 		(3,'Administrador de Inventario'),
 		(4, 'Contador');
 
+GO
+
 CREATE PROC VerificarCredenciales
     @correo VARCHAR(150),
     @contrasenia VARCHAR(250)
@@ -91,6 +93,8 @@ BEGIN
 END
 
 EXEC VerificarCredenciales @correo = 'jozperez@gmail.com', @contrasenia = '1234';
+
+GO
 
 CREATE PROCEDURE EliminarPersonal
     @idTrabajador INT -- Cambiarlo luego por cedula?
@@ -194,3 +198,90 @@ VALUES (30, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
        (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
        (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
        (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
+
+--SP para Documentos
+
+GO
+
+CREATE PROCEDURE ObtenerConsecutivo
+    @TipoDocumento INT,
+    @Consecutivo INT OUTPUT
+AS
+BEGIN
+    SELECT @Consecutivo = consecutivo FROM Consecutivos WHERE tipo = @TipoDocumento;
+END
+
+GO
+
+CREATE PROCEDURE ActualizarConsecutivo
+    @TipoDocumento INT
+AS
+BEGIN
+    UPDATE Consecutivos SET consecutivo = consecutivo + 1 WHERE tipo = @TipoDocumento;
+END
+
+GO
+
+CREATE PROCEDURE InsertarDocumento
+    @TipoDocumento INT,
+    @FechaCreacion DATETIME,
+    @Consecutivo INT,
+    @IdCliente NVARCHAR(50),
+    @IdTrabajador INT,
+    @TotalImpuestos DECIMAL(18, 2),
+    @Subtotal DECIMAL(18, 2),
+    @IdDocumento INT OUTPUT
+AS
+BEGIN
+    INSERT INTO Documentos (tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
+    VALUES (@TipoDocumento, @FechaCreacion, @Consecutivo, @IdCliente, @IdTrabajador, @TotalImpuestos, @Subtotal);
+    
+    SET @IdDocumento = SCOPE_IDENTITY();
+END
+
+GO
+
+CREATE PROCEDURE InsertarLinea
+    @Cantidad INT,
+    @CodigoProd INT,
+    @Subtotal DECIMAL(18, 2),
+    @Impuesto DECIMAL(18, 2),
+    @IdDocumento INT
+AS
+BEGIN
+    INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento)
+    VALUES (@Cantidad, @CodigoProd, @Subtotal, @Impuesto, @IdDocumento);
+END
+
+GO
+
+CREATE PROCEDURE ActualizarCantidadProducto
+    @Cantidad INT,
+    @CodigoProd INT
+AS
+BEGIN
+    UPDATE Productos SET cantidadInv = cantidadInv - @Cantidad WHERE codigoProd = @CodigoProd;
+END
+
+GO
+
+CREATE PROCEDURE VerificarProducto
+    @CodigoProd INT,
+    @ProductoExiste INT OUTPUT
+AS
+BEGIN
+    SELECT @ProductoExiste = COUNT(*) FROM Productos WHERE codigoProd = @CodigoProd;
+END
+
+GO
+
+CREATE PROCEDURE ActualizarCantidadProductoAnulacion
+    @Cantidad INT,
+    @CodigoProd INT
+AS
+BEGIN
+    UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
+END
+
+ALTER TABLE Documentos
+ADD idNotaCredito INT NULL;
