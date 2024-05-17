@@ -106,8 +106,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 		}
 
 		private void LimpiarCarrito() {
-
-		}
+            DGVCarrito.Rows.Clear();
+            numCantidad.Value = 1;
+            textTotales.Clear();
+            comboBoxTipoDoc.SelectedIndex = -1;
+            textIDCliente.Clear();
+        }
 		private void ActualizarTotales() {
 			decimal totalImpuestos = 0;
 			decimal subtotal = 0;
