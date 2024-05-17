@@ -1,33 +1,28 @@
-﻿namespace Gestor_de_inventario_Supermercado_Los_Patitos
-{
-    partial class PanelVentas
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+﻿namespace Gestor_de_inventario_Supermercado_Los_Patitos {
+	partial class PanelVentas {
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing) {
+			if (disposing && (components != null)) {
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent() {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,6 +32,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textIDCliente = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtName_Founded = new System.Windows.Forms.Label();
+            this.lbName = new System.Windows.Forms.Label();
+            this.txtID_Founded = new System.Windows.Forms.Label();
+            this.lbClientID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.DGVInventario = new System.Windows.Forms.DataGridView();
             this.numCantidad = new System.Windows.Forms.NumericUpDown();
@@ -51,6 +50,7 @@
             this.DGVDocumentos = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.bNotaCredito = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVInventario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCarrito)).BeginInit();
@@ -103,17 +103,59 @@
             // textIDCliente
             // 
             this.textIDCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textIDCliente.ForeColor = System.Drawing.Color.Silver;
             this.textIDCliente.Location = new System.Drawing.Point(23, 230);
             this.textIDCliente.Name = "textIDCliente";
             this.textIDCliente.Size = new System.Drawing.Size(371, 30);
             this.textIDCliente.TabIndex = 5;
+            this.textIDCliente.Text = "Ej: 123456789";
+            this.textIDCliente.Enter += new System.EventHandler(this.textIDCliente_Enter);
+            this.textIDCliente.Leave += new System.EventHandler(this.textIDCliente_Leave);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtName_Founded);
+            this.panel1.Controls.Add(this.lbName);
+            this.panel1.Controls.Add(this.txtID_Founded);
+            this.panel1.Controls.Add(this.lbClientID);
             this.panel1.Location = new System.Drawing.Point(25, 309);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(371, 494);
             this.panel1.TabIndex = 6;
+            // 
+            // txtName_Founded
+            // 
+            this.txtName_Founded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName_Founded.Location = new System.Drawing.Point(157, 144);
+            this.txtName_Founded.Name = "txtName_Founded";
+            this.txtName_Founded.Size = new System.Drawing.Size(211, 108);
+            this.txtName_Founded.TabIndex = 3;
+            // 
+            // lbName
+            // 
+            this.lbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbName.Location = new System.Drawing.Point(3, 144);
+            this.lbName.Name = "lbName";
+            this.lbName.Size = new System.Drawing.Size(148, 108);
+            this.lbName.TabIndex = 2;
+            this.lbName.Text = "Nombre Completo:";
+            // 
+            // txtID_Founded
+            // 
+            this.txtID_Founded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtID_Founded.Location = new System.Drawing.Point(156, 47);
+            this.txtID_Founded.Name = "txtID_Founded";
+            this.txtID_Founded.Size = new System.Drawing.Size(212, 65);
+            this.txtID_Founded.TabIndex = 1;
+            // 
+            // lbClientID
+            // 
+            this.lbClientID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbClientID.Location = new System.Drawing.Point(3, 47);
+            this.lbClientID.Name = "lbClientID";
+            this.lbClientID.Size = new System.Drawing.Size(148, 65);
+            this.lbClientID.TabIndex = 0;
+            this.lbClientID.Text = "Identificación:";
             // 
             // label4
             // 
@@ -160,6 +202,7 @@
             this.bAgregar.TabIndex = 10;
             this.bAgregar.Text = "Agregar al Carrito";
             this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // label5
             // 
@@ -192,6 +235,7 @@
             this.bComprar.TabIndex = 13;
             this.bComprar.Text = "Completar Compra";
             this.bComprar.UseVisualStyleBackColor = true;
+            this.bComprar.Click += new System.EventHandler(this.bComprar_Click);
             // 
             // label6
             // 
@@ -291,11 +335,12 @@
             this.Controls.Add(this.comboBoxTipoDoc);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1425, 815);
             this.MinimumSize = new System.Drawing.Size(1425, 815);
             this.Name = "PanelVentas";
             this.Text = "PanelVentas";
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVInventario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCarrito)).EndInit();
@@ -303,29 +348,33 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxTipoDoc;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textIDCliente;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView DGVInventario;
-        private System.Windows.Forms.NumericUpDown numCantidad;
-        private System.Windows.Forms.Button bAgregar;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView DGVCarrito;
-        private System.Windows.Forms.Button bComprar;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RichTextBox textTotales;
-        private System.Windows.Forms.DataGridView DGVDocumentos;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button bNotaCredito;
-    }
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ComboBox comboBoxTipoDoc;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox textIDCliente;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.DataGridView DGVInventario;
+		private System.Windows.Forms.NumericUpDown numCantidad;
+		private System.Windows.Forms.Button bAgregar;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.DataGridView DGVCarrito;
+		private System.Windows.Forms.Button bComprar;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.RichTextBox textTotales;
+		private System.Windows.Forms.DataGridView DGVDocumentos;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Button bNotaCredito;
+		private System.Windows.Forms.Label lbClientID;
+		private System.Windows.Forms.Label txtID_Founded;
+		private System.Windows.Forms.Label txtName_Founded;
+		private System.Windows.Forms.Label lbName;
+	}
 }
