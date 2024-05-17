@@ -374,29 +374,29 @@ BEGIN
 	ORDER BY SUM(L.cantidad) DESC;
 END;
 
-CREATE PROC Cajero_Del_Mes
+CREATE PROC Cajeros_Mas_Ventas
 AS
 BEGIN
-	SELECT TOP 1 P.idTrabajador 'Cédula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo'
+	SELECT TOP 5 P.idTrabajador 'Cédula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	INNER JOIN Personal P ON
 	D.idTrabajador = P.idTrabajador
 	GROUP BY P.idTrabajador, P.apellidoPat, P.apellidoMat, P.nombre;
 END;
 
-CREATE PROC Fecha_Mas_Compras
+CREATE PROC Fechas_Mas_Compras
 AS
 BEGIN
 	SET LANGUAGE Spanish;
-	SELECT TOP 1 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
+	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	GROUP BY DATENAME(DW, D.fechaCreacion)
 	ORDER BY COUNT(D.idDocumento) DESC;
 	SET LANGUAGE English;
 END;
 
-DROP PROC Fecha_Mas_Compras
-DROP PROC Cajero_Del_Mes
+DROP PROC Fechas_Mas_Compras
+DROP PROC Cajeros_Mas_Ventas
 DROP PROC Top_Categorias_Vendidas
 DROP PROC Facturas_Por_Rango_Fechas
 DROP PROC Top_5_Clientes
@@ -409,8 +409,9 @@ EXEC Prod_Vendido_30_Dias
 EXEC Top_5_Clientes
 EXEC Facturas_Por_Rango_Fechas '2024-04-01', '2024-04-20';
 EXEC Top_Categorias_Vendidas
-EXEC Cajero_Del_Mes
-EXEC Fecha_Mas_Compras
+EXEC Cajeros_Mas_Ventas
+EXEC Fechas_Mas_Compras
+
 
 
 --##############################################################
