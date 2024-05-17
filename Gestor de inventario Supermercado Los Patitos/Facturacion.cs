@@ -15,11 +15,43 @@ using Newtonsoft.Json.Linq;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
 
+
+/*
+ * Clase: Facturacion
+ *
+ * Descripción:
+ * Clase que maneja la generación y envío de facturas electrónicas en formato PDF a través del sistema de gestión de inventario 
+ * para el supermercado "Los Patitos".
+ *
+ * * Métodos:
+ * - Facturacion()
+ * - enviarFactura(string pDestinatario, int pIdDocumento): bool
+ * - generarFactura(int pIdDocumento): PDFDocument
+ * 
+ */
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 	internal class Facturacion {
 
 		private static string projectPath;
 		private Conexion c;
+
+		/*
+         * Método Controlador:
+         *
+         *	Descripción:
+         *	Constructor de la clase Facturacion que inicializa una instancia de Facturacion con la ubicación del proyecto
+         *	y la instancia de la conexión a la base de datos.
+         *
+         *	Entradas:
+         *	Ninguna.
+         *
+         *	Salidas:
+         *	Ninguna.
+         *
+         *	Parámetros:
+         *	Ninguno.
+         *
+         */
 		public Facturacion() {
 			string path = getMyLocation();
 			string[] p = path.Split('\\');
@@ -29,6 +61,24 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			c = new Conexion();
 		}
 
+		/*
+         * Método: enviarFactura
+         *
+         * Descripción:
+         * Genera y envía una factura electrónica en formato PDF a través de correo electrónico.
+         *
+         * Entradas:
+         * - pDestinatario: Dirección de correo electrónico del destinatario.
+         * - pIdDocumento: ID del documento de factura.
+         *
+         * Salidas:
+         * - bool: Devuelve verdadero si la factura se envió correctamente, de lo contrario, falso.
+         *
+         * Parámetros:
+         * - pDestinatario: string, dirección de correo electrónico del destinatario.
+         * - pIdDocumento: int, ID del documento de factura.
+         *
+         */
 		public bool enviarFactura(string pDestinatario, int pIdDocumento) {
 
 			try {
@@ -43,6 +93,22 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return false;
 		}
 
+		/*
+         * Método: generarFactura
+         *
+         * Descripción:
+         * Genera un documento PDF de factura electrónica basado en el ID de documento proporcionado.
+         *
+         * Entradas:
+         * - pIdDocumento: ID del documento de factura.
+         *
+         * Salidas:
+         * - PdfDocument: Devuelve un documento PDF de factura electrónica.
+         *
+         * Parámetros:
+         * - pIdDocumento: int, ID del documento de factura.
+         *
+         */
 		private PdfDocument generarFactura(int pIdDocumento) {
 			try {
 				DataTable dt = new DataTable();
@@ -128,7 +194,20 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 				page.Canvas.DrawString(fechaCreacion.ToString("dd/MM/yyyy"), contentFont, PdfBrushes.Black, new PointF(430, 130), leftFormat);
 
 				page.Canvas.DrawString("CAJERO(A):", subTitleFont, PdfBrushes.Black, new PointF(400, 150), rightFormat);
-				page.Canvas.DrawString(idTrabajador.ToString(), contentFont, PdfBrushes.Black, new PointF(430, 150), leftFormat);
+
+				string workerName = "";
+				try {
+					c.abrir();
+					SqlCommand cmd = new SqlCommand("Get_Nombre_Trabajador", c.ConectarBD);
+					cmd.CommandType = CommandType.StoredProcedure;
+					workerName = cmd.ExecuteScalar()?.ToString();
+
+					c.cerrar();
+				} catch (Exception ex) {
+					MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+
+				page.Canvas.DrawString(workerName, contentFont, PdfBrushes.Black, new PointF(430, 150), leftFormat);
 
 				page.Canvas.DrawString("LINEAS", subTitleFont, PdfBrushes.Black, new PointF(10, 200), leftFormat);
 				page.Canvas.DrawLine(pen, margin, 220, width - margin, 220);
@@ -212,6 +291,22 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return null;
 		}
 
+		/*
+		 * Método: getMyLocation
+		 *
+		 * Descripción:
+		 * Obtiene la ubicación del archivo de la clase Facturacion.cs.
+		 *
+		 * Entradas:
+		 * Ninguna.
+		 *
+		 * Salidas:
+		 * - string: Devuelve la ruta completa del archivo Facturacion.cs.
+		 *
+		 * Parámetros:
+		 * Ninguno.
+		 *
+		 */
 		public string getMyLocation() {
 			string codeBase = Assembly.GetExecutingAssembly().CodeBase;
 			UriBuilder uri = new UriBuilder(codeBase);
@@ -223,6 +318,4 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return filePath;
 		}
 	}
-
-	
-	}
+}

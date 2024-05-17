@@ -9,6 +9,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 
+
+/*
+ * Clase: VerifyID
+ *
+ * Descripción:
+ * Clase que proporciona métodos para verificar la identificación (ID) de un usuario en un sitio web específico.
+ *
+ * Métodos:
+ * - verifyID(string pId)
+ *
+ */
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 	internal class VerifyID {
 
