@@ -160,6 +160,7 @@
             this.bAgregar.TabIndex = 10;
             this.bAgregar.Text = "Agregar al Carrito";
             this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // label5
             // 
@@ -192,6 +193,7 @@
             this.bComprar.TabIndex = 13;
             this.bComprar.Text = "Completar Compra";
             this.bComprar.UseVisualStyleBackColor = true;
+            this.bComprar.Click += new System.EventHandler(this.bComprar_Click);
             // 
             // label6
             // 
@@ -291,7 +293,7 @@
             this.Controls.Add(this.comboBoxTipoDoc);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1425, 815);
             this.MinimumSize = new System.Drawing.Size(1425, 815);
             this.Name = "PanelVentas";
