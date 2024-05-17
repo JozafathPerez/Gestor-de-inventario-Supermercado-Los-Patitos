@@ -210,8 +210,6 @@ VALUES	(1, 0),
 
 --CAMBIOS MYNELL
 
-USE LOS_PATITOS;
-
 ALTER TABLE Documentos
 ALTER COLUMN totalImpuestos DECIMAL(18, 2);
 
@@ -306,6 +304,8 @@ VALUES
 
 SELECT * FROM Productos
 
+GO
+
 CREATE PROC Top_Producto
 AS
 BEGIN
@@ -316,6 +316,8 @@ BEGIN
 	GROUP BY P.codigoProd, P.nombre, P.categoria
 	ORDER BY SUM(L.cantidad) DESC;
 END;
+
+GO
 
 CREATE PROC Prod_Vendidos_30_Dias
 AS
@@ -334,6 +336,8 @@ BEGIN
 	ORDER BY SUM(L.cantidad) DESC;
 END;
 
+GO
+
 CREATE PROC Top_5_Clientes
 AS
 BEGIN
@@ -343,6 +347,8 @@ BEGIN
     GROUP BY D.idCliente
     ORDER BY COUNT(D.idDocumento) DESC;
 END;
+
+GO
 
 CREATE PROC Facturas_Por_Rango_Fechas
 	(@fechaInicial DATE,
@@ -366,6 +372,7 @@ BEGIN
         D.fechaCreacion;
 END;
 
+GO
 
 CREATE PROC Top_Categorias_Vendidas
 AS
@@ -378,6 +385,8 @@ BEGIN
 	ORDER BY SUM(L.cantidad) DESC;
 END;
 
+GO
+
 CREATE PROC Cajeros_Mas_Ventas
 AS
 BEGIN
@@ -387,6 +396,8 @@ BEGIN
 	D.idTrabajador = P.idTrabajador
 	GROUP BY P.idTrabajador, P.apellidoPat, P.apellidoMat, P.nombre;
 END;
+
+GO
 
 CREATE PROC Fechas_Mas_Compras
 AS
@@ -398,6 +409,8 @@ BEGIN
 	ORDER BY COUNT(D.idDocumento) DESC;
 	SET LANGUAGE English;
 END;
+
+GO
 
 CREATE PROC Cajero_Del_Mes
 AS
@@ -438,11 +451,6 @@ EXEC Cajero_Del_Mes
 EXEC Top_Categorias_Vendidas
 EXEC Cajeros_Mas_Ventas
 EXEC Fechas_Mas_Compras
-
-
-
---##############################################################
-       (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
 
 --SP para Documentos
 
