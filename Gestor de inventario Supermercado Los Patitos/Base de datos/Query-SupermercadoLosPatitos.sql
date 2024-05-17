@@ -415,6 +415,59 @@ BEGIN
     ORDER BY COUNT(D.idDocumento) DESC;
 END;
 
+CREATE PROC Buscar_Documento 
+(@idDocumento INT)
+AS
+BEGIN
+(SELECT idDocumento,
+       tipo,
+       fechaCreacion,
+       consecutivo,
+       idCliente,
+       idTrabajador,
+       totalImpuestos,
+       subtotal
+FROM Documentos D
+WHERE D.idDocumento = @idDocumento);
+END;
+
+CREATE PROC Buscar_Lineas_Documento
+(@idDocumento INT)
+AS
+BEGIN
+	SELECT cantidad,
+		codigoProd,
+		subtotal,
+		impuesto
+	FROM Lineas L
+	WHERE L.idDocumento = @idDocumento;
+END;
+
+CREATE PROC Buscar_Producto 
+(@codigoProd INT)
+AS
+BEGIN
+SELECT
+	codigoProd,
+	nombre,
+	categoria,
+	tipoMedida,
+	cantidadInv
+	precioUnit
+FROM Productos
+WHERE codigoProd = @codigoProd;
+END;
+
+CREATE PROC Get_Nombre_Trabajador 
+(@idTrabajador INT)
+AS
+BEGIN
+SELECT
+	CONCAT(nombre,' ', apellidoPat,' ', apellidoMat)
+FROM Personal
+WHERE idTrabajador = @idTrabajador;
+END;
+
 DROP PROC Fechas_Mas_Compras
 DROP PROC Cajeros_Mas_Ventas
 DROP PROC Top_Categorias_Vendidas
