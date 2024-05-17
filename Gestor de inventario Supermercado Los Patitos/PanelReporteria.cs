@@ -16,17 +16,111 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
     {
 
 		Conexion c;
+		VerifyID vID;
         public PanelReporteria()
-        {
+        {	
+			vID = new VerifyID();
 			c = new Conexion();
 			InitializeComponent();
-			cajerosConMasVentas();
-			fechaConMasCompras();
-			categoriasMasVendida();
-
+			loadCashiersMostSales();
+			loadDaysMostPurchases();
+			loadTopSellingCategories();
+			loadTop5Clients();
+			loadTop5Products();
+			loadTopProduct();
+			loadCashierOfTheMonth();
 		}
 
-		private void categoriasMasVendida() {
+		private void loadTopProduct() {
+			try {
+				c.abrir();
+				SqlDataAdapter da = new SqlDataAdapter("Top_Producto", c.ConectarBD);
+				da.SelectCommand.CommandType = CommandType.StoredProcedure;
+				DataTable dt = new DataTable();
+				da.Fill(dt);
+				this.tbTopProd.DataSource = dt;
+				c.cerrar();
+			} catch (Exception ex) {
+				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			foreach (DataGridViewColumn column in tbTopProd.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
+		}
+
+		private void loadTop5Clients() {
+			try {
+				c.abrir();
+				SqlDataAdapter da = new SqlDataAdapter("Top_5_Clientes", c.ConectarBD);
+				da.SelectCommand.CommandType = CommandType.StoredProcedure;
+				DataTable dt = new DataTable();
+				da.Fill(dt);
+
+
+				/*
+				DataColumn colName = new DataColumn("Nombre Completo", typeof(string));
+				dt.Columns.Add(colName);
+
+				colName.SetOrdinal(1);
+	
+				foreach (DataRow row in dt.Rows) {
+					string clientID = row["Cédula"].ToString();
+
+					string clientData = vID.verifyID(clientID);
+					string[] cD = clientData.Split(',');
+
+					if (cD != null && cD[0].Equals('0')) {
+						cD[1] = "Nombre no registrado";
+					}
+
+					row["Nombre Completo"] = cD[1];
+				}
+				*/
+				this.tbTopClientes.DataSource = dt;
+				c.cerrar();
+			} catch (Exception ex) {
+				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			foreach (DataGridViewColumn column in tbTopClientes.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
+		}
+
+		private void loadTop5Products() {
+			try {
+				c.abrir();
+				SqlDataAdapter da = new SqlDataAdapter("Prod_Vendidos_30_Dias", c.ConectarBD);
+				da.SelectCommand.CommandType = CommandType.StoredProcedure;
+				DataTable dt = new DataTable();
+				da.Fill(dt);
+				this.tbProdVendidos.DataSource = dt;
+				c.cerrar();
+			} catch (Exception ex) {
+				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			foreach (DataGridViewColumn column in tbProdVendidos.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
+		}
+
+		private void loadCashierOfTheMonth() {
+			try {
+				c.abrir();
+				SqlDataAdapter da = new SqlDataAdapter("Cajero_Del_Mes", c.ConectarBD);
+				da.SelectCommand.CommandType = CommandType.StoredProcedure;
+				DataTable dt = new DataTable();
+				da.Fill(dt);
+				this.tbTopCashier.DataSource = dt;
+				c.cerrar();
+			} catch (Exception ex) {
+				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			foreach (DataGridViewColumn column in tbTopCashier.Columns) {
+				column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
+		}
+
+		private void loadTopSellingCategories() {
 			try {
 				DataTable dt = spExecuter("Top_Categorias_Vendidas");
 
@@ -49,7 +143,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 		}
 
-		private void cajerosConMasVentas() {
+		private void loadCashiersMostSales() {
 			try {
 				DataTable dt = spExecuter("Cajeros_Mas_Ventas");
 
@@ -72,7 +166,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 		}
 
-		private void fechaConMasCompras() {
+		private void loadDaysMostPurchases() {
 			try {
 				DataTable dt = spExecuter("Fechas_Mas_Compras");
 
@@ -103,6 +197,47 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			da.Fill(dt);
 			c.cerrar();
 			return dt;
+		}
+
+		private void loadInvoicesByDateRange(object sender, EventArgs e) {
+			if (dtpFechaInicio.Value <= dtpFechaFin.Value) {
+				try {
+					c.abrir();
+
+					SqlDataAdapter da = new SqlDataAdapter("Facturas_Por_Rango_Fechas", c.ConectarBD);
+					da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+					da.SelectCommand.Parameters.AddWithValue("@fechaInicial", dtpFechaInicio.Value.ToString("MM-dd-yyyy"));
+					da.SelectCommand.Parameters.AddWithValue("@fechaFinal", dtpFechaFin.Value.ToString("MM-dd-yyyy"));
+
+					DataTable dt = new DataTable();
+					da.Fill(dt);
+					this.tbFacturasRF.DataSource = dt;
+					c.cerrar();
+				} catch (Exception ex) {
+					MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+		}
+		private void loadInvoicesByDateRange2(object sender, EventArgs e) {
+			if (dtpFechaInicio.Value <= dtpFechaFin.Value) {
+				try {
+					c.abrir();
+
+					SqlDataAdapter da = new SqlDataAdapter("Facturas_Por_Rango_Fechas", c.ConectarBD);
+					da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+					da.SelectCommand.Parameters.AddWithValue("@fechaInicial", dtpFechaInicio.Value.ToString("MM-dd-yyyy"));
+					da.SelectCommand.Parameters.AddWithValue("@fechaFinal", dtpFechaFin.Value.ToString("MM-dd-yyyy"));
+
+					DataTable dt = new DataTable();
+					da.Fill(dt);
+					this.tbFacturasRF.DataSource = dt;
+					c.cerrar();
+				} catch (Exception ex) {
+					MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
 		}
 
 	}

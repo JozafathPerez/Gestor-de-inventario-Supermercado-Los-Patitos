@@ -69,6 +69,8 @@ VALUES	(1,'Administrador'),
 		(3,'Administrador de Inventario'),
 		(4, 'Contador');
 
+GO
+
 CREATE PROC VerificarCredenciales
     @correo VARCHAR(150),
     @contrasenia VARCHAR(250)
@@ -91,6 +93,8 @@ BEGIN
 END
 
 EXEC VerificarCredenciales @correo = 'jozperez@gmail.com', @contrasenia = '1234';
+
+GO
 
 CREATE PROCEDURE EliminarPersonal
     @idTrabajador INT -- Cambiarlo luego por cedula?
@@ -206,8 +210,6 @@ VALUES	(1, 0),
 
 --CAMBIOS MYNELL
 
-USE LOS_PATITOS;
-
 ALTER TABLE Documentos
 ALTER COLUMN totalImpuestos DECIMAL(18, 2);
 
@@ -302,6 +304,8 @@ VALUES
 
 SELECT * FROM Productos
 
+GO
+
 CREATE PROC Top_Producto
 AS
 BEGIN
@@ -313,13 +317,15 @@ BEGIN
 	ORDER BY SUM(L.cantidad) DESC;
 END;
 
-CREATE PROC Prod_Vendido_30_Dias
+GO
+
+CREATE PROC Prod_Vendidos_30_Dias
 AS
 BEGIN
 	DECLARE @FechaActual DATE = GETDATE();
 	DECLARE @FechaInicio DATE = DATEADD(DAY, -30, @FechaActual);
 
-	SELECT TOP 1 P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
 	FROM Documentos D
 	INNER JOIN Lineas L ON
 	D.idDocumento = L.idDocumento
@@ -330,6 +336,8 @@ BEGIN
 	ORDER BY SUM(L.cantidad) DESC;
 END;
 
+GO
+
 CREATE PROC Top_5_Clientes
 AS
 BEGIN
@@ -339,6 +347,8 @@ BEGIN
     GROUP BY D.idCliente
     ORDER BY COUNT(D.idDocumento) DESC;
 END;
+
+GO
 
 CREATE PROC Facturas_Por_Rango_Fechas
 	(@fechaInicial DATE,
@@ -362,6 +372,7 @@ BEGIN
         D.fechaCreacion;
 END;
 
+GO
 
 CREATE PROC Top_Categorias_Vendidas
 AS
@@ -374,6 +385,8 @@ BEGIN
 	ORDER BY SUM(L.cantidad) DESC;
 END;
 
+GO
+
 CREATE PROC Cajeros_Mas_Ventas
 AS
 BEGIN
@@ -383,6 +396,8 @@ BEGIN
 	D.idTrabajador = P.idTrabajador
 	GROUP BY P.idTrabajador, P.apellidoPat, P.apellidoMat, P.nombre;
 END;
+
+GO
 
 CREATE PROC Fechas_Mas_Compras
 AS
@@ -395,6 +410,28 @@ BEGIN
 	SET LANGUAGE English;
 END;
 
+GO
+
+CREATE PROC Cajero_Del_Mes
+AS
+BEGIN
+    DECLARE @FechaActual DATE = GETDATE();
+    DECLARE @MesAnterior INT = MONTH(DATEADD(MONTH, -1, @FechaActual));
+    DECLARE @AnioMesAnterior INT = YEAR(DATEADD(MONTH, -1, @FechaActual));
+
+    SELECT TOP 1
+        P.idTrabajador AS 'Cédula',
+        CONCAT(P.apellidoPat, ' ', P.apellidoMat, ' ', P.nombre) AS 'Nombre Completo',
+        COUNT(D.idDocumento) AS 'Total Facturas'
+    FROM
+        Documentos D
+    INNER JOIN Personal P ON 
+	D.idTrabajador = P.idTrabajador
+    WHERE MONTH(D.fechaCreacion) = @MesAnterior AND YEAR(D.fechaCreacion) = @AnioMesAnterior
+    GROUP BY P.idTrabajador, P.apellidoPat, P.apellidoMat, P.nombre
+    ORDER BY COUNT(D.idDocumento) DESC;
+END;
+
 DROP PROC Fechas_Mas_Compras
 DROP PROC Cajeros_Mas_Ventas
 DROP PROC Top_Categorias_Vendidas
@@ -404,14 +441,100 @@ DROP PROC Prod_Vendido_30_Dias
 DROP PROC Top_Producto
 
 
+
 EXEC Top_Producto
-EXEC Prod_Vendido_30_Dias
+EXEC Prod_Vendidos_30_Dias
 EXEC Top_5_Clientes
 EXEC Facturas_Por_Rango_Fechas '2024-04-01', '2024-04-20';
+
+EXEC Cajero_Del_Mes
 EXEC Top_Categorias_Vendidas
 EXEC Cajeros_Mas_Ventas
 EXEC Fechas_Mas_Compras
 
+--SP para Documentos
 
+GO
 
---##############################################################
+CREATE PROCEDURE ObtenerConsecutivo
+    @TipoDocumento INT,
+    @Consecutivo INT OUTPUT
+AS
+BEGIN
+    SELECT @Consecutivo = consecutivo FROM Consecutivos WHERE tipo = @TipoDocumento;
+END
+
+GO
+
+CREATE PROCEDURE ActualizarConsecutivo
+    @TipoDocumento INT
+AS
+BEGIN
+    UPDATE Consecutivos SET consecutivo = consecutivo + 1 WHERE tipo = @TipoDocumento;
+END
+
+GO
+
+CREATE PROCEDURE InsertarDocumento
+    @TipoDocumento INT,
+    @FechaCreacion DATETIME,
+    @Consecutivo INT,
+    @IdCliente NVARCHAR(50),
+    @IdTrabajador INT,
+    @TotalImpuestos DECIMAL(18, 2),
+    @Subtotal DECIMAL(18, 2),
+    @IdDocumento INT OUTPUT
+AS
+BEGIN
+    INSERT INTO Documentos (tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
+    VALUES (@TipoDocumento, @FechaCreacion, @Consecutivo, @IdCliente, @IdTrabajador, @TotalImpuestos, @Subtotal);
+    
+    SET @IdDocumento = SCOPE_IDENTITY();
+END
+
+GO
+
+CREATE PROCEDURE InsertarLinea
+    @Cantidad INT,
+    @CodigoProd INT,
+    @Subtotal DECIMAL(18, 2),
+    @Impuesto DECIMAL(18, 2),
+    @IdDocumento INT
+AS
+BEGIN
+    INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento)
+    VALUES (@Cantidad, @CodigoProd, @Subtotal, @Impuesto, @IdDocumento);
+END
+
+GO
+
+CREATE PROCEDURE ActualizarCantidadProducto
+    @Cantidad INT,
+    @CodigoProd INT
+AS
+BEGIN
+    UPDATE Productos SET cantidadInv = cantidadInv - @Cantidad WHERE codigoProd = @CodigoProd;
+END
+
+GO
+
+CREATE PROCEDURE VerificarProducto
+    @CodigoProd INT,
+    @ProductoExiste INT OUTPUT
+AS
+BEGIN
+    SELECT @ProductoExiste = COUNT(*) FROM Productos WHERE codigoProd = @CodigoProd;
+END
+
+GO
+
+CREATE PROCEDURE ActualizarCantidadProductoAnulacion
+    @Cantidad INT,
+    @CodigoProd INT
+AS
+BEGIN
+    UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
+END
+
+ALTER TABLE Documentos
+ADD idNotaCredito INT NULL;
