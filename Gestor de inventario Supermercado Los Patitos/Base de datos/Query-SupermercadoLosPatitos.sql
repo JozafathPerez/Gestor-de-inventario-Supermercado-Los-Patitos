@@ -1,5 +1,6 @@
 CREATE DATABASE LOS_PATITOS;
-GO;
+
+GO
 
 USE LOS_PATITOS;
 
@@ -28,13 +29,6 @@ CREATE TABLE Bitacora
 	(idTrabajador	INT			NOT NULL	FOREIGN KEY REFERENCES	Personal(idTrabajador),
 	fechaHora		DATETIME	NOT NULL
 	CONSTRAINT		PK_BITACORA	PRIMARY KEY (idTrabajador,fechaHora));
-
--- Tabla de registro de clientes
-CREATE TABLE Clientes
-	(idCliente		INT PRIMARY KEY	NOT NULL,
-	nombre			VARCHAR(150)	NOT NULL,
-	apellidoPat		VARCHAR(150)	NOT NULL,
-	apellidoMat		VARCHAR(150)	NOT NULL);
 
 -- Tabla de registro de productos
 CREATE TABLE Productos
@@ -110,18 +104,21 @@ INSERT INTO Personal
 VALUES 
 (6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
 
-INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit) VALUES
-(1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
-(2, 'Pan Integral', 'Panadería', 'Unidades', 100, 0.80),
-(3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
-(4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
-(5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
-(6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
-(7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50),
-(8, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
-(31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
-(32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
-(33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
+INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
+VALUES
+    (1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
+    (2, 'Pan Integral', 'Panadería', 'Unidades', 100, 0.80),
+    (3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
+    (4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
+    (5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
+    (6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
+    (7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50),
+    (8, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
+    (30, 'Leche Deslactosada', 'Lácteos', 'Litros', 80, 1.80),  -- Añadido
+    (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
+    (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
+    (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
+
 
 
 INSERT INTO Documentos (idDocumento, tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
@@ -189,6 +186,7 @@ VALUES
     (12, 5, 21.00, 2, 19),
     (6, 6, 30.00, 5, 20),
     (5, 7, 17.50, 2, 20);
+
 
 -- SP de Personal
 GO

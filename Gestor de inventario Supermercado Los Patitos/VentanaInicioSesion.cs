@@ -39,7 +39,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             if (!credencialesValidas)
             {
                 MessageBox.Show("Cuenta o contraseña incorrectos. Inténtelo de nuevo.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                return;
             }
 
             bool estadoPesonal = VerificarEstado(cuenta);
