@@ -494,6 +494,8 @@ BEGIN
     UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
 END
 
+GO
+
 DROP PROC Top_Producto;
 
 GO
@@ -598,6 +600,10 @@ BEGIN
 	ORDER BY COUNT(D.idDocumento) DESC;
 	SET LANGUAGE English;
 END;
+
+GO
+
+DROP PROC Get_Nombre_Trabajador;
 
 GO
 
