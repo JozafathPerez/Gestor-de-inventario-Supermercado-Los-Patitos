@@ -496,10 +496,6 @@ END
 
 GO
 
-DROP PROC Top_Producto;
-
-GO
-
 CREATE PROC Top_Producto
 AS
 BEGIN
