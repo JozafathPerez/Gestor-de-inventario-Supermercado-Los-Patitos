@@ -1,4 +1,4 @@
-CREATE DATABASE LOS_PATITOS;
+﻿CREATE DATABASE LOS_PATITOS;
 
 GO
 
@@ -595,6 +595,22 @@ BEGIN
 	GROUP BY DATENAME(DW, D.fechaCreacion)
 	ORDER BY COUNT(D.idDocumento) DESC;
 	SET LANGUAGE English;
+END;
+
+GO
+
+DROP PROC Get_Nombre_Trabajador;
+
+GO
+
+CREATE PROC Get_Nombre_Trabajador 
+(@idTrabajador INT)
+AS
+BEGIN
+SELECT
+	CONCAT(nombre,' ', apellidoPat,' ', apellidoMat)
+FROM Personal
+WHERE idTrabajador = @idTrabajador;
 END;
 
 GO
