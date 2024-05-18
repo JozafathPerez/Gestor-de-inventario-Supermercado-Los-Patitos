@@ -23,6 +23,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             this.idAjuste = idAjuste;
         }
 
+        /// <summary>
+        /// Maneja el evento Load del formulario DialogoHistorialProductosAjustados.
+        /// Carga los datos de los productos ajustados para el ID de ajuste proporcionado.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void DialogoHistorialProductosAjustados_Load(object sender, EventArgs e)
         {
             try

@@ -31,9 +31,30 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
             int idRol = ObtenerIdRol(idTrabajador);
 
-            if (idRol != 1) { BT_empleados.Visible = false; }
+            if (idRol != 1) { 
+                BT_empleados.Enabled = false; 
+                if (idRol == 2)
+                {
+                    BT_reporteria.Enabled = false;
+                    BT_inventario.Enabled = false;
+                }
+                else if (idRol == 3)
+                {
+                    BT_reporteria.Enabled = false;
+                    BT_ventas.Enabled = false;
+                }
+                else if (idRol == 4) {
+                    BT_ventas.Enabled = false;
+                    BT_inventario.Enabled = false;
+                }
+            }
 
         }
+        /// <summary>
+        /// Obtiene el rol del trabajador registrado
+        /// </summary>
+        /// <param name="idTrabajador"></param>
+        /// <returns></returns>
         public int ObtenerIdRol(int idTrabajador)
         {
             // Verifica si el idEmpleado es igual a 1 para administrador
@@ -64,7 +85,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         }
 
 
-        // Función para cambiar el color del botón y restaurar el color del último botón presionado
+        /// <summary>
+        /// Función para cambiar el color del botón y restaurar el color del último botón presionado
+        /// </summary>
+        /// <param name="botonPresionado"></param>
         private void CambiarColorBoton(Button botonPresionado)
         {
             if (ultimoBoton != null)
@@ -76,7 +100,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             ultimoBoton = botonPresionado; // Actualizar el último botón presionado
         }
 
-        // Funcion para controlar el menu de hambuergesa
+        /// <summary>
+        /// Funcion para controlar el sidebar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sidebarTimer_Tick(object sender, EventArgs e)
         {
             if (sidebarExpand)
@@ -103,12 +131,21 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void menuButton_Click(object sender, EventArgs e)
         {
             sidebarTimer.Start();
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_reporteria_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_reporteria);
@@ -120,6 +157,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_ventas_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_ventas);
@@ -130,6 +172,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             cargarForm(new PanelVentas(this.idTrabajador));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_inventario_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_inventario);
@@ -140,6 +187,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             cargarForm(new PanelInventario(idTrabajador));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_empleados_Click(object sender, EventArgs e)
         {
             CambiarColorBoton(BT_empleados);
@@ -150,8 +202,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             cargarForm(new PanelEmpleados());
         }
 
-        // Función para cargar los Forms (los sub-menus) y colocarlos en el PanelAreaDeTrabajo
-        // También remueve lo que estaba antes en el panel!!
+        /// <summary>
+        /// Maneja el evento Click del botón buttonHistrial.
+        /// Se ejecuta al hacer clic en el botón "Historial" y realiza acciones relacionadas.
+        /// </summary>
         public void cargarForm(object Form)
         {
             if (this.PanelAreaDeTrabajo.Controls.Count > 0)
@@ -164,6 +218,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             f.Show();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void cerrarVentana(object sender, FormClosedEventArgs e) {
             String mensaje = "¿Desea cerrar la aplicación?";
             DialogResult resultado = MessageBox.Show(mensaje, "Cerrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
