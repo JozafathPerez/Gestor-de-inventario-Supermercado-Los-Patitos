@@ -71,7 +71,8 @@ CREATE TABLE Documentos
 	idCliente		INT,
 	idTrabajador	INT		NOT NULL	FOREIGN KEY REFERENCES Personal(idTrabajador),
 	totalImpuestos	DECIMAL(18, 2)		NOT NULL,
-	subtotal		DECIMAL(18, 2)		NOT NULL);
+	subtotal		DECIMAL(18, 2)		NOT NULL,
+    idNotaCredito   INT     NULL);
 
 
 CREATE TABLE Lineas
@@ -99,6 +100,7 @@ VALUES	(1, 0),
 
 
 -- SP de usos
+GO
 
 CREATE PROCEDURE VerificarCredenciales
     @correo VARCHAR(150),
@@ -121,6 +123,7 @@ BEGIN
         SELECT 'false' AS Existe;
 END
 
+GO
 
 CREATE PROCEDURE EliminarPersonal
     @idTrabajador INT -- Cambiarlo luego por cedula?
@@ -374,6 +377,8 @@ BEGIN
     ORDER BY COUNT(D.idDocumento) DESC;
 END;
 
+GO
+
 CREATE PROC Buscar_Documento 
 (@idDocumento INT)
 AS
@@ -390,6 +395,8 @@ FROM Documentos D
 WHERE D.idDocumento = @idDocumento);
 END;
 
+GO
+
 CREATE PROC Buscar_Lineas_Documento
 (@idDocumento INT)
 AS
@@ -401,6 +408,8 @@ BEGIN
 	FROM Lineas L
 	WHERE L.idDocumento = @idDocumento;
 END;
+
+GO
 
 CREATE PROC Buscar_Producto 
 (@codigoProd INT)
@@ -416,6 +425,8 @@ SELECT
 FROM Productos
 WHERE codigoProd = @codigoProd;
 END;
+
+GO
 
 CREATE PROC Get_Nombre_Trabajador 
 (@idTrabajador INT)
@@ -530,6 +541,3 @@ AS
 BEGIN
     UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
 END
-
-ALTER TABLE Documentos
-ADD idNotaCredito INT NULL;
