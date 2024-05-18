@@ -33,7 +33,6 @@
             this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.menuButton = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BT_reporteria = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -42,16 +41,17 @@
             this.BT_inventario = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.BT_empleados = new System.Windows.Forms.Button();
-            this.ImagenPatito = new System.Windows.Forms.PictureBox();
             this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
             this.PanelAreaDeTrabajo = new System.Windows.Forms.Panel();
+            this.menuButton = new System.Windows.Forms.PictureBox();
+            this.ImagenPatito = new System.Windows.Forms.PictureBox();
             this.sidebar.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,18 +91,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 21);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Menu";
-            // 
-            // menuButton
-            // 
-            this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.menuButton.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_menu;
-            this.menuButton.Location = new System.Drawing.Point(3, 29);
-            this.menuButton.Name = "menuButton";
-            this.menuButton.Size = new System.Drawing.Size(53, 49);
-            this.menuButton.TabIndex = 1;
-            this.menuButton.TabStop = false;
-            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
+            this.label1.Text = "Menú";
             // 
             // panel3
             // 
@@ -119,7 +108,6 @@
             this.BT_reporteria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_reporteria.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_reporteria.ForeColor = System.Drawing.Color.White;
-            this.BT_reporteria.Image = ((System.Drawing.Image)(resources.GetObject("BT_reporteria.Image")));
             this.BT_reporteria.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_reporteria.Location = new System.Drawing.Point(0, 0);
             this.BT_reporteria.Name = "BT_reporteria";
@@ -145,7 +133,6 @@
             this.BT_ventas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_ventas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_ventas.ForeColor = System.Drawing.Color.White;
-            this.BT_ventas.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_ventas;
             this.BT_ventas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_ventas.Location = new System.Drawing.Point(0, 0);
             this.BT_ventas.Margin = new System.Windows.Forms.Padding(0);
@@ -172,7 +159,6 @@
             this.BT_inventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_inventario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_inventario.ForeColor = System.Drawing.Color.White;
-            this.BT_inventario.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_inventario;
             this.BT_inventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_inventario.Location = new System.Drawing.Point(0, 0);
             this.BT_inventario.Name = "BT_inventario";
@@ -198,7 +184,6 @@
             this.BT_empleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_empleados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_empleados.ForeColor = System.Drawing.Color.White;
-            this.BT_empleados.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_empleados;
             this.BT_empleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_empleados.Location = new System.Drawing.Point(0, 0);
             this.BT_empleados.Name = "BT_empleados";
@@ -208,16 +193,6 @@
             this.BT_empleados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BT_empleados.UseVisualStyleBackColor = true;
             this.BT_empleados.Click += new System.EventHandler(this.BT_empleados_Click);
-            // 
-            // ImagenPatito
-            // 
-            this.ImagenPatito.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.LOGO_Transparente;
-            this.ImagenPatito.Location = new System.Drawing.Point(3, 433);
-            this.ImagenPatito.Name = "ImagenPatito";
-            this.ImagenPatito.Size = new System.Drawing.Size(237, 217);
-            this.ImagenPatito.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ImagenPatito.TabIndex = 5;
-            this.ImagenPatito.TabStop = false;
             // 
             // sidebarTimer
             // 
@@ -230,6 +205,27 @@
             this.PanelAreaDeTrabajo.Name = "PanelAreaDeTrabajo";
             this.PanelAreaDeTrabajo.Size = new System.Drawing.Size(1069, 662);
             this.PanelAreaDeTrabajo.TabIndex = 1;
+            // 
+            // menuButton
+            // 
+            this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.menuButton.Location = new System.Drawing.Point(3, 29);
+            this.menuButton.Name = "menuButton";
+            this.menuButton.Size = new System.Drawing.Size(53, 49);
+            this.menuButton.TabIndex = 1;
+            this.menuButton.TabStop = false;
+            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
+            this.menuButton.MouseHover += new System.EventHandler(this.menuButton_MouseHover);
+            // 
+            // ImagenPatito
+            // 
+            this.ImagenPatito.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.LOGO_Transparente;
+            this.ImagenPatito.Location = new System.Drawing.Point(3, 433);
+            this.ImagenPatito.Name = "ImagenPatito";
+            this.ImagenPatito.Size = new System.Drawing.Size(237, 217);
+            this.ImagenPatito.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ImagenPatito.TabIndex = 5;
+            this.ImagenPatito.TabStop = false;
             // 
             // VentanaPrincipal
             // 
@@ -248,11 +244,11 @@
             this.sidebar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.menuButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenPatito)).EndInit();
             this.ResumeLayout(false);
 

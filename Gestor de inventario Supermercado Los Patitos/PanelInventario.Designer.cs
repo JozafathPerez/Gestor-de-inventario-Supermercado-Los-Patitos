@@ -35,7 +35,6 @@
             this.BT_realizarAjuste = new System.Windows.Forms.Button();
             this.PanelAreaInventario = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonEliminarProducto = new System.Windows.Forms.Button();
             this.BT_vistaAgregar = new System.Windows.Forms.Button();
             this.BT_vistaAjuste = new System.Windows.Forms.Button();
             this.buttonHistrial = new System.Windows.Forms.Button();
@@ -47,11 +46,10 @@
             // 
             this.DataViewProductos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(30)))), ((int)(((byte)(41)))));
             this.DataViewProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewProductos.Location = new System.Drawing.Point(16, 114);
-            this.DataViewProductos.Margin = new System.Windows.Forms.Padding(4);
+            this.DataViewProductos.Location = new System.Drawing.Point(12, 93);
             this.DataViewProductos.Name = "DataViewProductos";
             this.DataViewProductos.RowHeadersWidth = 51;
-            this.DataViewProductos.Size = new System.Drawing.Size(828, 572);
+            this.DataViewProductos.Size = new System.Drawing.Size(621, 465);
             this.DataViewProductos.TabIndex = 0;
             this.DataViewProductos.DoubleClick += new System.EventHandler(this.DataViewProductos_DoubleClick);
             // 
@@ -61,22 +59,19 @@
             this.comboBoxBuscar.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.comboBoxBuscar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxBuscar.FormattingEnabled = true;
-            this.comboBoxBuscar.Location = new System.Drawing.Point(256, 43);
-            this.comboBoxBuscar.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxBuscar.Location = new System.Drawing.Point(192, 35);
             this.comboBoxBuscar.Name = "comboBoxBuscar";
-            this.comboBoxBuscar.Size = new System.Drawing.Size(517, 40);
+            this.comboBoxBuscar.Size = new System.Drawing.Size(389, 33);
             this.comboBoxBuscar.TabIndex = 1;
-            this.comboBoxBuscar.TextChanged += new System.EventHandler(this.ComboBoxBuscar_TextChanged);
             this.comboBoxBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBoxBuscar_KeyUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 43);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(27, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(199, 32);
+            this.label1.Size = new System.Drawing.Size(159, 25);
             this.label1.TabIndex = 2;
             this.label1.Text = "Buscar producto :";
             // 
@@ -84,10 +79,9 @@
             // 
             this.BT_agregarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(195)))), ((int)(((byte)(141)))));
             this.BT_agregarProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_agregarProducto.Location = new System.Drawing.Point(892, 711);
-            this.BT_agregarProducto.Margin = new System.Windows.Forms.Padding(4);
+            this.BT_agregarProducto.Location = new System.Drawing.Point(669, 578);
             this.BT_agregarProducto.Name = "BT_agregarProducto";
-            this.BT_agregarProducto.Size = new System.Drawing.Size(231, 50);
+            this.BT_agregarProducto.Size = new System.Drawing.Size(173, 41);
             this.BT_agregarProducto.TabIndex = 3;
             this.BT_agregarProducto.Text = "Guardar producto";
             this.BT_agregarProducto.UseVisualStyleBackColor = false;
@@ -97,10 +91,9 @@
             // 
             this.BT_realizarAjuste.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(195)))), ((int)(((byte)(141)))));
             this.BT_realizarAjuste.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_realizarAjuste.Location = new System.Drawing.Point(1188, 711);
-            this.BT_realizarAjuste.Margin = new System.Windows.Forms.Padding(4);
+            this.BT_realizarAjuste.Location = new System.Drawing.Point(891, 578);
             this.BT_realizarAjuste.Name = "BT_realizarAjuste";
-            this.BT_realizarAjuste.Size = new System.Drawing.Size(221, 50);
+            this.BT_realizarAjuste.Size = new System.Drawing.Size(166, 41);
             this.BT_realizarAjuste.TabIndex = 4;
             this.BT_realizarAjuste.Text = "Guardar ajuste";
             this.BT_realizarAjuste.UseVisualStyleBackColor = false;
@@ -109,45 +102,29 @@
             // PanelAreaInventario
             // 
             this.PanelAreaInventario.Controls.Add(this.label2);
-            this.PanelAreaInventario.Location = new System.Drawing.Point(852, 114);
-            this.PanelAreaInventario.Margin = new System.Windows.Forms.Padding(4);
+            this.PanelAreaInventario.Location = new System.Drawing.Point(639, 93);
             this.PanelAreaInventario.Name = "PanelAreaInventario";
-            this.PanelAreaInventario.Size = new System.Drawing.Size(571, 590);
+            this.PanelAreaInventario.Size = new System.Drawing.Size(428, 479);
             this.PanelAreaInventario.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(123, 246);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(92, 200);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(295, 56);
+            this.label2.Size = new System.Drawing.Size(235, 42);
             this.label2.TabIndex = 0;
             this.label2.Text = "      Crea un producto o un ajuste\r\n          para dezplegar la ventana\r\n";
-            // 
-            // buttonEliminarProducto
-            // 
-            this.buttonEliminarProducto.BackColor = System.Drawing.Color.IndianRed;
-            this.buttonEliminarProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEliminarProducto.Location = new System.Drawing.Point(256, 715);
-            this.buttonEliminarProducto.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonEliminarProducto.Name = "buttonEliminarProducto";
-            this.buttonEliminarProducto.Size = new System.Drawing.Size(217, 47);
-            this.buttonEliminarProducto.TabIndex = 6;
-            this.buttonEliminarProducto.Text = "Eliminar producto";
-            this.buttonEliminarProducto.UseVisualStyleBackColor = false;
-            this.buttonEliminarProducto.Click += new System.EventHandler(this.buttonEliminarProducto_Click);
             // 
             // BT_vistaAgregar
             // 
             this.BT_vistaAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.BT_vistaAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_vistaAgregar.ForeColor = System.Drawing.Color.White;
-            this.BT_vistaAgregar.Location = new System.Drawing.Point(892, 715);
-            this.BT_vistaAgregar.Margin = new System.Windows.Forms.Padding(4);
+            this.BT_vistaAgregar.Location = new System.Drawing.Point(669, 581);
             this.BT_vistaAgregar.Name = "BT_vistaAgregar";
-            this.BT_vistaAgregar.Size = new System.Drawing.Size(231, 50);
+            this.BT_vistaAgregar.Size = new System.Drawing.Size(173, 41);
             this.BT_vistaAgregar.TabIndex = 7;
             this.BT_vistaAgregar.Text = "Crear producto";
             this.BT_vistaAgregar.UseVisualStyleBackColor = false;
@@ -158,10 +135,9 @@
             this.BT_vistaAjuste.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.BT_vistaAjuste.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_vistaAjuste.ForeColor = System.Drawing.Color.White;
-            this.BT_vistaAjuste.Location = new System.Drawing.Point(1188, 715);
-            this.BT_vistaAjuste.Margin = new System.Windows.Forms.Padding(4);
+            this.BT_vistaAjuste.Location = new System.Drawing.Point(891, 581);
             this.BT_vistaAjuste.Name = "BT_vistaAjuste";
-            this.BT_vistaAjuste.Size = new System.Drawing.Size(221, 50);
+            this.BT_vistaAjuste.Size = new System.Drawing.Size(166, 41);
             this.BT_vistaAjuste.TabIndex = 8;
             this.BT_vistaAjuste.Text = "Crear ajuste";
             this.BT_vistaAjuste.UseVisualStyleBackColor = false;
@@ -169,10 +145,9 @@
             // 
             // buttonHistrial
             // 
-            this.buttonHistrial.Location = new System.Drawing.Point(1257, 43);
-            this.buttonHistrial.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonHistrial.Location = new System.Drawing.Point(943, 35);
             this.buttonHistrial.Name = "buttonHistrial";
-            this.buttonHistrial.Size = new System.Drawing.Size(152, 28);
+            this.buttonHistrial.Size = new System.Drawing.Size(114, 23);
             this.buttonHistrial.TabIndex = 9;
             this.buttonHistrial.Text = "Historial de ajustes";
             this.buttonHistrial.UseVisualStyleBackColor = true;
@@ -180,14 +155,13 @@
             // 
             // PanelInventario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1425, 815);
+            this.ClientSize = new System.Drawing.Size(1069, 662);
             this.Controls.Add(this.buttonHistrial);
             this.Controls.Add(this.BT_vistaAjuste);
             this.Controls.Add(this.BT_vistaAgregar);
-            this.Controls.Add(this.buttonEliminarProducto);
             this.Controls.Add(this.PanelAreaInventario);
             this.Controls.Add(this.BT_realizarAjuste);
             this.Controls.Add(this.BT_agregarProducto);
@@ -195,9 +169,8 @@
             this.Controls.Add(this.comboBoxBuscar);
             this.Controls.Add(this.DataViewProductos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximumSize = new System.Drawing.Size(1425, 815);
-            this.MinimumSize = new System.Drawing.Size(1425, 815);
+            this.MaximumSize = new System.Drawing.Size(1069, 662);
+            this.MinimumSize = new System.Drawing.Size(1023, 583);
             this.Name = "PanelInventario";
             this.Text = "PanelInventario";
             this.Load += new System.EventHandler(this.PanelInventario_Load);
@@ -217,7 +190,6 @@
         private System.Windows.Forms.Button BT_agregarProducto;
         private System.Windows.Forms.Button BT_realizarAjuste;
         private System.Windows.Forms.Panel PanelAreaInventario;
-        private System.Windows.Forms.Button buttonEliminarProducto;
         private System.Windows.Forms.Button BT_vistaAgregar;
         private System.Windows.Forms.Button BT_vistaAjuste;
         private System.Windows.Forms.Label label2;

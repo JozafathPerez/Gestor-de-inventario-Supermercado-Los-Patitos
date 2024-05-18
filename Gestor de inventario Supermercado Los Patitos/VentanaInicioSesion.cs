@@ -34,7 +34,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             string contrasena = TEXT_contrasena.Text;
 
             bool credencialesValidas = VerificarCredenciales(cuenta, contrasena);
-            MessageBox.Show(credencialesValidas.ToString());
 
             if (!credencialesValidas)
             {
