@@ -54,7 +54,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             labelID.Text = "";
             numericPrecio.Value = 0; 
             numericCantidad.Value = 0;
-            textBoxRazon.Text = "";
         }
 
         /// <summary>

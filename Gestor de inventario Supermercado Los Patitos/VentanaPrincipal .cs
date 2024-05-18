@@ -9,16 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Gestor_de_inventario_Supermercado_Los_Patitos
 {
     public partial class VentanaPrincipal : Form
     {
         bool sidebarExpand;
-        private Button ultimoBoton = null;
+        private System.Windows.Forms.Button ultimoBoton = null;
         private Conexion conexion;
         private int idTrabajador;
-
+        private System.Windows.Forms.ToolTip toolTip1;
         VentanaInicioSesion view;
 
         public VentanaPrincipal(VentanaInicioSesion pView,int idTrabajador)
@@ -28,6 +29,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             this.idTrabajador = idTrabajador;
             conexion = new Conexion();
             sidebarExpand = true;
+            InicializarToolTip();
 
             int idRol = ObtenerIdRol(idTrabajador);
 
@@ -50,6 +52,21 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InicializarToolTip()
+        {
+            toolTip1 = new System.Windows.Forms.ToolTip();
+
+            // Establecer los parámetros del ToolTip
+            toolTip1.AutoPopDelay = 5000; // Tiempo que permanece visible el ToolTip
+            toolTip1.InitialDelay = 100; // Tiempo que tarda en aparecer el ToolTip
+            toolTip1.ReshowDelay = 500;   // Tiempo que tarda en volver a aparecer el ToolTip si el cursor se mueve fuera y luego vuelve a la imagen
+            toolTip1.ShowAlways = true;   // Permitir que el ToolTip se muestre siempre, incluso si el control no está habilitado
+        }
+
         /// <summary>
         /// Obtiene el rol del trabajador registrado
         /// </summary>
@@ -89,7 +106,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         /// Función para cambiar el color del botón y restaurar el color del último botón presionado
         /// </summary>
         /// <param name="botonPresionado"></param>
-        private void CambiarColorBoton(Button botonPresionado)
+        private void CambiarColorBoton(System.Windows.Forms.Button botonPresionado)
         {
             if (ultimoBoton != null)
             {
@@ -232,5 +249,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 Application.Exit();
             }
 		}
-	}
+
+        private void menuButton_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.menuButton, "Menú");
+        }
+    }
 }

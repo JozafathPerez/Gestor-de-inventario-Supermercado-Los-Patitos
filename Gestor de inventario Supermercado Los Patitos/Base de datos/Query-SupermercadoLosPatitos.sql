@@ -24,7 +24,7 @@ CREATE TABLE Personal
 	idRol			VARCHAR(10)		NOT NULL	FOREIGN KEY REFERENCES Roles(idRol),
 	estado			BIT				NOT NULL);
 
--- Tabla de bitacora de creaci�n de personal
+-- Tabla de bitacora de creación de personal
 CREATE TABLE Bitacora
 	(idTrabajador	INT			NOT NULL	FOREIGN KEY REFERENCES	Personal(idTrabajador),
 	fechaHora		DATETIME	NOT NULL
@@ -79,7 +79,7 @@ CREATE TABLE Lineas
 ALTER TABLE Lineas
 ADD CONSTRAINT PK_Lineas PRIMARY KEY (codigoProd,idDocumento);
 
--- Inserts de informaci�n
+-- Inserts de información
 
 INSERT INTO Roles
 VALUES	(1,'Administrador'),
@@ -94,24 +94,24 @@ VALUES	(1, 0),
 
 INSERT INTO Personal 
 VALUES 
-    (1, '1990-05-15', 'Juan', 'P�rez', 'Gonz�lez', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1),
-    (2, '1990-05-15', 'Juan', 'P�rez', 'Gonz�lez', 'Calle Principal 123', 'jozperez@gmail.com', '1234', 123456789, 'Masculino', 1, 1),
-    (3, '1995-08-20', 'Mar�a', 'L�pez', 'Garc�a', 'Avenida Central 456', 'maria.lopez@email.com', '1234', 987654321, 'Femenino', 2, 1),
-    (4, '1988-12-10', 'Pedro', 'Mart�nez', 'Hern�ndez', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'Masculino', 3, 1),
-    (5, '1987-04-25', 'Ana', 'G�mez', 'Fern�ndez', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'Femenino', 4, 1),
-	(6, '1990-05-15', 'Juan', 'P�rez', 'Gonz�lez', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
+    (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1),
+    (2, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', 'jozperez@gmail.com', '1234', 123456789, 'Masculino', 1, 1),
+    (3, '1995-08-20', 'María', 'López', 'García', 'Avenida Central 456', 'maria.lopez@email.com', '1234', 987654321, 'Femenino', 2, 1),
+    (4, '1988-12-10', 'Pedro', 'Martínez', 'Hernández', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'Masculino', 3, 1),
+    (5, '1987-04-25', 'Ana', 'Gómez', 'Fernández', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'Femenino', 4, 1),
+	(6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
 
 INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
 VALUES
-    (1, 'Leche Entera', 'L�cteos', 'Litros', 50, 1.50),
-    (2, 'Pan Integral', 'Panader�a', 'Unidad', 100, 0.80),
+    (1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
+    (2, 'Pan Integral', 'Panadería', 'Unidad', 100, 0.80),
     (3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
     (4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
     (5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
     (6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
-    (7, 'Detergente L�quido', 'Limpieza', 'Litros', 60, 3.50),
-    (8, 'Leche de Avena', 'L�cteos', 'Unidad', 100, 2.99),
-    (30, 'Leche Deslactosada', 'L�cteos', 'Litros', 80, 1.80),  -- A�adido
+    (7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50),
+    (8, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
+    (30, 'Leche Deslactosada', 'Lácteos', 'Litros', 80, 1.80),  -- Añadido
     (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
     (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
     (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
@@ -224,7 +224,7 @@ GO
 CREATE PROC Top_Producto
 AS
 BEGIN
-	SELECT TOP 1  P.codigoProd 'C�digo', P.nombre Nombre, P.categoria 'Categor�a', SUM(L.cantidad) 'Total Vendido'
+	SELECT TOP 1  P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
 	FROM Lineas L
 	INNER JOIN Productos P on
 	L.codigoProd = P.codigoProd
@@ -240,7 +240,7 @@ BEGIN
 	DECLARE @FechaActual DATE = GETDATE();
 	DECLARE @FechaInicio DATE = DATEADD(DAY, -30, @FechaActual);
 
-	SELECT P.codigoProd 'C�digo', P.nombre Nombre, P.categoria 'Categor�a', SUM(L.cantidad) 'Total Vendido'
+	SELECT P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
 	FROM Documentos D
 	INNER JOIN Lineas L ON
 	D.idDocumento = L.idDocumento
@@ -256,7 +256,7 @@ GO
 CREATE PROC Top_5_Clientes
 AS
 BEGIN
-    SELECT TOP 5 D.idCliente 'C�dula', COUNT(D.idDocumento) 'Cantidad de Documentos'
+    SELECT TOP 5 D.idCliente 'Cédula', COUNT(D.idDocumento) 'Cantidad de Documentos'
     FROM Documentos D
     WHERE D.idCliente IS NOT NULL
     GROUP BY D.idCliente
@@ -275,8 +275,8 @@ BEGIN
         D.tipo			'Tipo',
         D.fechaCreacion	'Efectuado En',
         D.consecutivo	'Consecurivo',
-        D.idCliente		'C�dula del Cliente',
-        D.idTrabajador	'C�dula del Trabajador',
+        D.idCliente		'Cédula del Cliente',
+        D.idTrabajador	'Cédula del Trabajador',
         D.totalImpuestos 'Total Impuestos',
         D.subtotal		'SubTotal'
     FROM
@@ -292,7 +292,7 @@ GO
 CREATE PROC Top_Categorias_Vendidas
 AS
 BEGIN
-	SELECT TOP 5 P.categoria 'Categor�a', SUM(L.cantidad) 'Total Vendido'
+	SELECT TOP 5 P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
 	FROM Lineas L
 	INNER JOIN Productos P ON
 	L.codigoProd = P.codigoProd
@@ -305,7 +305,7 @@ GO
 CREATE PROC Cajeros_Mas_Ventas
 AS
 BEGIN
-	SELECT TOP 5 P.idTrabajador 'C�dula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo', COUNT(D.idDocumento) 'Total Facturas'
+	SELECT TOP 5 P.idTrabajador 'Cédula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	INNER JOIN Personal P ON
 	D.idTrabajador = P.idTrabajador
@@ -318,7 +318,7 @@ CREATE PROC Fechas_Mas_Compras
 AS
 BEGIN
 	SET LANGUAGE Spanish;
-	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'D�a', COUNT(D.idDocumento) 'Total Facturas'
+	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	GROUP BY DATENAME(DW, D.fechaCreacion)
 	ORDER BY COUNT(D.idDocumento) DESC;
@@ -335,7 +335,7 @@ BEGIN
     DECLARE @AnioMesAnterior INT = YEAR(DATEADD(MONTH, -1, @FechaActual));
 
     SELECT TOP 1
-        P.idTrabajador AS 'C�dula',
+        P.idTrabajador AS 'Cédula',
         CONCAT(P.apellidoPat, ' ', P.apellidoMat, ' ', P.nombre) AS 'Nombre Completo',
         COUNT(D.idDocumento) AS 'Total Facturas'
     FROM
