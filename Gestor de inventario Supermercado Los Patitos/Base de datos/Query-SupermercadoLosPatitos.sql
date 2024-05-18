@@ -64,7 +64,7 @@ CREATE TABLE Consecutivos
 
 -- 
 CREATE TABLE Documentos
-	(idDocumento	INT		NOT NULL	PRIMARY KEY,
+	(idDocumento	INT		IDENTITY(0,1)	PRIMARY KEY,
 	tipo			INT		NOT NULL	FOREIGN KEY REFERENCES Consecutivos(tipo),
 	fechaCreacion	DATE	NOT NULL,
 	consecutivo		INT		NOT NULL,
@@ -235,6 +235,9 @@ BEGIN
 	FROM Lineas L
 	INNER JOIN Productos P on
 	L.codigoProd = P.codigoProd
+    INNER JOIN Documentos D ON
+    D.idDocumento = L.idDocumento
+    WHERE D.idNotaCredito != NULL
 	GROUP BY P.codigoProd, P.nombre, P.categoria
 	ORDER BY SUM(L.cantidad) DESC;
 END;
@@ -417,13 +420,6 @@ FROM Personal
 WHERE idTrabajador = @idTrabajador;
 END;
 
-DROP PROC Fechas_Mas_Compras
-DROP PROC Cajeros_Mas_Ventas
-DROP PROC Top_Categorias_Vendidas
-DROP PROC Facturas_Por_Rango_Fechas
-DROP PROC Top_5_Clientes
-DROP PROC Prod_Vendido_30_Dias
-DROP PROC Top_Producto
 
 --SP para Documentos
 
@@ -508,3 +504,113 @@ AS
 BEGIN
     UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
 END
+
+
+-----------------------------------------------------
+
+DROP PROC Top_Producto;
+
+GO
+
+CREATE PROC Top_Producto
+AS
+BEGIN
+	SELECT TOP 1  P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	FROM Lineas L
+	INNER JOIN Productos P on
+	L.codigoProd = P.codigoProd
+    INNER JOIN Documentos D ON
+    D.idDocumento = L.idDocumento
+	WHERE D.idNotaCredito IS NULL
+	GROUP BY P.codigoProd, P.nombre, P.categoria
+	ORDER BY SUM(L.cantidad) DESC;
+END;
+
+GO
+
+DROP PROC Cajero_Del_Mes;
+
+GO
+
+CREATE PROC Cajero_Del_Mes
+AS
+BEGIN
+    DECLARE @FechaActual DATE = GETDATE();
+    DECLARE @MesAnterior INT = MONTH(DATEADD(MONTH, -1, @FechaActual));
+    DECLARE @AnioMesAnterior INT = YEAR(DATEADD(MONTH, -1, @FechaActual));
+
+    SELECT TOP 1
+        P.idTrabajador AS 'Cédula',
+        CONCAT(P.apellidoPat, ' ', P.apellidoMat, ' ', P.nombre) AS 'Nombre Completo',
+        COUNT(D.idDocumento) AS 'Total Facturas'
+    FROM
+        Documentos D
+    INNER JOIN Personal P ON 
+	D.idTrabajador = P.idTrabajador
+    WHERE MONTH(D.fechaCreacion) = @MesAnterior AND YEAR(D.fechaCreacion) = @AnioMesAnterior AND D.idNotaCredito IS NULL
+    GROUP BY P.idTrabajador, P.apellidoPat, P.apellidoMat, P.nombre
+    ORDER BY COUNT(D.idDocumento) DESC;
+END;
+
+GO
+
+DROP PROC Prod_Vendidos_30_Dias;
+
+GO
+
+CREATE PROC Prod_Vendidos_30_Dias
+AS
+BEGIN
+	DECLARE @FechaActual DATE = GETDATE();
+	DECLARE @FechaInicio DATE = DATEADD(DAY, -30, @FechaActual);
+
+	SELECT P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	FROM Documentos D
+	INNER JOIN Lineas L ON
+	D.idDocumento = L.idDocumento
+	INNER JOIN Productos P ON
+	P.codigoProd = L.codigoProd
+	WHERE D.fechaCreacion >= @FechaInicio AND D.idNotaCredito IS NULL
+	GROUP BY P.codigoProd, P.nombre, P.categoria
+	ORDER BY SUM(L.cantidad) DESC;
+END;
+
+GO
+
+DROP PROC Top_Categorias_Vendidas;
+
+GO
+
+CREATE PROC Top_Categorias_Vendidas
+AS
+BEGIN
+	SELECT TOP 5 P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	FROM Lineas L
+	INNER JOIN Productos P ON
+	L.codigoProd = P.codigoProd
+	INNER JOIN Documentos D ON
+	D.idDocumento = L.idDocumento
+	WHERE D.idNotaCredito IS NULL
+	GROUP BY P.categoria
+	ORDER BY SUM(L.cantidad) DESC;
+END;
+
+GO
+
+DROP PROC Fechas_Mas_Compras;
+
+GO
+
+CREATE PROC Fechas_Mas_Compras
+AS
+BEGIN
+	SET LANGUAGE Spanish;
+	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
+	FROM Documentos D
+	WHERE D.idNotaCredito IS NULL
+	GROUP BY DATENAME(DW, D.fechaCreacion)
+	ORDER BY COUNT(D.idDocumento) DESC;
+	SET LANGUAGE English;
+END;
+
+GO
