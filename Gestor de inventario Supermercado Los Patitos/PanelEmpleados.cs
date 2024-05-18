@@ -97,25 +97,25 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 string.IsNullOrWhiteSpace(genero) || string.IsNullOrWhiteSpace(rol) ||
                 string.IsNullOrWhiteSpace(direccion))
             {
-                MessageBox.Show("Todos los campos son obligatorios.");
+                MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!EsFormatoCorreoValido(email))
             {
-                MessageBox.Show("El formato del correo electrónico no es válido.");
+                MessageBox.Show("El formato del correo electrónico no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!EsNumeroValido(telefono))
             {
-                MessageBox.Show("El número de teléfono debe contener solo números.");
+                MessageBox.Show("El número de teléfono debe contener solo números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!EsNumeroValido(identificacion))
             {
-                MessageBox.Show("La identificación debe contener solo números.");
+                MessageBox.Show("La identificación debe contener solo números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -156,14 +156,14 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo insertar el registro de personal.");
+                        MessageBox.Show("No se pudo insertar el registro de personal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     c.cerrar();
                     CargarPersonal();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al insertar el registro de personal: " + ex.Message);
+                    MessageBox.Show("Error al insertar el registro de personal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -227,7 +227,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al obtener el ID del rol: " + ex.Message);
+                    MessageBox.Show("Error al obtener el ID del rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             return idRol;
@@ -254,25 +254,25 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 string.IsNullOrWhiteSpace(genero) || string.IsNullOrWhiteSpace(nombreRol) ||
                 string.IsNullOrWhiteSpace(direccion))
             {
-                MessageBox.Show("Todos los campos son obligatorios.");
+                MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!EsFormatoCorreoValido(email))
             {
-                MessageBox.Show("El formato del correo electrónico no es válido.");
+                MessageBox.Show("El formato del correo electrónico no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!EsNumeroValido(telefono))
             {
-                MessageBox.Show("El número de teléfono debe contener solo números.");
+                MessageBox.Show("El número de teléfono debe contener solo números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!EsNumeroValido(identificacion))
             {
-                MessageBox.Show("La identificación debe contener solo números.");
+                MessageBox.Show("La identificación debe contener solo números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -280,7 +280,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
             if (idRol == -1)
             {
-                MessageBox.Show("El rol seleccionado no existe en la base de datos.");
+                MessageBox.Show("El rol seleccionado no existe en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -318,13 +318,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo modificar el registro de personal. Verifique la identificación.");
+                        MessageBox.Show("No se pudo modificar el registro de personal. Verifique la identificación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     c.cerrar();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al modificar el registro de personal: " + ex.Message);
+                    MessageBox.Show("Error al modificar el registro de personal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -366,13 +366,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                         }
                         else
                         {
-                            MessageBox.Show("No se encontró ningún registro de personal con ese identificador.");
+                            MessageBox.Show("No se encontró ningún registro de personal con ese identificador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         c.cerrar();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error al eliminar el registro de personal: " + ex.Message);
+                        MessageBox.Show("Error al eliminar el registro de personal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

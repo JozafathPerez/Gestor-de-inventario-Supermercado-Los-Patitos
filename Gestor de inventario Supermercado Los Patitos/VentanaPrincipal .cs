@@ -18,6 +18,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         private Button ultimoBoton = null;
         private Conexion conexion;
         private int idTrabajador;
+        private bool cerrar = false;
 
         VentanaInicioSesion view;
 
@@ -48,7 +49,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                     BT_inventario.Enabled = false;
                 }
             }
-
         }
         /// <summary>
         /// Obtiene el rol del trabajador registrado
@@ -218,19 +218,19 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             f.Show();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-		private void cerrarVentana(object sender, FormClosedEventArgs e) {
-            String mensaje = "¿Desea cerrar la aplicación?";
-            DialogResult resultado = MessageBox.Show(mensaje, "Cerrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        private void prepararCerrado(object sender, FormClosingEventArgs e)
+        {
+            if (this.cerrar) { Application.Exit(); } else {
+                String mensaje = "¿Desea cerrar la aplicación?";
+                DialogResult resultado = MessageBox.Show(mensaje, "Cerrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (resultado == DialogResult.Yes)
-            {
-                Application.Exit();
+                if (resultado == DialogResult.Yes)
+                {
+                    this.cerrar = true;
+                    Application.Exit();
+                }
+                else { e.Cancel = true; }
             }
-		}
+        }
 	}
 }

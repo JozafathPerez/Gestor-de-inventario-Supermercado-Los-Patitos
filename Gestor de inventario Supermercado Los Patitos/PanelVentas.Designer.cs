@@ -57,6 +57,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.bNotaCredito = new System.Windows.Forms.Button();
             this.bLimpiar = new System.Windows.Forms.Button();
+            this.textBusqueda = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVInventario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
@@ -187,7 +188,7 @@
             this.DGVInventario.RowHeadersWidth = 51;
             this.DGVInventario.RowTemplate.Height = 24;
             this.DGVInventario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGVInventario.Size = new System.Drawing.Size(667, 247);
+            this.DGVInventario.Size = new System.Drawing.Size(667, 212);
             this.DGVInventario.TabIndex = 8;
             // 
             // numCantidad
@@ -406,12 +407,22 @@
             this.bLimpiar.UseVisualStyleBackColor = true;
             this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
             // 
+            // textBusqueda
+            // 
+            this.textBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBusqueda.Location = new System.Drawing.Point(413, 566);
+            this.textBusqueda.Name = "textBusqueda";
+            this.textBusqueda.Size = new System.Drawing.Size(667, 30);
+            this.textBusqueda.TabIndex = 23;
+            this.textBusqueda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBusqueda_KeyUp);
+            // 
             // PanelVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1425, 815);
+            this.Controls.Add(this.textBusqueda);
             this.Controls.Add(this.bLimpiar);
             this.Controls.Add(this.bNotaCredito);
             this.Controls.Add(this.label9);
@@ -482,5 +493,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Impuesto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.TextBox textBusqueda;
     }
 }

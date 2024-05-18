@@ -36,7 +36,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 		private void CargarInventario() {
 			try {
 				c.abrir();
-				string consulta = "SELECT codigoProd AS 'Codigo', categoria AS 'Categoria', tipoMedida AS 'Medida', cantidadInv AS 'Cantidad', precioUnit AS 'Precio' FROM Productos; ";
+				string consulta = "SELECT codigoProd AS 'Codigo', nombre AS 'Nombre', categoria AS 'Categoria', tipoMedida AS 'Medida', cantidadInv AS 'Cantidad', precioUnit AS 'Precio' FROM Productos; ";
 				SqlDataAdapter adaptador = new SqlDataAdapter(consulta, c.ConectarBD);
 				DataTable tabla = new DataTable();
 				adaptador.Fill(tabla);
@@ -262,6 +262,16 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
             textIDCliente.Clear();
             CargarInventario();
             CargarDocumentos();
+            this.lbName.Visible = false;
+            this.txtName_Founded.Visible = false;
+            this.txtID_Founded.Visible = false;
+            this.lbClientID.Visible = false;
+
+            this.lbClientID.Text = "";
+            this.lbName.Text = "";
+            this.txtID_Founded.Text = "";
+            this.txtName_Founded.Text = "";
+            this.textIDCliente.ForeColor = System.Drawing.Color.Red;
         }
         /// <summary>
         /// Calcula y muestra los totales esperados de una compra
@@ -498,6 +508,28 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
         private void bLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarCarrito();
+        }
+
+        private void textBusqueda_KeyUp(object sender, KeyEventArgs e)
+        {
+            string busqueda = textBusqueda.Text.ToLower();
+
+            foreach (DataGridViewRow fila in DGVInventario.Rows)
+            {
+                if (fila.Cells["Nombre"].Value != null)
+                {
+                    string nombre = fila.Cells["Nombre"].Value.ToString().ToLower();
+
+                    if (!nombre.Contains(busqueda))
+                    {
+                        fila.Visible = false;
+                    }
+                    else
+                    {
+                        fila.Visible = true;
+                    }
+                }
+            }
         }
 
 
