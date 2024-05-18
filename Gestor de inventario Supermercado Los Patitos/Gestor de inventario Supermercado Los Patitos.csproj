@@ -137,6 +137,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelInventario.resx">
       <DependentUpon>PanelInventario.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelReporteria.resx">
       <DependentUpon>PanelReporteria.cs</DependentUpon>

@@ -513,6 +513,19 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             MostrarBotones(true, true, false, false);
         }
 
+        private void comboBoxBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            conexion.abrir();
+            string busqueda = comboBoxBuscar.Text;
+            string query = "SELECT codigoProd AS 'Código del producto', nombre AS 'Nombre', categoria AS 'Categoría', tipoMedida AS 'Tipo de medida', cantidadInv AS 'Cantidad en inventario', precioUnit AS 'Precio' FROM Productos WHERE nombre LIKE @busqueda;";
+            SqlCommand comando = new SqlCommand(query, conexion.ConectarBD);
+            comando.Parameters.AddWithValue("@busqueda", "%" + busqueda + "%");
+            SqlDataAdapter data = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            data.Fill(tabla);
+            DataViewProductos.DataSource = tabla;
+            conexion.cerrar();
+        }
 
     }
 }
