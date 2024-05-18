@@ -330,57 +330,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         }
 
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            // Verifica si hay una fila seleccionada en el DataGridView
-            if (DGVPersonal.SelectedRows.Count > 0)
-            {
-                // Obtiene el idEmpleado de la fila seleccionada
-                int idEmpleado = Convert.ToInt32(DGVPersonal.SelectedRows[0].Cells["Identificación"].Value);
-
-                DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este registro de personal?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.No)
-                {
-                    return;
-                }
-
-                // Llamar al Stored Procedure para eliminar la fila seleccionada
-                string storedProcedure = "EliminarPersonal";
-
-                using (SqlCommand command = new SqlCommand(storedProcedure, c.ConectarBD))
-                {
-                    try
-                    {
-                        c.abrir();
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@idTrabajador", idEmpleado);
-
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Registro de personal eliminado correctamente.");
-                            LimpiarCampos();
-                            CargarPersonal(); // Vuelve a cargar los datos en el DataGridView después de eliminar
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se encontró ningún registro de personal con ese identificador.");
-                        }
-                        c.cerrar();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al eliminar el registro de personal: " + ex.Message);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una fila para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void DGVPersonal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

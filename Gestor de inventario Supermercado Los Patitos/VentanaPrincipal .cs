@@ -20,6 +20,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         private Conexion conexion;
         private int idTrabajador;
         private System.Windows.Forms.ToolTip toolTip1;
+        private bool cerrar = false;
+
         VentanaInicioSesion view;
 
         public VentanaPrincipal(VentanaInicioSesion pView,int idTrabajador)
@@ -235,24 +237,44 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             f.Show();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-		private void cerrarVentana(object sender, FormClosedEventArgs e) {
-            String mensaje = "¿Desea cerrar la aplicación?";
-            DialogResult resultado = MessageBox.Show(mensaje, "Cerrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        private void prepararCerrado(object sender, FormClosingEventArgs e)
+        {
+            if (this.cerrar) { Application.Exit(); } else {
+                String mensaje = "¿Desea cerrar la aplicación?";
+                DialogResult resultado = MessageBox.Show(mensaje, "Cerrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (resultado == DialogResult.Yes)
-            {
-                Application.Exit();
+                if (resultado == DialogResult.Yes)
+                {
+                    this.cerrar = true;
+                    Application.Exit();
+                }
+                else { e.Cancel = true; }
             }
-		}
+        }
 
         private void menuButton_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(this.menuButton, "Menú");
+        }
+
+        private void BT_reporteria_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_reporteria, "Reportería");
+        }
+
+        private void BT_ventas_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_ventas, "Ventas");
+        }
+
+        private void BT_inventario_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_inventario, "Inventario");
+        }
+
+        private void BT_empleados_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_empleados, "Empleados");
         }
     }
 }
