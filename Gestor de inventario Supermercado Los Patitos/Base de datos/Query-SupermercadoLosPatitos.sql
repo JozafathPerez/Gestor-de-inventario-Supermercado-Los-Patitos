@@ -600,3 +600,13 @@ BEGIN
 END;
 
 GO
+
+CREATE PROC Get_Nombre_Trabajador 
+(@idTrabajador INT)
+AS
+BEGIN
+SELECT
+	CONCAT(nombre,' ', apellidoPat,' ', apellidoMat)
+FROM Personal
+WHERE idTrabajador = @idTrabajador;
+END;
