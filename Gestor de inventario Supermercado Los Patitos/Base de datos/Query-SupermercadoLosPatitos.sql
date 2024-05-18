@@ -146,9 +146,6 @@ END
 
 
 -- ELIMINAR ESTOS INSERTS AL FINAL
-
-SELECT *
-FROM Personal
 INSERT INTO Personal 
 VALUES 
     (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'M', 1, 1),
