@@ -1,4 +1,4 @@
-CREATE DATABASE LOS_PATITOS;
+﻿CREATE DATABASE LOS_PATITOS;
 
 GO
 
@@ -400,7 +400,6 @@ END;
 
 GO
 
-
 CREATE PROC Get_Nombre_Trabajador 
 (@idTrabajador INT)
 AS
@@ -494,6 +493,8 @@ AS
 BEGIN
     UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
 END
+
+GO
 
 DROP PROC Top_Producto;
 
@@ -602,4 +603,18 @@ END;
 
 GO
 
+DROP PROC Get_Nombre_Trabajador;
 
+GO
+
+CREATE PROC Get_Nombre_Trabajador 
+(@idTrabajador INT)
+AS
+BEGIN
+SELECT
+	CONCAT(nombre,' ', apellidoPat,' ', apellidoMat)
+FROM Personal
+WHERE idTrabajador = @idTrabajador;
+END;
+
+GO
