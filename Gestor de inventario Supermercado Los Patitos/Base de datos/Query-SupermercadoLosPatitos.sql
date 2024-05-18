@@ -84,6 +84,9 @@ CREATE TABLE Lineas
 ALTER TABLE Lineas
 ADD CONSTRAINT PK_Lineas PRIMARY KEY (codigoProd,idDocumento);
 
+ALTER TABLE Documentos
+ADD idNotaCredito INT NULL;
+
 -- Inserts de información
 
 INSERT INTO Roles
