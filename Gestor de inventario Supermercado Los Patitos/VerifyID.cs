@@ -12,6 +12,7 @@ using System.Threading;
 
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
+
 	/// <summary>
 	/// Clase que proporciona métodos para verificar la identificación (ID) de un usuario en un sitio web específico.
 	/// </summary>

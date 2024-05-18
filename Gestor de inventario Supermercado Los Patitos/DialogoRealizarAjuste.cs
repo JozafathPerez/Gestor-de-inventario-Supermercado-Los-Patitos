@@ -19,6 +19,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             labelProducto.Text = "";
         }
 
+        /// <summary>
+        /// Maneja el evento Click del botón Realizar Ajuste.
+        /// Verifica si se ha seleccionado un producto y agrega los datos a la tabla de productos seleccionados.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void buttonRealizarAjuste_Click(object sender, EventArgs e)
         {
             // Verificar si los campos están vacíos
@@ -39,8 +45,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             LimpiarEntradas();
         }
 
-
-
+        /// <summary>
+        /// Limpia las entradas del formulario estableciendo los textos y valores a vacío o cero.
+        /// </summary>
         private void LimpiarEntradas()
         {
             labelProducto.Text = "";
@@ -50,6 +57,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             textBoxRazon.Text = "";
         }
 
+        /// <summary>
+        /// Maneja el evento DoubleClick del DataGridView.
+        /// Elimina la fila seleccionada del DataGridView al hacer doble clic en ella.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void dataGridSeleccionados_DoubleClick(object sender, EventArgs e)
         {
             // Verificar si se ha seleccionado una fila

@@ -17,6 +17,7 @@ using Spire.Pdf.Graphics;
 
 
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
+
 	internal class Facturacion {
 		/// <summary>
 		/// Clase que maneja la generación y envío de facturas electrónicas en formato PDF a través del sistema de gestión de inventario 

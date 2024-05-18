@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 /// <summary>
 /// Clase que proporciona métodos para enviar correos electrónicos con archivos adjuntos de facturas electrónicas en formato PDF.
 /// </summary>
