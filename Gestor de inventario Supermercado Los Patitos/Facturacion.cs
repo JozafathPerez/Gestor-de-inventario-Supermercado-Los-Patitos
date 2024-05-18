@@ -16,42 +16,20 @@ using Spire.Pdf;
 using Spire.Pdf.Graphics;
 
 
-/*
- * Clase: Facturacion
- *
- * Descripción:
- * Clase que maneja la generación y envío de facturas electrónicas en formato PDF a través del sistema de gestión de inventario 
- * para el supermercado "Los Patitos".
- *
- * * Métodos:
- * - Facturacion()
- * - enviarFactura(string pDestinatario, int pIdDocumento): bool
- * - generarFactura(int pIdDocumento): PDFDocument
- * 
- */
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
-	internal class Facturacion {
 
+	internal class Facturacion {
+		/// <summary>
+		/// Clase que maneja la generación y envío de facturas electrónicas en formato PDF a través del sistema de gestión de inventario 
+		/// para el supermercado "Los Patitos".
+		/// </summary>
 		private static string projectPath;
 		private Conexion c;
 
-		/*
-         * Método Controlador:
-         *
-         *	Descripción:
-         *	Constructor de la clase Facturacion que inicializa una instancia de Facturacion con la ubicación del proyecto
-         *	y la instancia de la conexión a la base de datos.
-         *
-         *	Entradas:
-         *	Ninguna.
-         *
-         *	Salidas:
-         *	Ninguna.
-         *
-         *	Parámetros:
-         *	Ninguno.
-         *
-         */
+		/// <summary>
+		/// Constructor de la clase Facturacion que inicializa una instancia de Facturacion con la ubicación del proyecto
+		/// y la instancia de la conexión a la base de datos.
+		/// </summary>
 		public Facturacion() {
 			string path = getMyLocation();
 			string[] p = path.Split('\\');
@@ -61,24 +39,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			c = new Conexion();
 		}
 
-		/*
-         * Método: enviarFactura
-         *
-         * Descripción:
-         * Genera y envía una factura electrónica en formato PDF a través de correo electrónico.
-         *
-         * Entradas:
-         * - pDestinatario: Dirección de correo electrónico del destinatario.
-         * - pIdDocumento: ID del documento de factura.
-         *
-         * Salidas:
-         * - bool: Devuelve verdadero si la factura se envió correctamente, de lo contrario, falso.
-         *
-         * Parámetros:
-         * - pDestinatario: string, dirección de correo electrónico del destinatario.
-         * - pIdDocumento: int, ID del documento de factura.
-         *
-         */
+
+		/// <summary>
+		/// Genera y envía una factura electrónica en formato PDF a través de correo electrónico.
+		/// </summary>
+		/// <param name="pDestinatario">Dirección de correo electrónico del destinatario.</param>
+		/// <param name="pIdDocumento">ID del documento de factura.</param>
+		/// <returns>Devuelve verdadero si la factura se envió correctamente, de lo contrario, falso.</returns>
 		public bool enviarFactura(string pDestinatario, int pIdDocumento) {
 
 			try {
@@ -93,22 +60,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return false;
 		}
 
-		/*
-         * Método: generarFactura
-         *
-         * Descripción:
-         * Genera un documento PDF de factura electrónica basado en el ID de documento proporcionado.
-         *
-         * Entradas:
-         * - pIdDocumento: ID del documento de factura.
-         *
-         * Salidas:
-         * - PdfDocument: Devuelve un documento PDF de factura electrónica.
-         *
-         * Parámetros:
-         * - pIdDocumento: int, ID del documento de factura.
-         *
-         */
+		/// <summary>
+		/// Genera un documento PDF de factura electrónica basado en el ID de documento proporcionado.
+		/// </summary>
+		/// <param name="pIdDocumento">ID del documento de factura.</param>
+		/// <returns>Devuelve un documento PDF de factura electrónica.</returns>
 		private PdfDocument generarFactura(int pIdDocumento) {
 			try {
 				DataTable dt = new DataTable();
@@ -168,7 +124,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 				VerifyID vId = new VerifyID();
 				string clientInfo = vId.verifyID(idCliente);
 				string[] cI = clientInfo.Split(',');
-
 
 
 				string title = "Factura Electrónica";
@@ -291,22 +246,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return null;
 		}
 
-		/*
-		 * Método: getMyLocation
-		 *
-		 * Descripción:
-		 * Obtiene la ubicación del archivo de la clase Facturacion.cs.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * - string: Devuelve la ruta completa del archivo Facturacion.cs.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Obtiene la ubicación del archivo de la clase Facturacion.cs.
+		/// </summary>
+		/// <returns>Devuelve la ruta completa del archivo Facturacion.cs.</returns>
 		public string getMyLocation() {
 			string codeBase = Assembly.GetExecutingAssembly().CodeBase;
 			UriBuilder uri = new UriBuilder(codeBase);

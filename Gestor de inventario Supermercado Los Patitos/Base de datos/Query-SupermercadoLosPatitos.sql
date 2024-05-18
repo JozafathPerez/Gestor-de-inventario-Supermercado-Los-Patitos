@@ -85,9 +85,6 @@ CREATE TABLE Lineas
 ALTER TABLE Lineas
 ADD CONSTRAINT PK_Lineas PRIMARY KEY (codigoProd,idDocumento);
 
-ALTER TABLE Documentos
-ADD idNotaCredito INT NULL;
-
 -- Inserts de información
 
 INSERT INTO Roles
@@ -101,51 +98,6 @@ VALUES	(1, 0),
 		(2, 0),
 		(3,	0);
 
-
--- SP de usos
-GO
-
-CREATE PROCEDURE VerificarCredenciales
-    @correo VARCHAR(150),
-    @contrasenia VARCHAR(250)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @existe INT;
-
-    -- Verificar si las credenciales existen en la tabla Personal
-    SELECT @existe = COUNT(*) 
-    FROM Personal 
-    WHERE email = @correo AND contrasenia = @contrasenia;
-
-    -- Retornar true si existe, false si no existe
-    IF @existe > 0
-        SELECT 'true' AS Existe;
-    ELSE
-        SELECT 'false' AS Existe;
-END
-
-GO
-
-CREATE PROCEDURE EliminarPersonal
-    @idTrabajador INT -- Cambiarlo luego por cedula?
-AS
-BEGIN
-    DELETE FROM Personal WHERE idTrabajador = @idTrabajador;
-END
-
-
-
-
-
-
-
-
-
-
-
--- ELIMINAR ESTOS INSERTS AL FINAL
 INSERT INTO Personal 
 VALUES 
     (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'M', 1, 1),
@@ -172,11 +124,6 @@ INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, p
 (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
 
 
---#####################################################################
-
-
--- Crear las 20 facturas
-
 INSERT INTO Documentos (idDocumento, tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
 VALUES
     (1, 1, '2024-05-01', 1, 703100722, 1, 500, 4500),
@@ -199,9 +146,6 @@ VALUES
     (18, 1, '2024-04-18', 14, 703100722, 2, 750, 6750),
     (19, 1, '2024-04-19', 15, 4, 1, 720, 6480),
     (20, 1, '2024-04-20', 16, 5, 2, 770, 6930);
-
-
--- Crear las líneas de productos
 
 INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento)
 VALUES
@@ -246,8 +190,41 @@ VALUES
     (6, 6, 30.00, 5, 20),
     (5, 7, 17.50, 2, 20);
 
+-- SP de Personal
+GO
 
-SELECT * FROM Productos
+CREATE PROCEDURE VerificarCredenciales
+    @correo VARCHAR(150),
+    @contrasenia VARCHAR(250)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @existe INT;
+
+    -- Verificar si las credenciales existen en la tabla Personal
+    SELECT @existe = COUNT(*) 
+    FROM Personal 
+    WHERE email = @correo AND contrasenia = @contrasenia;
+
+    -- Retornar true si existe, false si no existe
+    IF @existe > 0
+        SELECT 'true' AS Existe;
+    ELSE
+        SELECT 'false' AS Existe;
+END
+
+GO
+
+CREATE PROCEDURE EliminarPersonal
+    @idTrabajador INT -- Cambiarlo luego por cedula?
+AS
+BEGIN
+    DELETE FROM Personal WHERE idTrabajador = @idTrabajador;
+END
+
+
+--SP de Reporteria
 
 GO
 
@@ -379,6 +356,8 @@ END;
 
 GO
 
+--SP de Busqueda
+
 CREATE PROC Buscar_Documento 
 (@idDocumento INT)
 AS
@@ -445,18 +424,6 @@ DROP PROC Facturas_Por_Rango_Fechas
 DROP PROC Top_5_Clientes
 DROP PROC Prod_Vendido_30_Dias
 DROP PROC Top_Producto
-
-
-
-EXEC Top_Producto
-EXEC Prod_Vendidos_30_Dias
-EXEC Top_5_Clientes
-EXEC Facturas_Por_Rango_Fechas '2024-04-01', '2024-04-20';
-
-EXEC Cajero_Del_Mes
-EXEC Top_Categorias_Vendidas
-EXEC Cajeros_Mas_Ventas
-EXEC Fechas_Mas_Compras
 
 --SP para Documentos
 

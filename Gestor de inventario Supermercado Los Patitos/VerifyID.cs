@@ -10,34 +10,19 @@ using OpenQA.Selenium.Chrome;
 using System.Threading;
 
 
-/*
- * Clase: VerifyID
- *
- * Descripción:
- * Clase que proporciona métodos para verificar la identificación (ID) de un usuario en un sitio web específico.
- *
- * Métodos:
- * - verifyID(string pId)
- *
- */
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
+
+
+	/// <summary>
+	/// Clase que proporciona métodos para verificar la identificación (ID) de un usuario en un sitio web específico.
+	/// </summary>
 	internal class VerifyID {
 
-		/*
-		 * Método verifyID:
-		 *
-		 *	Descripción:
-		 *	Método que verifica una identificación (ID) en un sitio web específico y devuelve la cédula y el nombre asociados.
-		 *
-		 *	Entradas:
-		 *	- string pId: El ID a verificar.
-		 *
-		 *	Salidas:
-		 *	- string: Una cadena que contiene la cédula y el nombre separados por coma (cedula,nombre).
-		 *
-		 *	Parámetros:
-		 *	- pId: El ID a verificar.
-		 */
+		/// <summary>
+		/// Método que verifica una identificación (ID) en un sitio web específico y devuelve la cédula y el nombre asociados.
+		/// </summary>
+		/// <param name="pId">El ID a verificar.</param>
+		/// <returns>Una cadena que contiene la cédula y el nombre separados por coma (cedula,nombre).</returns>
 		public string verifyID(string pId) {
 
 

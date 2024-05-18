@@ -11,14 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-/*
- * Clase: PanelReporteria
- *
- * Descripción:
- * Representa el panel de reportes y estadísticas del sistema de gestión de inventario para el supermercado "Los Patitos".
- * Este formulario muestra varios gráficos y tablas con información relevante sobre las ventas, productos, clientes y empleados.
- *
- */
 
 namespace Gestor_de_inventario_Supermercado_Los_Patitos
 {
@@ -26,28 +18,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
     {
 
 		Conexion c;
-		VerifyID vID;
 
-		/*
-         * Método Controlador:
-         *
-         *	Descripción:
-         *	Constructor de la clase PanelReporteria que inicializa una instancia 
-         *	de PanelReporteria con las vistas y métodos de carga de datos especificados.
-         *
-         *	Entradas:
-         *	Ninguna.
-         *
-         *	Salidas:
-         *	Ninguna.
-         *
-         *	Parámetros:
-         *	Ninguno.
-         *
-         */
+		/// <summary>
+		/// Constructor de la clase PanelReporteria que inicializa una instancia de PanelReporteria
+		/// con las vistas y métodos de carga de datos especificados.
+		/// </summary>
 		public PanelReporteria()
         {	
-			vID = new VerifyID();
 			c = new Conexion();
 			InitializeComponent();
 			loadCashiersMostSales();
@@ -59,22 +36,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			loadCashierOfTheMonth();
 		}
 
-		/*
-		 * Método: loadTopProduct
-		 *
-		 * Descripción:
-		 * Carga los datos de los productos más vendidos en el DataGridView tbTopProd.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Carga los datos del producto más vendido en el DataGridView tbTopProd.
+		/// </summary>
+
 		private void loadTopProduct() {
 			try {
 				c.abrir();
@@ -92,22 +57,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			}
 		}
 
-		/*
-		 * Método: loadTop5Clients
-		 *
-		 * Descripción:
-		 * Carga los datos de los 5 clientes principales en el DataGridView tbTopClientes.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Carga los datos de los 5 clientes principales en el DataGridView tbTopClientes.
+		/// </summary>
 		private void loadTop5Clients() {
 			try {
 				c.abrir();
@@ -146,22 +98,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			}
 		}
 
-		/*
-		 * Método: loadTop5Products
-		 *
-		 * Descripción:
-		 * Carga los datos de los productos más vendidos en el DataGridView tbProdVendidos.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Carga los datos de los productos más vendidos en el DataGridView tbProdVendidos.
+		/// </summary>
 		private void loadTop5Products() {
 			try {
 				c.abrir();
@@ -179,22 +118,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			}
 		}
 
-		/*
-		 * Método: loadCashierOfTheMonth
-		 *
-		 * Descripción:
-		 * Carga los datos del cajero del mes en el DataGridView tbTopCashier.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Carga los datos del cajero del mes en el DataGridView tbTopCashier.
+		/// </summary>
 		private void loadCashierOfTheMonth() {
 			try {
 				c.abrir();
@@ -212,22 +138,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			}
 		}
 
-		/*
-		 * Método: loadTopSellingCategories
-		 *
-		 * Descripción:
-		 * Carga los datos de las categorías más vendidas en el gráfico chCategorias.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Carga los datos de las categorías más vendidas en el gráfico chCategorias.
+		/// </summary>
 		private void loadTopSellingCategories() {
 			try {
 				DataTable dt = spExecuter("Top_Categorias_Vendidas");
@@ -251,22 +164,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 		}
 
-		/*
-		 * Método: loadCashiersMostSales
-		 *
-		 * Descripción:
-		 * Carga los datos de las ventas por cajero en el gráfico chCajeros.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+		/// <summary>
+		/// Carga los datos de las ventas por cajero en el gráfico chCajeros.
+		/// </summary>
 		private void loadCashiersMostSales() {
 			try {
 				DataTable dt = spExecuter("Cajeros_Mas_Ventas");
@@ -291,22 +191,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 		}
 
 
-		/*
-		 * Método: loadDaysMostPurchases
-		 *
-		 * Descripción:
-		 * Carga los datos de los días con más compras en el gráfico chFechas.
-		 *
-		 * Entradas:
-		 * Ninguna.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * Ninguno.
-		 *
-		 */
+
+		/// <summary>
+		/// Carga los datos de los días con más compras en el gráfico chFechas.
+		/// </summary>
 		private void loadDaysMostPurchases() {
 			try {
 				DataTable dt = spExecuter("Fechas_Mas_Compras");
@@ -330,22 +218,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 		}
 
-		/*
-		 * Método: spExecuter
-		 *
-		 * Descripción:
-		 * Ejecuta un procedimiento almacenado y devuelve el resultado en forma de DataTable.
-		 *
-		 * Entradas:
-		 * - string pSp: Nombre del procedimiento almacenado a ejecutar.
-		 *
-		 * Salidas:
-		 * - DataTable: Resultado del procedimiento almacenado.
-		 *
-		 * Parámetros:
-		 * - pSp: Nombre del procedimiento almacenado a ejecutar.
-		 *
-		 */
+
+
+		/// <summary>
+		/// Ejecuta un procedimiento almacenado y devuelve el resultado en forma de DataTable.
+		/// </summary>
+		/// <param name="pSp">Nombre del procedimiento almacenado a ejecutar.</param>
+		/// <returns>DataTable con el resultado del procedimiento almacenado.</returns>
 		public DataTable spExecuter(string pSp) {
 			c.abrir();
 			DataTable dt = new DataTable();
@@ -356,24 +235,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			return dt;
 		}
 
-		/*
-		 * Método: loadInvoicesByDateRange
-		 *
-		 * Descripción:
-		 * Carga las facturas dentro de un rango de fechas especificado en el DataGridView tbFacturasRF.
-		 *
-		 * Entradas:
-		 * - object sender: Objeto que envía el evento (en este caso, un control de fecha).
-		 * - EventArgs e: Argumentos del evento.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * - sender: Objeto que envía el evento (en este caso, un control de fecha).
-		 * - e: Argumentos del evento.
-		 *
-		 */
+
+		/// <summary>
+		/// Carga las facturas dentro de un rango de fechas especificado en el DataGridView tbFacturasRF.
+		/// </summary>
+		/// <param name="sender">Objeto que envía el evento (en este caso, un control de fecha).</param>
+		/// <param name="e">Argumentos del evento.</param>
 		private void loadInvoicesByDateRange(object sender, EventArgs e) {
 			if (dtpFechaInicio.Value <= dtpFechaFin.Value) {
 				try {
@@ -395,24 +262,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 			}
 		}
 
-		/*
-		 * Método: loadInvoicesByDateRange2
-		 *
-		 * Descripción:
-		 * Carga las facturas dentro de un rango de fechas especificado en el DataGridView tbFacturasRF.
-		 *
-		 * Entradas:
-		 * - object sender: Objeto que envía el evento (en este caso, un control de fecha).
-		 * - EventArgs e: Argumentos del evento.
-		 *
-		 * Salidas:
-		 * Ninguna.
-		 *
-		 * Parámetros:
-		 * - sender: Objeto que envía el evento (en este caso, un control de fecha).
-		 * - e: Argumentos del evento.
-		 *
-		 */
+
+		/// <summary>
+		/// Carga las facturas dentro de un rango de fechas especificado en el DataGridView tbFacturasRF.
+		/// </summary>
+		/// <param name="sender">Objeto que envía el evento (en este caso, un control de fecha).</param>
+		/// <param name="e">Argumentos del evento.</param>
 		private void loadInvoicesByDateRange2(object sender, EventArgs e) {
 			if (dtpFechaInicio.Value <= dtpFechaFin.Value) {
 				try {
