@@ -10,44 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/*
- * Clase: Email
- *
- * Descripción:
- * Clase que proporciona métodos para enviar correos electrónicos con archivos adjuntos de facturas electrónicas en formato PDF.
- *
- * Métodos:
- * - sendEmail(string pDestinatario, PdfDocument pFactura)
- *
- * Atributos estáticos:
- * - EMAIL_ORIGEN: Dirección de correo electrónico del remitente.
- * - PASSWORD: Contraseña del correo electrónico del remitente.
- *
- */
+/// <summary>
+/// Clase que proporciona métodos para enviar correos electrónicos con archivos adjuntos de facturas electrónicas en formato PDF.
+/// </summary>
 namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 	internal class Email {
 
 		private static readonly string EMAIL_ORIGEN	= "supermercado.los.patitos.cr@gmail.com";
 		private static readonly string PASSWORD = "sgro yjyn tpvk gjaq";
 
-		/*
-         * Método: sendEmail
-         *
-         * Descripción:
-         * Método que envía un correo electrónico con una factura electrónica adjunta en formato PDF.
-         *
-         * Entradas:
-         * - string pDestinatario: La dirección de correo electrónico del destinatario.
-         * - PdfDocument pFactura: El documento PDF de la factura electrónica a adjuntar.
-         *
-         * Salidas:
-         * Ninguna.
-         *
-         * Parámetros:
-         * - pDestinatario: Dirección de correo electrónico del destinatario.
-         * - pFactura: Documento PDF de la factura electrónica a adjuntar.
-         *
-         */
+		/// <summary>
+		/// Envía un correo electrónico con una factura electrónica adjunta en formato PDF.
+		/// </summary>
+		/// <param name="pDestinatario">Dirección de correo electrónico del destinatario.</param>
+		/// <param name="pFactura">Documento PDF de la factura a adjuntar.</param>
 		public void sendEmail(string pDestinatario, PdfDocument pFactura) {
 			string destinatario = pDestinatario;
 			MailMessage mail = new MailMessage();
