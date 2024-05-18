@@ -223,6 +223,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                                 string email = res.ToString();
                                 if(this.txtEmail.Text != null && this.txtEmail.Text != "") {
 									enviarDocumento(this.txtEmail.Text, idDocumento);
+                                    this.txtEmail.Text = "";
 								}
                                 else {
 									MessageBox.Show("Ingrese un correo electrónico. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

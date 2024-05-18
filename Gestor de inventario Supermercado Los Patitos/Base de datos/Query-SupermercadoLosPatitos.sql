@@ -392,7 +392,7 @@ SELECT
 	nombre,
 	categoria,
 	tipoMedida,
-	cantidadInv
+	cantidadInv,
 	precioUnit
 FROM Productos
 WHERE codigoProd = @codigoProd;
@@ -614,3 +614,22 @@ WHERE idTrabajador = @idTrabajador;
 END;
 
 GO
+
+DROP PROC Buscar_Producto;
+
+GO
+
+CREATE PROC Buscar_Producto 
+(@codigoProd INT)
+AS
+BEGIN
+SELECT
+	codigoProd,
+	nombre,
+	categoria,
+	tipoMedida,
+	cantidadInv,
+	precioUnit
+FROM Productos
+WHERE codigoProd = @codigoProd;
+END;
