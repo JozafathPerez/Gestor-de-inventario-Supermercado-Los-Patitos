@@ -417,14 +417,6 @@ FROM Personal
 WHERE idTrabajador = @idTrabajador;
 END;
 
-DROP PROC Fechas_Mas_Compras
-DROP PROC Cajeros_Mas_Ventas
-DROP PROC Top_Categorias_Vendidas
-DROP PROC Facturas_Por_Rango_Fechas
-DROP PROC Top_5_Clientes
-DROP PROC Prod_Vendido_30_Dias
-DROP PROC Top_Producto
-
 --SP para Documentos
 
 GO
