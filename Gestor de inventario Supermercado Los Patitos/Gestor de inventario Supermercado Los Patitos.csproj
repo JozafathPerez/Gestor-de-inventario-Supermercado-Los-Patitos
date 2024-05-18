@@ -186,6 +186,11 @@
   <ItemGroup>
     <Content Include="Base de datos\Query-SupermercadoLosPatitos.sql" />
     <Content Include="Resources\ICON.ico" />
+    <None Include="Resources\Icono de menu.png" />
+    <None Include="Resources\Icono de Reportería.png" />
+    <None Include="Resources\Icono de ventas.png" />
+    <None Include="Resources\Icono de inventario.png" />
+    <None Include="Resources\Icono de Empleados.png" />
     <Content Include="Resources\LOGO_Transparente.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

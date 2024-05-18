@@ -254,5 +254,25 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
         {
             toolTip1.SetToolTip(this.menuButton, "Menú");
         }
+
+        private void BT_reporteria_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_reporteria, "Reportería");
+        }
+
+        private void BT_ventas_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_ventas, "Ventas");
+        }
+
+        private void BT_inventario_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_inventario, "Inventario");
+        }
+
+        private void BT_empleados_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.BT_empleados, "Empleados");
+        }
     }
 }

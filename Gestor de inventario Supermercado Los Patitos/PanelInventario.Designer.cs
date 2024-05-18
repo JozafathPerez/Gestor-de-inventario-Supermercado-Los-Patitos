@@ -122,7 +122,7 @@
             this.BT_vistaAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.BT_vistaAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_vistaAgregar.ForeColor = System.Drawing.Color.White;
-            this.BT_vistaAgregar.Location = new System.Drawing.Point(669, 581);
+            this.BT_vistaAgregar.Location = new System.Drawing.Point(669, 578);
             this.BT_vistaAgregar.Name = "BT_vistaAgregar";
             this.BT_vistaAgregar.Size = new System.Drawing.Size(173, 41);
             this.BT_vistaAgregar.TabIndex = 7;
@@ -135,7 +135,7 @@
             this.BT_vistaAjuste.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.BT_vistaAjuste.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_vistaAjuste.ForeColor = System.Drawing.Color.White;
-            this.BT_vistaAjuste.Location = new System.Drawing.Point(891, 581);
+            this.BT_vistaAjuste.Location = new System.Drawing.Point(891, 578);
             this.BT_vistaAjuste.Name = "BT_vistaAjuste";
             this.BT_vistaAjuste.Size = new System.Drawing.Size(166, 41);
             this.BT_vistaAjuste.TabIndex = 8;
@@ -145,12 +145,15 @@
             // 
             // buttonHistrial
             // 
+            this.buttonHistrial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
+            this.buttonHistrial.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHistrial.ForeColor = System.Drawing.Color.White;
             this.buttonHistrial.Location = new System.Drawing.Point(943, 35);
             this.buttonHistrial.Name = "buttonHistrial";
-            this.buttonHistrial.Size = new System.Drawing.Size(114, 23);
+            this.buttonHistrial.Size = new System.Drawing.Size(114, 33);
             this.buttonHistrial.TabIndex = 9;
             this.buttonHistrial.Text = "Historial de ajustes";
-            this.buttonHistrial.UseVisualStyleBackColor = true;
+            this.buttonHistrial.UseVisualStyleBackColor = false;
             this.buttonHistrial.Click += new System.EventHandler(this.buttonHistrial_Click);
             // 
             // PanelInventario
