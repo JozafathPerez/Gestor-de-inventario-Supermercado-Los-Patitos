@@ -30,6 +30,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			CargarDocumentos();
             ActualizarTotales();
         }
+        /// <summary>
+        /// Funcion encargada de cargar los productos de la base de datos
+        /// </summary>
 		private void CargarInventario() {
 			try {
 				c.abrir();
@@ -43,6 +46,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 				MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
+        /// <summary>
+        /// Funcion encargada de cargar los documentos de la base de datos
+        /// </summary>
 		private void CargarDocumentos() {
 			try {
 				c.abrir();
@@ -232,11 +238,19 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
             ActualizarTotales();
         }
 
+        /// <summary>
+        /// Funcion para enviar un correo al crear un documento
+        /// </summary>
+        /// <param name="correo"></param>
+        /// <param name="idDocumento"></param>
         private void enviarDocumento(string correo, int idDocumento)
         {
+            new Facturacion().enviarFactura(correo, idDocumento);
             Console.WriteLine("El correo del trabajador que hizo el documento {0} es: {1}", idDocumento, correo);
         }
-
+        /// <summary>
+        /// Se encarga de limpiar los espacios y refrescar todos los datos
+        /// </summary>
         private void LimpiarCarrito() {
             DGVCarrito.Rows.Clear();
             numCantidad.Value = 1;
@@ -246,6 +260,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
             CargarInventario();
             CargarDocumentos();
         }
+        /// <summary>
+        /// Calcula y muestra los totales esperados de una compra
+        /// </summary>
 		private void ActualizarTotales() {
 			decimal totalImpuestos = 0;
 			decimal subtotal = 0;
@@ -263,9 +280,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
 		// CÓDIGO PARA VERIFICACIÓN DE CÉDULA DE CLIENTE
 
-		private void textIDCliente_Leave(object sender, EventArgs e) {
-		}
-
 		private string getClientID(string pID) {
 			string clientInfo = null;
 			if (this.textIDCliente.Text != "" || this.textIDCliente.Text != null) {
@@ -277,6 +291,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			return clientInfo;
 		}
 
+        /// <summary>
+        /// Verifica que una cadena sea numero valido
+        /// </summary>
+        /// <param name="cadena"></param>
+        /// <returns></returns>
 		private bool EsNumeroValido(string cadena) {
 			foreach (char c in cadena) {
 				if (!char.IsDigit(c))
@@ -412,24 +431,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
                     LimpiarCarrito();
                     ActualizarTotales();
-
-                    DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
-                    if (resultado == DialogResult.Yes)
-                    {
-                        string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
-                        SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
-                        getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
-                        object res = getemail.ExecuteScalar();
-                        if (res != null)
-                        {
-                            string email = res.ToString();
-                            enviarDocumento(email, idDocumentoNotaCredito);
-                        }
-                        else
-                        {
-                            throw new Exception("No se encontró ningún trabajador");
-                        }
-                    }
 
                 }
                 catch (Exception ex)
