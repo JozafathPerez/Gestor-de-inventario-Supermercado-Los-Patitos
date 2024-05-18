@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gestor_de_inventario__Super_Los_Patitos_;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
 
@@ -154,6 +155,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 				try {
 					c.abrir();
 					SqlCommand cmd = new SqlCommand("Get_Nombre_Trabajador", c.ConectarBD);
+					cmd.Parameters.AddWithValue("@idTrabajador", idTrabajador);
 					cmd.CommandType = CommandType.StoredProcedure;
 					workerName = cmd.ExecuteScalar()?.ToString();
 
