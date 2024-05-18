@@ -215,7 +215,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                         {
                             string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
                             SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
-                            getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
+                            getemail.Parameters.AddWithValue("@idTrabajador", idTrabajador);
                             object res = getemail.ExecuteScalar();
                             if (res != null)
                             {

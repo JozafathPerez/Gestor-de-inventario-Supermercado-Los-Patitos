@@ -400,6 +400,7 @@ END;
 
 GO
 
+
 CREATE PROC Get_Nombre_Trabajador 
 (@idTrabajador INT)
 AS
@@ -600,3 +601,5 @@ BEGIN
 END;
 
 GO
+
+
