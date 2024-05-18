@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 			this.txtName_Founded.Visible = false;
 			this.txtID_Founded.Visible = false;
 			this.lbClientID.Visible = false;
+            this.lbClientEmail.Visible = false;
+            this.txtEmail.Visible = false;
             this.idTrabajador = idTrabajador;
             c = new Conexion();
 			CargarInventario();
@@ -218,8 +221,14 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                             if (res != null)
                             {
                                 string email = res.ToString();
-                                enviarDocumento(email, idDocumento);
-                            }
+                                if(this.txtEmail.Text != null && this.txtEmail.Text != "") {
+									enviarDocumento(this.txtEmail.Text, idDocumento);
+								}
+                                else {
+									MessageBox.Show("Ingrese un correo electrónico. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+								}
+							}
                             else
                             {
                                 throw new Exception("No se encontró ningún trabajador");
@@ -485,6 +494,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                 this.lbName.Visible = true;
                 this.txtName_Founded.Visible = true;
                 this.txtID_Founded.Visible = true;
+
+                //////////////////////////////
+                this.txtEmail.Visible = true;
+                this.lbClientEmail.Visible = true;
+                /////////////////////////////
+
                 this.textIDCliente.ForeColor = System.Drawing.Color.Black;
             }
             else
@@ -533,6 +548,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
         }
 
 
-        ////////////////////////////////////////////////////////////////////////////
-    }
+		////////////////////////////////////////////////////////////////////////////
+	}
+
 }
