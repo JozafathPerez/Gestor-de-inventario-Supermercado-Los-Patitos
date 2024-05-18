@@ -268,6 +268,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
             this.txtName_Founded.Visible = false;
             this.txtID_Founded.Visible = false;
             this.lbClientID.Visible = false;
+            this.txtEmail.Visible = false;
+            this.lbClientEmail.Visible = false;
             this.lbClientID.Text = "";
             this.lbName.Text = "";
             this.txtID_Founded.Text = "";
@@ -509,6 +511,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                 this.txtName_Founded.Visible = false;
                 this.txtID_Founded.Visible = false;
                 this.lbClientID.Visible = false;
+                this.txtEmail.Visible = false;
+                this.lbClientEmail.Visible = false;
 
                 this.lbClientID.Text = "";
                 this.lbName.Text = "";
