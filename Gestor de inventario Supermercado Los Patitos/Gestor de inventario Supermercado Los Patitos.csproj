@@ -71,6 +71,12 @@
     <Compile Include="DialogoAgregarProducto.Designer.cs">
       <DependentUpon>DialogoAgregarProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogoHistorialProductosAjustados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogoHistorialProductosAjustados.Designer.cs">
+      <DependentUpon>DialogoHistorialProductosAjustados.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogoRealizarAjuste.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogoAgregarProducto.resx">
       <DependentUpon>DialogoAgregarProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogoHistorialProductosAjustados.resx">
+      <DependentUpon>DialogoHistorialProductosAjustados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogoRealizarAjuste.resx">
       <DependentUpon>DialogoRealizarAjuste.cs</DependentUpon>

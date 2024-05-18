@@ -176,6 +176,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+
+
+
         private void DataViewProductos_DoubleClick(object sender, EventArgs e)
         {
             // Verificar si se ha seleccionado una fila
@@ -208,77 +211,107 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
 
             int inserciones = 0;
+
+            // Obtener el ID del ajuste creado
+            int idAjuste = InsertarRegistroBitacora();
+
+            if (idAjuste == -1)
+            {
+                MessageBox.Show("Error al insertar el registro en la Bitácora.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Iterar sobre cada fila en el dataGridSeleccionados
             foreach (DataGridViewRow fila in PanelAjuste.dataGridSeleccionados.Rows)
             {
                 // Obtener los valores de la fila
                 int codigoProducto = Convert.ToInt32(fila.Cells["Codigo"].Value);
-                int cantidadAjuste = Convert.ToInt32(fila.Cells["Cantidad"].Value); 
+                int cantidadAjuste = Convert.ToInt32(fila.Cells["Cantidad"].Value);
                 decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
 
                 ActualizarCantidadProducto(codigoProducto, cantidadAjuste, precio);
-                
+                InsertarProductoAjustado(idAjuste, codigoProducto, cantidadAjuste);
+
                 inserciones++;
             }
 
             if (inserciones != 0)
             {
                 MessageBox.Show("Ajuste finalizado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 PanelAjuste.dataGridSeleccionados.Rows.Clear();
                 actualizarDataView();
-                InsertarRegistroBitacora();
             }
-            else 
+            else
             {
                 MessageBox.Show("Debe de realizar al menos un cambio en inventario.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void InsertarRegistroBitacora()
+        private int InsertarRegistroBitacora()
         {
             try
             {
-         
                 DateTime fechaHora = DateTime.Now;
-                // Obtener el nombre del trabajador                
-
                 string motivo = PanelAjuste.textBoxRazon.Text;
 
                 // Query para insertar el registro en la tabla Bitacora
-                string query = "INSERT INTO Bitacora (idTrabajador, fechaHora, motivo) " +
+                string query = "INSERT INTO BitacoraAjuste (idTrabajador, fechaHora, motivo) " +
+                               "OUTPUT INSERTED.IdAjuste " +
                                "VALUES (@idTrabajador, @fechaHora, @motivo)";
 
-                // Crear un SqlCommand para ejecutar la inserción
                 using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
                 {
-                    // Agregar los parámetros al comando
                     command.Parameters.AddWithValue("@idTrabajador", idTrabajador);
                     command.Parameters.AddWithValue("@fechaHora", fechaHora);
                     command.Parameters.AddWithValue("@motivo", motivo);
 
-                    // Abrir la conexión y ejecutar la consulta
+                    conexion.abrir();
+                    int idAjuste = (int)command.ExecuteScalar(); // Obtener el IdAjuste generado
+                    return idAjuste;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar el registro en la Bitácora: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+            finally
+            {
+                conexion.cerrar();
+            }
+        }
+
+        private void InsertarProductoAjustado(int idAjuste, int codigoProducto, int cantidad)
+        {
+            try
+            {
+                // Query para insertar el registro en la tabla ProductosAjustados
+                string query = "INSERT INTO ProductosAjustados (IdAjuste, codigoProd, cantidad) " +
+                               "VALUES (@idAjuste, @codigoProducto, @cantidad)";
+
+                using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
+                {
+                    command.Parameters.AddWithValue("@idAjuste", idAjuste);
+                    command.Parameters.AddWithValue("@codigoProducto", codigoProducto);
+                    command.Parameters.AddWithValue("@cantidad", cantidad);
+
                     conexion.abrir();
                     command.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar el registro en la Bitácora: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al insertar el registro en ProductosAjustados: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                // Cerrar la conexión
                 conexion.cerrar();
             }
         }
 
-
-
-            // Método para actualizar la cantidad del producto en la base de datos
-            private void ActualizarCantidadProducto(int codigoProducto, int nuevaCantidad, decimal precio)
+        // Método para actualizar la cantidad del producto en la base de datos
+        private void ActualizarCantidadProducto(int codigoProducto, int nuevaCantidad, decimal precio)
         {
-
             try
             {
                 string query = "UPDATE Productos SET cantidadInv = (cantidadInv + @nuevaCantidad), precioUnit = @precio WHERE codigoProd = @codigoProducto";
@@ -291,11 +324,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                     conexion.abrir();
                     int rowsAffected = command.ExecuteNonQuery();
 
-                    if (rowsAffected > 0)
-                    {
-                        
-                    }
-                    else
+                    if (rowsAffected <= 0)
                     {
                         MessageBox.Show("Error al actualizar la cantidad del producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -310,6 +339,8 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 conexion.cerrar();
             }
         }
+
+
 
         private void buttonEliminarProducto_Click(object sender, EventArgs e)
         {
