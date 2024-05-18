@@ -25,8 +25,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             InitializeComponent();
             conexion = new Conexion();
             this.idTrabajador = idTrabajador;
-
-
         }
 
         /// <summary>
@@ -42,70 +40,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             PanelAjuste = new DialogoRealizarAjuste();
             CargarTiposMedida();
             CargarCategorias();
-
-            // Habilitar autocompletado y configurar el modo de sugerencia
-            comboBoxBuscar.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBoxBuscar.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            comboBoxBuscar.DropDownStyle = ComboBoxStyle.DropDown;
-            comboBoxBuscar.AutoCompleteCustomSource = ObtenerSugerenciasDesdeBaseDatos(""); // Inicializar con sugerencias vacías
-
-        }
-
-        private void ComboBoxBuscar_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-
-        private AutoCompleteStringCollection ObtenerSugerenciasDesdeBaseDatos(string filtro)
-        {
-            AutoCompleteStringCollection suggestions = new AutoCompleteStringCollection();
-
-            try
-            {
-                conexion.abrir();
-
-                string[] filtros = filtro.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                StringBuilder queryBuilder = new StringBuilder("SELECT nombre FROM Productos WHERE 1=1");
-
-                for (int i = 0; i < filtros.Length; i++)
-                {
-                    string paramName = "@filtro" + i;
-                    queryBuilder.Append($" AND nombre LIKE {paramName}");
-                    filtros[i] = "%" + filtros[i] + "%";
-                }
-
-                string query = queryBuilder.ToString();
-
-                using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
-                {
-                    for (int i = 0; i < filtros.Length; i++)
-                    {
-                        string paramName = "@filtro" + i;
-                        command.Parameters.AddWithValue(paramName, filtros[i]);
-                    }
-
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        string nombreProducto = reader["nombre"].ToString();
-                        suggestions.Add(nombreProducto);
-                    }
-
-                    reader.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al obtener sugerencias desde la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexion.cerrar();
-            }
-
-            return suggestions;
         }
 
         /// <summary>
@@ -252,11 +186,20 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 MessageBox.Show("Ajuste finalizado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 PanelAjuste.dataGridSeleccionados.Rows.Clear();
                 actualizarDataView();
+                LimpiarEntradas();
             }
             else
             {
                 MessageBox.Show("Debe de realizar al menos un cambio en inventario.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void LimpiarEntradas()
+        {
+            PanelAjuste.labelProducto.Text = "";
+            PanelAjuste.labelID.Text = "";
+            PanelAjuste.numericPrecio.Value = 0;
+            PanelAjuste.numericCantidad.Value = 0;
+            PanelAjuste.textBoxRazon.Text = "";
         }
 
         /// <summary>
@@ -367,57 +310,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
-        /// <summary>
-        /// Maneja el evento Click del botón buttonEliminarProducto.
-        /// Se ejecuta al hacer clic en el botón "Eliminar Producto" y realiza acciones relacionadas.
-        /// </summary>
-        private void buttonEliminarProducto_Click(object sender, EventArgs e)
-        {
-            // Verificar si se ha seleccionado una fila en el DataGridView
-            if (DataViewProductos.SelectedRows.Count > 0)
-            {
-                // Obtener el valor del código del producto de la fila seleccionada
-                string codigoProducto = DataViewProductos.SelectedRows[0].Cells["Código del producto"].Value.ToString();
-
-                // Confirmar la eliminación con un cuadro de diálogo
-                DialogResult confirmacion = MessageBox.Show("¿Está seguro de que desea eliminar este producto?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (confirmacion == DialogResult.Yes)
-                {
-                    try
-                    {
-                        // Construir la consulta SQL para eliminar el producto
-                        string query = "DELETE FROM Productos WHERE codigoProd = @codigo";
-                        using (SqlCommand command = new SqlCommand(query, conexion.ConectarBD))
-                        {
-                            command.Parameters.AddWithValue("@codigo", codigoProducto);
-                            conexion.abrir();
-                            int filasEliminadas = command.ExecuteNonQuery();
-                            conexion.cerrar();
-
-                            // Verificar si se eliminó correctamente
-                            if (filasEliminadas > 0)
-                            {
-                                MessageBox.Show("Producto eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                actualizarDataView();  // Actualizar el DataGridView
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se pudo eliminar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al eliminar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione una fila para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         /// <summary>
         /// Método para verificar si un código de producto ya existe en la base de datos.

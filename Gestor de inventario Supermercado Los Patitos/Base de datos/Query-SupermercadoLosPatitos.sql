@@ -58,7 +58,7 @@ CREATE TABLE Consecutivos
 
 -- 
 CREATE TABLE Documentos
-	(idDocumento	INT		NOT NULL	PRIMARY KEY,
+	(idDocumento	INT		PRIMARY KEY	IDENTITY(0,1),
 	tipo			INT		NOT NULL	FOREIGN KEY REFERENCES Consecutivos(tipo),
 	fechaCreacion	DATE	NOT NULL,
 	consecutivo		INT		NOT NULL,
@@ -94,20 +94,17 @@ VALUES	(1, 0),
 
 INSERT INTO Personal 
 VALUES 
-    (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'M', 1, 1),
-    (2, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', 'jozperez@gmail.com', '1234', 123456789, 'M', 1, 1),
-    (3, '1995-08-20', 'María', 'López', 'García', 'Avenida Central 456', 'maria.lopez@email.com', '1234', 987654321, 'F', 2, 1),
-    (4, '1988-12-10', 'Pedro', 'Martínez', 'Hernández', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'M', 3, 1),
-    (5, '1987-04-25', 'Ana', 'Gómez', 'Fernández', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'F', 4, 1);
-
-INSERT INTO Personal 
-VALUES 
-(6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
+    (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1),
+    (2, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', 'jozperez@gmail.com', '1234', 123456789, 'Masculino', 1, 1),
+    (3, '1995-08-20', 'María', 'López', 'García', 'Avenida Central 456', 'maria.lopez@email.com', '1234', 987654321, 'Femenino', 2, 1),
+    (4, '1988-12-10', 'Pedro', 'Martínez', 'Hernández', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'Masculino', 3, 1),
+    (5, '1987-04-25', 'Ana', 'Gómez', 'Fernández', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'Femenino', 4, 1),
+	(6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
 
 INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
 VALUES
     (1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
-    (2, 'Pan Integral', 'Panadería', 'Unidades', 100, 0.80),
+    (2, 'Pan Integral', 'Panadería', 'Unidad', 100, 0.80),
     (3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
     (4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
     (5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
@@ -121,28 +118,28 @@ VALUES
 
 
 
-INSERT INTO Documentos (idDocumento, tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
+INSERT INTO Documentos (tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
 VALUES
-    (1, 1, '2024-05-01', 1, 703100722, 1, 500, 4500),
-    (2, 2, '2024-05-02', 1, 703100722, 2, 600, 5400),
-    (3, 1, '2024-05-03', 2, 3, 1, 550, 4950),
-    (4, 2, '2024-05-04', 2, 703100722, 2, 620, 5580),
-    (5, 1, '2024-05-05', 3, 5, 1, 580, 5220),
-    (6, 1, '2024-05-06', 4, 1, 2, 630, 5670),
-    (7, 1, '2024-05-07', 5, 703100722, 1, 600, 5400),
-    (8, 1, '2024-05-08', 6, 3, 2, 650, 5850),
-    (9, 1, '2024-05-09', 7, 4, 1, 620, 5580),
-    (10, 2, '2024-05-10', 3, 703100722, 2, 670, 6030),
-    (11, 1, '2024-05-11', 8, 703100722, 1, 640, 5760),
-    (12, 2, '2024-05-12', 4, 703100722, 2, 690, 6210),
-    (13, 1, '2024-04-13', 9, 703100722, 1, 660, 5940),
-    (14, 1, '2024-04-14', 10, 4, 2, 710, 6390),
-    (15, 1, '2024-04-15', 11, 5, 1, 680, 6120),
-    (16, 1, '2024-04-16', 12, 703100722, 2, 730, 6570),
-    (17, 1, '2024-04-17', 13, 703100722, 1, 700, 6300),
-    (18, 1, '2024-04-18', 14, 703100722, 2, 750, 6750),
-    (19, 1, '2024-04-19', 15, 4, 1, 720, 6480),
-    (20, 1, '2024-04-20', 16, 5, 2, 770, 6930);
+    (1, '2024-05-01', 1, 703100722, 1, 500, 4500),
+    (2, '2024-05-02', 1, 703100722, 2, 600, 5400),
+    (1, '2024-05-03', 2, 3, 1, 550, 4950),
+    (2, '2024-05-04', 2, 703100722, 2, 620, 5580),
+    (1, '2024-05-05', 3, 5, 1, 580, 5220),
+    (1, '2024-05-06', 4, 1, 2, 630, 5670),
+    (1, '2024-05-07', 5, 703100722, 1, 600, 5400),
+    (1, '2024-05-08', 6, 3, 2, 650, 5850),
+    (1, '2024-05-09', 7, 4, 1, 620, 5580),
+    (2, '2024-05-10', 3, 703100722, 2, 670, 6030),
+    (1, '2024-05-11', 8, 703100722, 1, 640, 5760),
+    (2, '2024-05-12', 4, 703100722, 2, 690, 6210),
+    (1, '2024-04-13', 9, 703100722, 1, 660, 5940),
+    (1, '2024-04-14', 10, 4, 2, 710, 6390),
+    (1, '2024-04-15', 11, 5, 1, 680, 6120),
+    (1, '2024-04-16', 12, 703100722, 2, 730, 6570),
+    (1, '2024-04-17', 13, 703100722, 1, 700, 6300),
+    (1, '2024-04-18', 14, 703100722, 2, 750, 6750),
+    (1, '2024-04-19', 15, 4, 1, 720, 6480),
+    (1, '2024-04-20', 16, 5, 2, 770, 6930);
 
 INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento)
 VALUES
@@ -183,9 +180,7 @@ VALUES
     (20, 2, 16.00, 2, 18),
     (10, 3, 20.00, 2, 18),
     (25, 4, 30.00, 4, 19),
-    (12, 5, 21.00, 2, 19),
-    (6, 6, 30.00, 5, 20),
-    (5, 7, 17.50, 2, 20);
+    (12, 5, 21.00, 2, 19);
 
 
 -- SP de Personal
