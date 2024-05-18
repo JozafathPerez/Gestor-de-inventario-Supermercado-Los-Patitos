@@ -22,6 +22,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
         }
 
+        /// <summary>
+        /// Maneja el evento Load del formulario DialogHistorialAjustes.
+        /// Carga los datos de los ajustes realizados y los muestra en el DataGridView.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void DialogHistorialAjustes_Load(object sender, EventArgs e)
         {
             try
@@ -50,6 +56,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Maneja el evento DoubleClick del DataGridView.
+        /// Abre el formulario de historial de productos ajustados pasando el IdAjuste seleccionado.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
             // Verificar que hay una fila seleccionada

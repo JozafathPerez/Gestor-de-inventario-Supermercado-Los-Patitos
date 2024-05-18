@@ -28,6 +28,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
 
 
         }
+
+        /// <summary>
+        /// Maneja el evento Load del formulario PanelInventario.
+        /// Se ejecuta al cargar el formulario y realiza inicializaciones como cargar datos y configurar controles.
+        /// </summary>
         private void PanelInventario_Load(object sender, EventArgs e)
         {
             actualizarDataView();
@@ -103,7 +108,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             return suggestions;
         }
 
-
+        /// <summary>
+        /// Maneja el evento Click del botón BT_agregarProducto.
+        /// Se ejecuta al hacer clic en el botón "Agregar Producto" y realiza acciones relacionadas.
+        /// </summary>
         private void BT_agregarProducto_Click(object sender, EventArgs e)
         {
             // Obtener los valores de los controles del PanelAgregar
@@ -176,9 +184,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
-
-
-
+        /// <summary>
+        /// Maneja el evento DoubleClick del DataViewProductos.
+        /// Se ejecuta al hacer doble clic en una fila del DataViewProductos y realiza acciones relacionadas.
+        /// </summary>
         private void DataViewProductos_DoubleClick(object sender, EventArgs e)
         {
             // Verificar si se ha seleccionado una fila
@@ -199,7 +208,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
-
+        /// <summary>
+        /// Maneja el evento Click del botón BT_realizarAjuste.
+        /// Se ejecuta al hacer clic en el botón "Realizar Ajuste" y realiza acciones relacionadas.
+        /// </summary>
         private void BT_realizarAjuste_Click(object sender, EventArgs e)
         {
             MostrarBotones(true, false, false, true);
@@ -247,6 +259,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Método para insertar un registro en la tabla BitacoraAjuste y obtener el ID del ajuste creado.
+        /// </summary>
+        /// <returns>El ID del ajuste creado o -1 si hay un error.</returns>
         private int InsertarRegistroBitacora()
         {
             try
@@ -281,6 +297,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Método para insertar un producto ajustado en la tabla ProductosAjustados.
+        /// </summary>
+        /// <param name="idAjuste">El ID del ajuste asociado al producto ajustado.</param>
+        /// <param name="codigoProducto">El código del producto ajustado.</param>
+        /// <param name="cantidad">La cantidad ajustada del producto.</param>
         private void InsertarProductoAjustado(int idAjuste, int codigoProducto, int cantidad)
         {
             try
@@ -309,7 +331,12 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
-        // Método para actualizar la cantidad del producto en la base de datos
+        /// <summary>
+        /// Método para actualizar la cantidad de un producto en la base de datos.
+        /// </summary>
+        /// <param name="codigoProducto">El código del producto a actualizar.</param>
+        /// <param name="nuevaCantidad">La nueva cantidad del producto.</param>
+        /// <param name="precio">El nuevo precio del producto.</param>
         private void ActualizarCantidadProducto(int codigoProducto, int nuevaCantidad, decimal precio)
         {
             try
@@ -340,8 +367,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
-
-
+        /// <summary>
+        /// Maneja el evento Click del botón buttonEliminarProducto.
+        /// Se ejecuta al hacer clic en el botón "Eliminar Producto" y realiza acciones relacionadas.
+        /// </summary>
         private void buttonEliminarProducto_Click(object sender, EventArgs e)
         {
             // Verificar si se ha seleccionado una fila en el DataGridView
@@ -390,6 +419,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Método para verificar si un código de producto ya existe en la base de datos.
+        /// </summary>
+        /// <param name="codigo">El código de producto a verificar.</param>
+        /// <returns>True si el código existe, False si no existe o hay un error.</returns>
         private bool verificadorCodigo(string codigo)
         {
             string query = "SELECT COUNT(codigoProd) FROM Productos WHERE codigoProd = @codigo";
@@ -414,6 +448,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Método para cargar los tipos de medida en el ComboBox del PanelAgregar.
+        /// </summary>
         private void CargarTiposMedida()
         {
             PanelAgregar.comboBoxTipoMedida.Items.Clear();
@@ -447,6 +484,9 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Método para cargar las categorías en el ComboBox del PanelAgregar.
+        /// </summary>
         private void CargarCategorias()
         {
             PanelAgregar.comboBoxCategoria.Items.Clear();
@@ -478,18 +518,29 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             }
         }
 
+        /// <summary>
+        /// Maneja el evento Click del botón BT_vistaAjuste.
+        /// Se ejecuta al hacer clic en el botón "Vista Ajuste" y realiza acciones relacionadas.
+        /// </summary>
         private void BT_vistaAjuste_Click(object sender, EventArgs e)
         {
             MostrarBotones(true, false, false, true);
             cargarForm(PanelAjuste);
         }
 
+        /// <summary>
+        /// Maneja el evento Click del botón BT_vistaAgregar.
+        /// Se ejecuta al hacer clic en el botón "Vista Agregar" y realiza acciones relacionadas.
+        /// </summary>
         private void BT_vistaAgregar_Click(object sender, EventArgs e)
         {
             MostrarBotones(false, true, true, false);
             cargarForm(PanelAgregar);
         }
 
+        /// <summary>
+        /// Método para limpiar los controles del PanelAgregar después de agregar un producto.
+        /// </summary>
         private void LimpiarControlesPanelAgregar()
         {
             PanelAgregar.textBoxCodigo.Text = string.Empty;
@@ -500,6 +551,13 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             PanelAgregar.textBoxPrecioUnitario.Value = 0;
         }
 
+        /// <summary>
+        /// Método para mostrar u ocultar botones y paneles según la vista seleccionada.
+        /// </summary>
+        /// <param name="vistaAgregar">True para mostrar el botón Vista Agregar, False para ocultarlo.</param>
+        /// <param name="vistaAjuste">True para mostrar el botón Vista Ajuste, False para ocultarlo.</param>
+        /// <param name="agregarProducto">True para mostrar el botón Agregar Producto, False para ocultarlo.</param>
+        /// <param name="realizarAjuste">True para mostrar el botón Realizar Ajuste, False para ocultarlo.</param>
         private void MostrarBotones(bool vistaAgregar, bool vistaAjuste, bool agregarProducto, bool realizarAjuste)
         {
             BT_vistaAgregar.Visible = vistaAgregar;
@@ -526,6 +584,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             conexion.cerrar();
         }
 
+        /// <summary>
+        /// Método para cargar un formulario en el PanelAreaInventario.
+        /// </summary>
+        /// <param name="Form">El formulario a cargar en el panel.</param>
         public void cargarForm(object Form)
         {
             if (this.PanelAreaInventario.Controls.Count > 0)
@@ -538,6 +600,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             f.Show();
         }
 
+        /// <summary>
+        /// Maneja el evento Click del botón buttonHistrial.
+        /// Se ejecuta al hacer clic en el botón "Historial" y realiza acciones relacionadas.
+        /// </summary>
         private void buttonHistrial_Click(object sender, EventArgs e)
         {
             cargarForm(new DialogHistorialAjustes ());
