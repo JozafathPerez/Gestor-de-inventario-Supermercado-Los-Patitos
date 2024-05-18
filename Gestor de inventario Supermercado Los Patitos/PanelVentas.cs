@@ -206,23 +206,26 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                     }
 
                     transaction.Commit();
-                    MessageBox.Show("Documento y líneas creados correctamente.");
-
-                    DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
-                    if (resultado == DialogResult.Yes)
+                    if (tipoDocumento == "Factura")
                     {
-                        string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
-                        SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
-                        getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
-                        object res = getemail.ExecuteScalar();
-                        if (res != null)
+                        MessageBox.Show("Documento y líneas creados correctamente.");
+
+                        DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
+                        if (resultado == DialogResult.Yes)
                         {
-                            string email = res.ToString();
-                            enviarDocumento(email, idDocumento);
-                        }
-                        else
-                        {
-                            throw new Exception("No se encontró ningún trabajador");
+                            string obemial = "SELECT email FROM Personal WHERE idTrabajador = @idTrabajador";
+                            SqlCommand getemail = new SqlCommand(obemial, c.ConectarBD, transaction);
+                            getemail.Parameters.AddWithValue("@idTrabajador", this.idTrabajador);
+                            object res = getemail.ExecuteScalar();
+                            if (res != null)
+                            {
+                                string email = res.ToString();
+                                enviarDocumento(email, idDocumento);
+                            }
+                            else
+                            {
+                                throw new Exception("No se encontró ningún trabajador");
+                            }
                         }
                     }
                 }
