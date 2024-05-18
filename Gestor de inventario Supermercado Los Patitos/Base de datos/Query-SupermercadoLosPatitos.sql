@@ -494,8 +494,6 @@ BEGIN
     UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
 END
 
-DROP PROC Top_Producto;
-
 GO
 
 CREATE PROC Top_Producto
