@@ -1,6 +1,6 @@
 ﻿namespace Gestor_de_inventario_Supermercado_Los_Patitos
 {
-    partial class DialogHistorialAjustes
+    partial class DialogoHistorialProductosAjustados
     {
         /// <summary>
         /// Required designer variable.
@@ -41,23 +41,19 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(412, 426);
+            this.dataGridView1.Size = new System.Drawing.Size(285, 249);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             // 
-            // DialogHistorialAjustes
+            // DialogoHistorialProductosAjustados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(412, 426);
+            this.ClientSize = new System.Drawing.Size(282, 247);
             this.Controls.Add(this.dataGridView1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(412, 426);
-            this.MinimumSize = new System.Drawing.Size(412, 426);
-            this.Name = "DialogHistorialAjustes";
-            this.Text = "DialogHistorialAjustes";
-            this.Load += new System.EventHandler(this.DialogHistorialAjustes_Load);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "DialogoHistorialProductosAjustados";
+            this.Text = "Productos modificados";
+            this.Load += new System.EventHandler(this.DialogoHistorialProductosAjustados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

@@ -3,10 +3,12 @@ GO;
 
 USE LOS_PATITOS;
 
+-- Tabla de roles de personal
 CREATE TABLE Roles
 	(idRol			VARCHAR(10)		NOT NULL	PRIMARY KEY,
 	nombre			VARCHAR(100)	NOT NULL);
 
+-- Tabla de registro de personal
 CREATE TABLE Personal
 	(idTrabajador	INT PRIMARY KEY	NOT NULL,
 	fechaNacim		DATE			NOT NULL,
@@ -17,51 +19,72 @@ CREATE TABLE Personal
 	email			VARCHAR(150)	NOT NULL,
 	contrasenia		VARCHAR(250)	NOT NULL,
 	numTel			INT				NOT NULL,
-	genero			VARCHAR(2)		NOT NULL,
+	genero			VARCHAR(20)		NOT NULL,
 	idRol			VARCHAR(10)		NOT NULL	FOREIGN KEY REFERENCES Roles(idRol),
 	estado			BIT				NOT NULL);
 
+-- Tabla de bitacora de creación de personal
 CREATE TABLE Bitacora
 	(idTrabajador	INT			NOT NULL	FOREIGN KEY REFERENCES	Personal(idTrabajador),
 	fechaHora		DATETIME	NOT NULL
 	CONSTRAINT		PK_BITACORA	PRIMARY KEY (idTrabajador,fechaHora));
 
+-- Tabla de registro de clientes
 CREATE TABLE Clientes
 	(idCliente		INT PRIMARY KEY	NOT NULL,
 	nombre			VARCHAR(150)	NOT NULL,
 	apellidoPat		VARCHAR(150)	NOT NULL,
 	apellidoMat		VARCHAR(150)	NOT NULL);
 
+-- Tabla de registro de productos
 CREATE TABLE Productos
 	(codigoProd		INT	PRIMARY KEY	NOT NULL,
+	nombre			VARCHAR(150)	NOT NULL,
 	categoria		VARCHAR(150)	NOT NULL,
-	descripcion		VARCHAR(150)	NOT NULL,
 	tipoMedida		VARCHAR(150)	NOT NULL,
-	cantidad		INT				NOT NULL,
-	precioUnit		DECIMAL(38,2)	NOT NULL,
-	fechaCaducidad	DATE			NOT NULL);
+	cantidadInv		INT				NOT NULL,
+	precioUnit		DECIMAL(38,2)	NOT NULL);
+
+CREATE TABLE BitacoraAjuste (
+	IdAjuste		INT			PRIMARY KEY IDENTITY(1,1),
+	idTrabajador	INT			NOT NULL	FOREIGN KEY REFERENCES	Personal(idTrabajador),
+	fechaHora		DATETIME	NOT NULL,
+	motivo			VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ProductosAjustados (
+	IdAjuste	INT		NOT NULL	FOREIGN KEY REFERENCES	BitacoraAjuste(IdAjuste),
+	codigoProd	INT		NOT NULL	FOREIGN KEY REFERENCES	Productos(codigoProd),
+	cantidad	INT		NOT NULL
+);
 
 CREATE TABLE Consecutivos
 	(tipo			INT		NOT NULL	PRIMARY KEY,
 	consecutivo		INT		NOT NULL);
 
+-- 
 CREATE TABLE Documentos
 	(idDocumento	INT		NOT NULL	PRIMARY KEY,
 	tipo			INT		NOT NULL	FOREIGN KEY REFERENCES Consecutivos(tipo),
 	fechaCreacion	DATE	NOT NULL,
 	consecutivo		INT		NOT NULL,
-	idCliente		INT		NOT NULL	FOREIGN KEY REFERENCES Clientes(idCliente),
+	idCliente		INT,
 	idTrabajador	INT		NOT NULL	FOREIGN KEY REFERENCES Personal(idTrabajador),
-	totalImpuestos	INT		NOT NULL,
-	subtotal		INT		NOT NULL);
+	totalImpuestos	DECIMAL(18, 2)		NOT NULL,
+	subtotal		DECIMAL(18, 2)		NOT NULL);
+
 
 CREATE TABLE Lineas
 	(cantidad		INT		NOT NULL,
 	codigoProd		INT		NOT NULL	FOREIGN KEY REFERENCES	Productos(codigoProd),
-	subtotal		INT		NOT NULL,
-	impuesto		INT		NOT NULL,
+	subtotal		DECIMAL(18, 2)		NOT NULL,
+	impuesto		DECIMAL(18, 2)		NOT NULL,
 	idDocumento		INT		NOT NULL	FOREIGN KEY REFERENCES	Documentos(idDocumento));
 
+ALTER TABLE Lineas
+ADD CONSTRAINT PK_Lineas PRIMARY KEY (codigoProd,idDocumento);
+
+-- Inserts de información
 
 INSERT INTO Roles
 VALUES	(1,'Administrador'),
@@ -69,9 +92,15 @@ VALUES	(1,'Administrador'),
 		(3,'Administrador de Inventario'),
 		(4, 'Contador');
 
-GO
+INSERT INTO Consecutivos
+VALUES	(1, 0),
+		(2, 0),
+		(3,	0);
 
-CREATE PROC VerificarCredenciales
+
+-- SP de usos
+
+CREATE PROCEDURE VerificarCredenciales
     @correo VARCHAR(150),
     @contrasenia VARCHAR(250)
 AS
@@ -92,9 +121,6 @@ BEGIN
         SELECT 'false' AS Existe;
 END
 
-EXEC VerificarCredenciales @correo = 'jozperez@gmail.com', @contrasenia = '1234';
-
-GO
 
 CREATE PROCEDURE EliminarPersonal
     @idTrabajador INT -- Cambiarlo luego por cedula?
@@ -104,7 +130,6 @@ BEGIN
 END
 
 
-SELECT * FROM Personal
 
 
 
@@ -112,66 +137,12 @@ SELECT * FROM Personal
 
 
 
--- AJUSTES
-
-DROP TABLE Productos
-DROP TABLE Lineas
-DROP TABLE Documentos
-DROP TABLE Bitacora
-DROP TABLE Personal
-DROP TABLE Clientes
-
-CREATE TABLE Personal
-	(idTrabajador	INT PRIMARY KEY	NOT NULL,
-	fechaNacim		DATE			NOT NULL,
-	nombre			VARCHAR(150)	NOT NULL,
-	apellidoPat		VARCHAR(150)	NOT NULL,
-	apellidoMat		VARCHAR(150)	NOT NULL,
-	direccion		VARCHAR(250)	NOT NULL,
-	email			VARCHAR(150)	NOT NULL,
-	contrasenia		VARCHAR(250)	NOT NULL,
-	numTel			INT				NOT NULL,
-	genero			VARCHAR(2)		NOT NULL,
-	idRol			VARCHAR(10)		NOT NULL	FOREIGN KEY REFERENCES Roles(idRol),
-	estado			BIT				NOT NULL);
 
 
-CREATE TABLE Bitacora
-	(idTrabajador	INT			NOT NULL	FOREIGN KEY REFERENCES	Personal(idTrabajador),
-	fechaHora		DATETIME	NOT NULL
-	CONSTRAINT		PK_BITACORA	PRIMARY KEY (idTrabajador,fechaHora));
+-- ELIMINAR ESTOS INSERTS AL FINAL
 
-CREATE TABLE Documentos
-	(idDocumento	INT		NOT NULL	PRIMARY KEY,
-	tipo			INT		NOT NULL	FOREIGN KEY REFERENCES Consecutivos(tipo),
-	fechaCreacion	DATE	NOT NULL,
-	consecutivo		INT		NOT NULL,
-	idCliente		INT,
-	idTrabajador	INT		NOT NULL	FOREIGN KEY REFERENCES Personal(idTrabajador),
-	totalImpuestos	INT		NOT NULL,
-	subtotal		INT		NOT NULL);
-
-CREATE TABLE Productos
-	(codigoProd		INT	PRIMARY KEY	NOT NULL,
-	nombre			VARCHAR(150)	NOT NULL,
-	categoria		VARCHAR(150)	NOT NULL,
-	tipoMedida		VARCHAR(150)	NOT NULL,
-	cantidadInv		INT				NOT NULL,
-	precioUnit		DECIMAL(38,2)	NOT NULL)
-
-CREATE TABLE Lineas
-	(cantidad		INT		NOT NULL,
-	codigoProd		INT		NOT NULL	FOREIGN KEY REFERENCES	Productos(codigoProd),
-	subtotal		INT		NOT NULL,
-	impuesto		INT		NOT NULL,
-	idDocumento		INT		NOT NULL	FOREIGN KEY REFERENCES	Documentos(idDocumento));
-
-ALTER TABLE Lineas
-ADD CONSTRAINT PK_Lineas PRIMARY KEY (codigoProd,idDocumento);
-
-ALTER TABLE Personal
-ALTER COLUMN genero VARCHAR(20);
-
+SELECT *
+FROM Personal
 INSERT INTO Personal 
 VALUES 
     (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'M', 1, 1),
@@ -191,43 +162,14 @@ INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, p
 (4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
 (5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
 (6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
-(7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50);
-
-INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
-VALUES (30, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
-       (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
-       (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
-       (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
-
-
---Para Documentos
-
-INSERT INTO Consecutivos
-VALUES	(1, 0),
-		(2, 0),
-		(3,	0);
-
-
---CAMBIOS MYNELL
-
-ALTER TABLE Documentos
-ALTER COLUMN totalImpuestos DECIMAL(18, 2);
-
-ALTER TABLE Documentos
-ALTER COLUMN subtotal DECIMAL(18, 2);
-
-ALTER TABLE Lineas
-ALTER COLUMN subtotal DECIMAL(18, 2);
-
-ALTER TABLE Lineas
-ALTER COLUMN impuesto DECIMAL(18, 2);
-
+(7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50),
+(8, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
+(31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
+(32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
+(33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
 
 
 --#####################################################################
-
---INSERCIÓN DE SP PARA Reportería
-
 
 
 -- Crear las 20 facturas
