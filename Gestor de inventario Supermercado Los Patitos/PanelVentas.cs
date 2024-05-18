@@ -208,8 +208,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                     transaction.Commit();
                     if (tipoDocumento == "Factura")
                     {
-                        MessageBox.Show("Documento y líneas creados correctamente.");
-
                         DialogResult resultado = MessageBox.Show("¿Quieres recibir un correo de tu Documento?", "Correo", MessageBoxButtons.YesNo);
                         if (resultado == DialogResult.Yes)
                         {
@@ -228,6 +226,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
                             }
                         }
                     }
+                    MessageBox.Show("Documento y líneas creados correctamente.");
                 }
                 catch (Exception ex){
                     transaction.Rollback();
