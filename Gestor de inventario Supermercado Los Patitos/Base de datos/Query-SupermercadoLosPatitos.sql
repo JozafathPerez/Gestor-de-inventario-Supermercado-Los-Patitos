@@ -1,5 +1,6 @@
-CREATE DATABASE LOS_PATITOS;
-GO;
+ï»¿CREATE DATABASE LOS_PATITOS;
+
+GO
 
 USE LOS_PATITOS;
 
@@ -23,18 +24,11 @@ CREATE TABLE Personal
 	idRol			VARCHAR(10)		NOT NULL	FOREIGN KEY REFERENCES Roles(idRol),
 	estado			BIT				NOT NULL);
 
--- Tabla de bitacora de creación de personal
+-- Tabla de bitacora de creaciï¿½n de personal
 CREATE TABLE Bitacora
 	(idTrabajador	INT			NOT NULL	FOREIGN KEY REFERENCES	Personal(idTrabajador),
 	fechaHora		DATETIME	NOT NULL
 	CONSTRAINT		PK_BITACORA	PRIMARY KEY (idTrabajador,fechaHora));
-
--- Tabla de registro de clientes
-CREATE TABLE Clientes
-	(idCliente		INT PRIMARY KEY	NOT NULL,
-	nombre			VARCHAR(150)	NOT NULL,
-	apellidoPat		VARCHAR(150)	NOT NULL,
-	apellidoMat		VARCHAR(150)	NOT NULL);
 
 -- Tabla de registro de productos
 CREATE TABLE Productos
@@ -64,7 +58,7 @@ CREATE TABLE Consecutivos
 
 -- 
 CREATE TABLE Documentos
-	(idDocumento	INT		IDENTITY(0,1)	PRIMARY KEY,
+	(idDocumento	INT		PRIMARY KEY	IDENTITY(0,1),
 	tipo			INT		NOT NULL	FOREIGN KEY REFERENCES Consecutivos(tipo),
 	fechaCreacion	DATE	NOT NULL,
 	consecutivo		INT		NOT NULL,
@@ -85,7 +79,7 @@ CREATE TABLE Lineas
 ALTER TABLE Lineas
 ADD CONSTRAINT PK_Lineas PRIMARY KEY (codigoProd,idDocumento);
 
--- Inserts de información
+-- Inserts de informaciï¿½n
 
 INSERT INTO Roles
 VALUES	(1,'Administrador'),
@@ -100,52 +94,52 @@ VALUES	(1, 0),
 
 INSERT INTO Personal 
 VALUES 
-    (1, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'M', 1, 1),
-    (2, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', 'jozperez@gmail.com', '1234', 123456789, 'M', 1, 1),
-    (3, '1995-08-20', 'María', 'López', 'García', 'Avenida Central 456', 'maria.lopez@email.com', '1234', 987654321, 'F', 2, 1),
-    (4, '1988-12-10', 'Pedro', 'Martínez', 'Hernández', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'M', 3, 1),
-    (5, '1987-04-25', 'Ana', 'Gómez', 'Fernández', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'F', 4, 1);
+    (1, '1990-05-15', 'Juan', 'Pï¿½rez', 'Gonzï¿½lez', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1),
+    (2, '1990-05-15', 'Juan', 'Pï¿½rez', 'Gonzï¿½lez', 'Calle Principal 123', 'jozperez@gmail.com', '1234', 123456789, 'Masculino', 1, 1),
+    (3, '1995-08-20', 'Marï¿½a', 'Lï¿½pez', 'Garcï¿½a', 'Avenida Central 456', 'maria.lopez@email.com', '1234', 987654321, 'Femenino', 2, 1),
+    (4, '1988-12-10', 'Pedro', 'Martï¿½nez', 'Hernï¿½ndez', 'Calle Secundaria 789', 'jozafatperezfer@gmail.com', '1234', 555555555, 'Masculino', 3, 1),
+    (5, '1987-04-25', 'Ana', 'Gï¿½mez', 'Fernï¿½ndez', 'Paseo Peatonal 234', 'ana.gomez@email.com', '1234', 111111111, 'Femenino', 4, 1),
+	(6, '1990-05-15', 'Juan', 'Pï¿½rez', 'Gonzï¿½lez', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
 
-INSERT INTO Personal 
-VALUES 
-(6, '1990-05-15', 'Juan', 'Pérez', 'González', 'Calle Principal 123', '1', '1', 123456789, 'Masculino', 1, 1);
-
-INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit) VALUES
-(1, 'Leche Entera', 'Lácteos', 'Litros', 50, 1.50),
-(2, 'Pan Integral', 'Panadería', 'Unidades', 100, 0.80),
-(3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
-(4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
-(5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
-(6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
-(7, 'Detergente Líquido', 'Limpieza', 'Litros', 60, 3.50),
-(8, 'Leche de Avena', 'Lácteos', 'Unidad', 100, 2.99),
-(31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
-(32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
-(33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
-
-
-INSERT INTO Documentos (idDocumento, tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
+INSERT INTO Productos (codigoProd, nombre, categoria, tipoMedida, cantidadInv, precioUnit)
 VALUES
-    (1, 1, '2024-05-01', 1, 703100722, 1, 500, 4500),
-    (2, 2, '2024-05-02', 1, 703100722, 2, 600, 5400),
-    (3, 1, '2024-05-03', 2, 3, 1, 550, 4950),
-    (4, 2, '2024-05-04', 2, 703100722, 2, 620, 5580),
-    (5, 1, '2024-05-05', 3, 5, 1, 580, 5220),
-    (6, 1, '2024-05-06', 4, 1, 2, 630, 5670),
-    (7, 1, '2024-05-07', 5, 703100722, 1, 600, 5400),
-    (8, 1, '2024-05-08', 6, 3, 2, 650, 5850),
-    (9, 1, '2024-05-09', 7, 4, 1, 620, 5580),
-    (10, 2, '2024-05-10', 3, 703100722, 2, 670, 6030),
-    (11, 1, '2024-05-11', 8, 703100722, 1, 640, 5760),
-    (12, 2, '2024-05-12', 4, 703100722, 2, 690, 6210),
-    (13, 1, '2024-04-13', 9, 703100722, 1, 660, 5940),
-    (14, 1, '2024-04-14', 10, 4, 2, 710, 6390),
-    (15, 1, '2024-04-15', 11, 5, 1, 680, 6120),
-    (16, 1, '2024-04-16', 12, 703100722, 2, 730, 6570),
-    (17, 1, '2024-04-17', 13, 703100722, 1, 700, 6300),
-    (18, 1, '2024-04-18', 14, 703100722, 2, 750, 6750),
-    (19, 1, '2024-04-19', 15, 4, 1, 720, 6480),
-    (20, 1, '2024-04-20', 16, 5, 2, 770, 6930);
+    (1, 'Leche Entera', 'Lï¿½cteos', 'Litros', 50, 1.50),
+    (2, 'Pan Integral', 'Panaderï¿½a', 'Unidad', 100, 0.80),
+    (3, 'Jugo de Naranja', 'Bebidas', 'Litros', 75, 2.00),
+    (4, 'Arroz Blanco', 'Granos', 'Kilos', 200, 1.20),
+    (5, 'Manzanas', 'Frutas', 'Kilos', 150, 1.75),
+    (6, 'Pollo Entero', 'Carnes', 'Kilos', 30, 5.00),
+    (7, 'Detergente Lï¿½quido', 'Limpieza', 'Litros', 60, 3.50),
+    (8, 'Leche de Avena', 'Lï¿½cteos', 'Unidad', 100, 2.99),
+    (30, 'Leche Deslactosada', 'Lï¿½cteos', 'Litros', 80, 1.80),  -- Aï¿½adido
+    (31, 'Avena', 'Cereales', 'Paquete', 50, 4.99),
+    (32, 'Galleta Avena y fresa', 'Snacks', 'Paquete', 80, 3.49),
+    (33, 'Helado de Avena y miel', 'Helados', 'Unidad', 120, 1.99);
+
+
+
+INSERT INTO Documentos (tipo, fechaCreacion, consecutivo, idCliente, idTrabajador, totalImpuestos, subtotal)
+VALUES
+    (1, '2024-05-01', 1, 703100722, 1, 500, 4500),
+    (2, '2024-05-02', 1, 703100722, 2, 600, 5400),
+    (1, '2024-05-03', 2, 3, 1, 550, 4950),
+    (2, '2024-05-04', 2, 703100722, 2, 620, 5580),
+    (1, '2024-05-05', 3, 5, 1, 580, 5220),
+    (1, '2024-05-06', 4, 1, 2, 630, 5670),
+    (1, '2024-05-07', 5, 703100722, 1, 600, 5400),
+    (1, '2024-05-08', 6, 3, 2, 650, 5850),
+    (1, '2024-05-09', 7, 4, 1, 620, 5580),
+    (2, '2024-05-10', 3, 703100722, 2, 670, 6030),
+    (1, '2024-05-11', 8, 703100722, 1, 640, 5760),
+    (2, '2024-05-12', 4, 703100722, 2, 690, 6210),
+    (1, '2024-04-13', 9, 703100722, 1, 660, 5940),
+    (1, '2024-04-14', 10, 4, 2, 710, 6390),
+    (1, '2024-04-15', 11, 5, 1, 680, 6120),
+    (1, '2024-04-16', 12, 703100722, 2, 730, 6570),
+    (1, '2024-04-17', 13, 703100722, 1, 700, 6300),
+    (1, '2024-04-18', 14, 703100722, 2, 750, 6750),
+    (1, '2024-04-19', 15, 4, 1, 720, 6480),
+    (1, '2024-04-20', 16, 5, 2, 770, 6930);
 
 INSERT INTO Lineas (cantidad, codigoProd, subtotal, impuesto, idDocumento)
 VALUES
@@ -186,9 +180,8 @@ VALUES
     (20, 2, 16.00, 2, 18),
     (10, 3, 20.00, 2, 18),
     (25, 4, 30.00, 4, 19),
-    (12, 5, 21.00, 2, 19),
-    (6, 6, 30.00, 5, 20),
-    (5, 7, 17.50, 2, 20);
+    (12, 5, 21.00, 2, 19);
+
 
 -- SP de Personal
 GO
@@ -231,13 +224,10 @@ GO
 CREATE PROC Top_Producto
 AS
 BEGIN
-	SELECT TOP 1  P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT TOP 1  P.codigoProd 'Cï¿½digo', P.nombre Nombre, P.categoria 'Categorï¿½a', SUM(L.cantidad) 'Total Vendido'
 	FROM Lineas L
 	INNER JOIN Productos P on
 	L.codigoProd = P.codigoProd
-    INNER JOIN Documentos D ON
-    D.idDocumento = L.idDocumento
-    WHERE D.idNotaCredito != NULL
 	GROUP BY P.codigoProd, P.nombre, P.categoria
 	ORDER BY SUM(L.cantidad) DESC;
 END;
@@ -250,7 +240,7 @@ BEGIN
 	DECLARE @FechaActual DATE = GETDATE();
 	DECLARE @FechaInicio DATE = DATEADD(DAY, -30, @FechaActual);
 
-	SELECT P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT P.codigoProd 'Cï¿½digo', P.nombre Nombre, P.categoria 'Categorï¿½a', SUM(L.cantidad) 'Total Vendido'
 	FROM Documentos D
 	INNER JOIN Lineas L ON
 	D.idDocumento = L.idDocumento
@@ -266,7 +256,7 @@ GO
 CREATE PROC Top_5_Clientes
 AS
 BEGIN
-    SELECT TOP 5 D.idCliente 'Cédula', COUNT(D.idDocumento) 'Cantidad de Documentos'
+    SELECT TOP 5 D.idCliente 'Cï¿½dula', COUNT(D.idDocumento) 'Cantidad de Documentos'
     FROM Documentos D
     WHERE D.idCliente IS NOT NULL
     GROUP BY D.idCliente
@@ -285,8 +275,8 @@ BEGIN
         D.tipo			'Tipo',
         D.fechaCreacion	'Efectuado En',
         D.consecutivo	'Consecurivo',
-        D.idCliente		'Cédula del Cliente',
-        D.idTrabajador	'Cédula del Trabajador',
+        D.idCliente		'Cï¿½dula del Cliente',
+        D.idTrabajador	'Cï¿½dula del Trabajador',
         D.totalImpuestos 'Total Impuestos',
         D.subtotal		'SubTotal'
     FROM
@@ -302,7 +292,7 @@ GO
 CREATE PROC Top_Categorias_Vendidas
 AS
 BEGIN
-	SELECT TOP 5 P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT TOP 5 P.categoria 'Categorï¿½a', SUM(L.cantidad) 'Total Vendido'
 	FROM Lineas L
 	INNER JOIN Productos P ON
 	L.codigoProd = P.codigoProd
@@ -315,7 +305,7 @@ GO
 CREATE PROC Cajeros_Mas_Ventas
 AS
 BEGIN
-	SELECT TOP 5 P.idTrabajador 'Cédula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo', COUNT(D.idDocumento) 'Total Facturas'
+	SELECT TOP 5 P.idTrabajador 'Cï¿½dula', CONCAT(P.apellidoPat, ' ', P.apellidoPat, ' ', P.nombre) 'Nombre Completo', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	INNER JOIN Personal P ON
 	D.idTrabajador = P.idTrabajador
@@ -328,7 +318,7 @@ CREATE PROC Fechas_Mas_Compras
 AS
 BEGIN
 	SET LANGUAGE Spanish;
-	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
+	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'Dï¿½a', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	GROUP BY DATENAME(DW, D.fechaCreacion)
 	ORDER BY COUNT(D.idDocumento) DESC;
@@ -345,7 +335,7 @@ BEGIN
     DECLARE @AnioMesAnterior INT = YEAR(DATEADD(MONTH, -1, @FechaActual));
 
     SELECT TOP 1
-        P.idTrabajador AS 'Cédula',
+        P.idTrabajador AS 'Cï¿½dula',
         CONCAT(P.apellidoPat, ' ', P.apellidoMat, ' ', P.nombre) AS 'Nombre Completo',
         COUNT(D.idDocumento) AS 'Total Facturas'
     FROM
@@ -419,7 +409,6 @@ SELECT
 FROM Personal
 WHERE idTrabajador = @idTrabajador;
 END;
-
 
 --SP para Documentos
 
@@ -505,9 +494,6 @@ BEGIN
     UPDATE Productos SET cantidadInv = cantidadInv + @Cantidad WHERE codigoProd = @CodigoProd;
 END
 
-
------------------------------------------------------
-
 DROP PROC Top_Producto;
 
 GO
@@ -515,7 +501,7 @@ GO
 CREATE PROC Top_Producto
 AS
 BEGIN
-	SELECT TOP 1  P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT TOP 1  P.codigoProd 'CÃ³digo', P.nombre Nombre, P.categoria 'CategorÃ­a', SUM(L.cantidad) 'Total Vendido'
 	FROM Lineas L
 	INNER JOIN Productos P on
 	L.codigoProd = P.codigoProd
@@ -540,7 +526,7 @@ BEGIN
     DECLARE @AnioMesAnterior INT = YEAR(DATEADD(MONTH, -1, @FechaActual));
 
     SELECT TOP 1
-        P.idTrabajador AS 'Cédula',
+        P.idTrabajador AS 'CÃ©dula',
         CONCAT(P.apellidoPat, ' ', P.apellidoMat, ' ', P.nombre) AS 'Nombre Completo',
         COUNT(D.idDocumento) AS 'Total Facturas'
     FROM
@@ -564,7 +550,7 @@ BEGIN
 	DECLARE @FechaActual DATE = GETDATE();
 	DECLARE @FechaInicio DATE = DATEADD(DAY, -30, @FechaActual);
 
-	SELECT P.codigoProd 'Código', P.nombre Nombre, P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT P.codigoProd 'CÃ³digo', P.nombre Nombre, P.categoria 'CategorÃ­a', SUM(L.cantidad) 'Total Vendido'
 	FROM Documentos D
 	INNER JOIN Lineas L ON
 	D.idDocumento = L.idDocumento
@@ -584,7 +570,7 @@ GO
 CREATE PROC Top_Categorias_Vendidas
 AS
 BEGIN
-	SELECT TOP 5 P.categoria 'Categoría', SUM(L.cantidad) 'Total Vendido'
+	SELECT TOP 5 P.categoria 'CategorÃ­a', SUM(L.cantidad) 'Total Vendido'
 	FROM Lineas L
 	INNER JOIN Productos P ON
 	L.codigoProd = P.codigoProd
@@ -605,7 +591,7 @@ CREATE PROC Fechas_Mas_Compras
 AS
 BEGIN
 	SET LANGUAGE Spanish;
-	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'Día', COUNT(D.idDocumento) 'Total Facturas'
+	SELECT TOP 5 DATENAME(DW, D.fechaCreacion) 'DÃ­a', COUNT(D.idDocumento) 'Total Facturas'
 	FROM Documentos D
 	WHERE D.idNotaCredito IS NULL
 	GROUP BY DATENAME(DW, D.fechaCreacion)
