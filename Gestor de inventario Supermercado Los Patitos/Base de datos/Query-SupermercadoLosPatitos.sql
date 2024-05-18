@@ -610,3 +610,5 @@ SELECT
 FROM Personal
 WHERE idTrabajador = @idTrabajador;
 END;
+
+GO
