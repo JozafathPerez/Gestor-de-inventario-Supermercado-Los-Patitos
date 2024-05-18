@@ -251,5 +251,10 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
                 else { e.Cancel = true; }
             }
         }
-	}
+
+        private void menuButton_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(this.menuButton, "Menú");
+        }
+    }
 }
