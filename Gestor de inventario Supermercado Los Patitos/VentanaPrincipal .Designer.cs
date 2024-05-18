@@ -101,7 +101,7 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos
             // menuButton
             // 
             this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.menuButton.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_menu;
+            //this.menuButton.Image = global::Gestor_de_inventario_Supermercado_Los_Patitos.Properties.Resources.Logo_de_menu;
             this.menuButton.Location = new System.Drawing.Point(4, 36);
             this.menuButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.menuButton.Name = "menuButton";

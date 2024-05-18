@@ -255,23 +255,21 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
         /// Se encarga de limpiar los espacios y refrescar todos los datos
         /// </summary>
         private void LimpiarCarrito() {
-            DGVCarrito.Rows.Clear();
-            numCantidad.Value = 1;
-            textTotales.Clear();
-            comboBoxTipoDoc.SelectedIndex = 0;
-            textIDCliente.Clear();
-            CargarInventario();
-            CargarDocumentos();
             this.lbName.Visible = false;
             this.txtName_Founded.Visible = false;
             this.txtID_Founded.Visible = false;
             this.lbClientID.Visible = false;
-
             this.lbClientID.Text = "";
             this.lbName.Text = "";
             this.txtID_Founded.Text = "";
             this.txtName_Founded.Text = "";
             this.textIDCliente.ForeColor = System.Drawing.Color.Red;
+            DGVCarrito.Rows.Clear();
+            numCantidad.Value = 1;
+            comboBoxTipoDoc.SelectedIndex = 0;
+            textIDCliente.Clear();
+            CargarInventario();
+            CargarDocumentos();
         }
         /// <summary>
         /// Calcula y muestra los totales esperados de una compra
@@ -513,7 +511,6 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
         private void textBusqueda_KeyUp(object sender, KeyEventArgs e)
         {
             string busqueda = textBusqueda.Text.ToLower();
-
             foreach (DataGridViewRow fila in DGVInventario.Rows)
             {
                 if (fila.Cells["Nombre"].Value != null)
@@ -522,7 +519,11 @@ namespace Gestor_de_inventario_Supermercado_Los_Patitos {
 
                     if (!nombre.Contains(busqueda))
                     {
-                        fila.Visible = false;
+                        try
+                        {
+                            fila.Visible = false;
+                        }
+                        catch { }
                     }
                     else
                     {
