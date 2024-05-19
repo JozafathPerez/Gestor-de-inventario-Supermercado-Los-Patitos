@@ -183,7 +183,9 @@
   <ItemGroup>
     <None Include="Resources\SUPERMERCADO LOS PATITOS [LOGOSINFONDO].png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Documentación\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Base de datos\Query-SupermercadoLosPatitos.sql" />
     <Content Include="Resources\ICON.ico" />

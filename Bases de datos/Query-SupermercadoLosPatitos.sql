@@ -381,22 +381,6 @@ BEGIN
 	WHERE L.idDocumento = @idDocumento;
 END;
 
-GO
-
-CREATE PROC Buscar_Producto 
-(@codigoProd INT)
-AS
-BEGIN
-SELECT
-	codigoProd,
-	nombre,
-	categoria,
-	tipoMedida,
-	cantidadInv,
-	precioUnit
-FROM Productos
-WHERE codigoProd = @codigoProd;
-END;
 
 GO
 
@@ -612,10 +596,6 @@ SELECT
 FROM Personal
 WHERE idTrabajador = @idTrabajador;
 END;
-
-GO
-
-DROP PROC Buscar_Producto;
 
 GO
 
